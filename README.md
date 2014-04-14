@@ -11,6 +11,7 @@ python <= 2.4, which lacks python-simplejson. The bootstrap.sh script will run
 this on all machines in the "rhel5" category.
 
 The following things must be done manually:
-- network setup
-- kerberos/ldap auth (including keytab deployment)
+- network setup, including port forwarding/bridging
+- full kerberos auth (LDAP/Kerberos auth without keytabs/DNS is possible in
+  kerberos.yml)
 - static DHCP / DNS entries

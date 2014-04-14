@@ -1,2 +1,5 @@
-- name: Setup authconfig
+- name: setup authconfig
   command: authconfig --enableldap --disableldapauth --ldapserver=blade.vtluug.org --ldapbasedn=dc=vtluug,dc=org --disableldaptls --enablekrb5 --krb5kdc=blade.vtluug.org --krb5adminserver=blade.vtluug.org --krb5realm=VTLUUG.ORG --enablesssd --enablesssdauth --disablecache --enablelocauthorize --enablemkhomedir --update
+- name: create symlinks to zsh path present in LDAP
+  file: src=/bin/zsh dest=/usr/bin/zsh owner=root group=root state=link
+  ignore_errors: yes
