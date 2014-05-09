@@ -1,5 +1,5 @@
 - name: Install audio streaming packages and libraries
-  yum: name=$item state=latest
+  yum: name={{ item }} state=latest
   with_items:
   - icecast
   - alsa-utils

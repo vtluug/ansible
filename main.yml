@@ -50,3 +50,16 @@
   - centos-common 
   - kvm
 
+- hosts: cdn
+  user: root
+  handlers:
+  - include: handlers/mail.yml
+  - include: handlers/ssh.yml
+  vars:
+  - include: vars/default.yml
+  - include: vars/private.yml
+  roles:
+  - selinux
+  - common
+  - centos-common 
+  - cdn
