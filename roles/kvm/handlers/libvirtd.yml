@@ -1,0 +1,8 @@
+---
+- name: Restart libvirtd service
+  service:
+  	name=libvirtd
+  	state=restarted
+  tags:
+  - services
+  - kvm
