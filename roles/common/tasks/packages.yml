@@ -1,9 +1,17 @@
+---
 - name: Download EPEL package
-  get_url: url=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm dest=/tmp/epel-release-6.8.noarch.rpm mode=0400
+  get_url:
+  	url=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+  	dest=/tmp/epel-release-latest-7.noarch.rpm
+  	mode=0400
+
 - name: Enable EPEL
-  command: rpm -Uvh /tmp/epel-release-6.8.noarch.rpm creates=/etc/yum.repos.d/epel.repo
+  command: rpm -Uvh /tmp/epel-release-latest-7.noarch.rpm creates=/etc/yum.repos.d/epel.repo
+
 - name: Install common packages
-  yum: name={{ item }} state=latest
+  yum:
+  	name={{ item }}
+  	state=latest
   with_items:
   - atool
   - emacs-nox
@@ -28,21 +36,15 @@
   - pciutils
   - bind-utils
   - cowsay
+  - python-celery
+  - libselinux-python
   tags:
   - packages
-- name: Install packages for auth
-  yum: name={{ item }} state=latest
-  with_items:
-  - pam_krb5
-  - krb5-libs
-  - krb5-workstation
-  - sssd
-  - openldap
-  tags:
-  - packages
-  - auth
+
 - name: Install packages for development
-  yum: name={{ item }} state=latest
+  yum:
+  	name={{ item }}
+  	state=latest
   with_items:
   - gcc
   - gcc-arm-linux-gnu
@@ -62,7 +64,7 @@
   - diffstat
   - doxygen
   - elfutils
-  - flex 
+  - flex
   - gcc-c++
   - indent
   - intltool
@@ -78,4 +80,3 @@
   - zip
   tags:
   - packages
-

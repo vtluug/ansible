@@ -1,4 +1,8 @@
+---
 - name: Restart postfix
-  service: name=postfix state=restarted
+  service:
+  	name=postfix
+  	state=restarted
+
 - name: Update aliases
   command: newaliases
