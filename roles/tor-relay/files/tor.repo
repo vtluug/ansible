@@ -1,7 +1,7 @@
 [tor]
 name=Tor experimental repo
 enabled=1
-baseurl=http://deb.torproject.org/torproject.org/rpm/el/6/$basearch/
+baseurl=http://deb.torproject.org/torproject.org/rpm/el/7/$basearch/
 gpgcheck=1
 gpgkey=http://deb.torproject.org/torproject.org/rpm/RPM-GPG-KEY-torproject.org.asc
 
@@ -9,6 +9,6 @@ gpgkey=http://deb.torproject.org/torproject.org/rpm/RPM-GPG-KEY-torproject.org.a
 name=Tor experimental source repo
 enabled=1
 autorefresh=0
-baseurl=http://deb.torproject.org/torproject.org/rpm/el/6/SRPMS
+baseurl=http://deb.torproject.org/torproject.org/rpm/el/7/SRPMS
 gpgcheck=1
 gpgkey=http://deb.torproject.org/torproject.org/rpm/RPM-GPG-KEY-torproject.org.asc
