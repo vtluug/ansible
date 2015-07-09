@@ -1,0 +1,45 @@
+---
+- name: Disable DHCP
+  lineinfile:
+  	dest=/etc/sysconfig/network-scripts/ifcfg-eth0
+  	regexp=^BOOTPROTO
+  	line="BOOTPROTO=\"static\""
+  	state=present
+
+- name: Configure static IPv4 address
+  lineinfile:
+  	dest=/etc/sysconfig/network-scripts/ifcfg-eth0
+  	regexp=^IPADDR=
+  	line="IPADDR=\"$ipv4\""
+  	state=present
+
+- name: Configure static IPv4 netmask
+  lineinfile:
+  	dest=/etc/sysconfig/network-scripts/ifcfg-eth0
+  	regexp=^NETMASK=
+  	line="NETMASK=\"255.0.0.0\""
+  	state=present
+
+- name: Set default IPv4 gateway
+  lineinfile:
+  	dest=/etc/sysconfig/network-scripts/ifcfg-eth0
+  	regexp=^GATEWAY=
+  	line="GATEWAY=\"$ipv4_gateway\""
+  	state=present
+
+- name: Disable IPv6 autoconfiguration
+  lineinfile:
+  	dest=/etc/sysconfig/network-scripts/ifcfg-eth0
+  	regexp=^IPV6_AUTOCONF=
+  	line="IPV6_AUTOCONF=\"no\""
+  	state=present
+
+- name: Set default IPv6 gateway
+  lineinfile:
+  	dest=/etc/sysconfig/network-scripts/ifcfg-eth0
+  	regexp=^IPV6_DEFAULTGW=
+  	line="IPV6_DEFAULTGW=\"$ipv6_gateway\""
+  	state=present
+
+- name: Set sysctl to disable IPv6 autoconfiguration immediately
+  command: /sbin/sysctl -w net.ipv6.conf.eth0.autoconf=0

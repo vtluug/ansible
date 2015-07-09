@@ -1,0 +1,2 @@
+---
+- include: kerberos0-slave.yml

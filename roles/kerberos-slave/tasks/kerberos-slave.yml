@@ -1,0 +1,46 @@
+---
+- name: Install Kerberos server package
+  yum:
+  	name=krb5-server
+  	state=latest
+  tags:
+  - packages
+
+- name: Install kdc.conf
+  copy:
+  	src=kdc.conf
+  	dest=/var/kerberos/krb5kdc/kdc.conf
+  	mode=0600
+  	owner=root
+  	group=root
+
+- name: Install kadm5.acl
+  copy:
+  	src=kadm5.acl
+  	dest=/var/kerberos/krb5kdc/kadm5.acl
+  	mode=0600
+  	owner=root
+  	group=root
+
+- name: Add master KDC to kpropd.acl
+  lineinfile:
+  	dest=/var/kerberos/krb5kdc/kpropd.acl
+  	regexp=^host/blade
+  	line='host/blade.vtluug.org@VTLUUG.ORG'
+  	create=yes
+  	state=present
+
+- name: Enable kprop service
+  service:
+  	name=kprop
+  	enabled=yes
+
+- name: Disable kadmin service
+  service:
+  	name=kadmin
+  	enabled=no
+
+- name: Enable krb5kdc service
+  service:
+  	name=krb5kdc
+  	enabled=yes
