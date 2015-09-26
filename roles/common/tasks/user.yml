@@ -1,7 +1,0 @@
----
-- name: Reset root password
-  user:
-  	name=root
-  	password=$root_password
-  	state=present
-  when_string: $root_password != ""

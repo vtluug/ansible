@@ -1,0 +1,5 @@
+- name: Disable SELinux
+  lineinfile: dest=/etc/selinux/config regexp=^SELINUX= line=SELINUX=disabled state=present
+- name: Turn off SELinux
+  command: setenforce 0
+  ignore_errors: yes
