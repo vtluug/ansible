@@ -1,2 +1,0 @@
-- name: Add wheel group to sudoers
-  lineinfile: "dest=/etc/sudoers regexp='^%wheel' line='%wheel ALL=(ALL) NOPASSWD: ALL' state=present"

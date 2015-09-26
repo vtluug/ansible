@@ -1,0 +1,14 @@
+---
+- name: Update ssh welcome message
+	template:
+		src=issue.net.j2
+		dest=/etc/issue.net
+		mode=0644
+
+- name: Update ssh config
+	copy:
+		src=sshd_config
+		dest=/etc/ssh/sshd_config
+		mode=0644
+  notify:
+  - Restart sshd

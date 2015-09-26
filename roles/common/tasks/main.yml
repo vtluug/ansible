@@ -1,1 +1,19 @@
+---
 - include: network.yml
+- include: sudo.yml
+- include: hostname.yml
+- include: yum.yml
+- include: create_user.yml
+		user=papatux
+		group=wheel
+		uid=999
+- include: mail.yml
+- include: ntp.yml
+- include: iptables.yml
+- include: smart.yml
+- include: packages.yml
+# TODO Merge auth tasks
+#- include: kerberos.yml
+#- include: sssd.yml
+- include: ssh.yml
+- include: yum.yml

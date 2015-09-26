@@ -1,0 +1,41 @@
+---
+- hosts: all
+  become: true
+  roles:
+  - common
+
+- hosts: kvm
+	become: true
+	roles:
+	- kvm
+
+- hosts: web-server
+  become: true
+  roles:
+
+- hosts: shell-server
+  become: true
+  roles:
+
+- hosts: lxc
+  become: true
+  roles:
+
+- hosts: tor-relay
+  become: true
+  roles:
+  - tor-relay
+
+- hosts: tahoe
+  become: true
+  roles:
+
+- hosts: sunway
+  become: true
+  roles:
+  - sunway
+
+- hosts: sunway-headnode
+  become: true
+  roles:
+  - kerberos-slave

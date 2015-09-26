@@ -1,0 +1,35 @@
+[domain/default]
+id_provider = ldap
+ldap_uri = ldap://{{ ldap_server }}/
+ldap_search_base = {{ ldap_base }}
+ldap_id_use_start_tls = False
+ldap_tls_cacertdir = /etc/openldap/cacerts
+
+auth_provider = krb5
+krb5_realm = {{ krb5_realm }}
+krb5_server = {{ krb5_server }}
+krb5_backup_server = {{ krb5_backup_server }}
+cache_credentials = True
+
+chpass_provider = krb5
+krb5_kpasswd = {{ krb5_kpasswd }}
+
+[sssd]
+domains = default
+services = nss, pam
+config_file_version = 2
+
+[nss]
+filter_groups = root
+filter_users = root
+
+[pam]
+
+[sudo]
+
+[autofs]
+
+[ssh]
+
+[pac]
+

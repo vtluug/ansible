@@ -1,0 +1,26 @@
+---
+- name: Install high-availability management packages
+  yum:
+  	name=$item
+  	state=latest
+  with_items:
+  - cman
+  - luci
+  tags:
+  - packages
+
+- name: Enable high-availability management services
+  service:
+  	name=$item
+  	enabled=yes
+  with_items:
+  - cman
+  - luci
+
+- name: Start high-availability management services
+  service:
+  	name=$item
+  	state=started
+  with_items:
+  - cman
+  - luci

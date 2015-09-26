@@ -1,0 +1,12 @@
+---
+- name: Remove high availability packages
+  yum:
+  	name=$item
+  	state=removed
+  with_items:
+  - ccs
+  - cman
+  - omping
+  - rgmanager
+  tags:
+  - packages
