@@ -9,6 +9,20 @@
   roles:
   - common
   - debian-common
+
+- hosts: auth
+  user: root
+  handlers:
+  - include: handlers/mail.yml
+  - include: handlers/ssh.yml
+  vars:
+  - include: default.yml
+  roles:
+  - selinux
+  - common
+  - centos-common
+  - ldap
+  
   
 - hosts: tor-relay
   user: root

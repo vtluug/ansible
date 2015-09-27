@@ -3,7 +3,7 @@
 - name: Enable EPEL
   command: rpm -Uvh /tmp/epel-release-6.8.noarch.rpm creates=/etc/yum.repos.d/epel.repo
 - name: Install common packages
-  yum: name=$item state=latest
+  yum: name={{ item }} state=latest
   with_items:
   - emacs-nox
   - elinks
@@ -30,7 +30,7 @@
   tags:
   - packages
 - name: Install packages for auth
-  yum: name=$item state=latest
+  yum: name={{ item }} state=latest
   with_items:
   - pam_krb5
   - krb5-libs
@@ -41,7 +41,7 @@
   - packages
   - auth
 - name: Install packages for development
-  yum: name=$item state=latest
+  yum: name={{ item }} state=latest
   with_items:
   - gcc
   - gcc-arm-linux-gnu
