@@ -1,41 +1,37 @@
 ---
-- hosts: all
+- hosts: auth
   become: true
   roles:
   - common
+  - centos-common
 
 - hosts: kvm
-	become: true
-	roles:
-	- kvm
-
-- hosts: web-server
   become: true
   roles:
+  - common
+  - centos-common
+  - kvm
 
 - hosts: shell-server
   become: true
   roles:
-
-- hosts: lxc
-  become: true
-  roles:
-
-- hosts: tor-relay
-  become: true
-  roles:
-  - tor-relay
+  - common
+  - debian-common
 
 - hosts: tahoe
   become: true
   roles:
+  - common
 
-- hosts: sunway
+- hosts: tor-relay
   become: true
   roles:
-  - sunway
+  - common
+  - tor-relay
 
-- hosts: sunway-headnode
+- hosts: web-server
   become: true
-  roles:
-  - kerberos-slave
+  roles: 
+  - common
+  - debian-common
+
