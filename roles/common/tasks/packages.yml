@@ -1,17 +1,17 @@
 ---
 - name: Download EPEL package
   get_url:
-  	url=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-  	dest=/tmp/epel-release-latest-7.noarch.rpm
-  	mode=0400
+    url=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    dest=/tmp/epel-release-latest-7.noarch.rpm
+    mode=0400
 
 - name: Enable EPEL
   command: rpm -Uvh /tmp/epel-release-latest-7.noarch.rpm creates=/etc/yum.repos.d/epel.repo
 
 - name: Install common packages
   yum:
-  	name={{ item }}
-  	state=latest
+    name={{ item }}
+    state=latest
   with_items:
   - atool
   - emacs-nox
@@ -43,8 +43,8 @@
 
 - name: Install packages for development
   yum:
-  	name={{ item }}
-  	state=latest
+    name={{ item }}
+    state=latest
   with_items:
   - gcc
   - gcc-arm-linux-gnu
@@ -80,3 +80,4 @@
   - zip
   tags:
   - packages
+

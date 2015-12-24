@@ -1,8 +1,8 @@
 ---
 - name: Install packages for auth
   yum:
-  	name={{ item }}
-  	state=latest
+    name={{ item }}
+    state=latest
   with_items:
   - pam_krb5
   - krb5-libs
@@ -16,15 +16,15 @@
 
 - name: Install LDAP certificate
   copy:
-  	src=ldap.vtluug.org.pem
-  	dest=/etc/ssl/certs/ldap.vtluug.org.pem
-  	mode=0644
+    src=ldap.vtluug.org.pem
+    dest=/etc/ssl/certs/ldap.vtluug.org.pem
+    mode=0644
 
 - name: Install krb5.conf
   copy:
-  	src=krb5.conf
-  	dest=/etc/krb5.conf
-  	mode=0644
+    src=krb5.conf
+    dest=/etc/krb5.conf
+    mode=0644
 
 - name: Run authconfig
   command: authconfig --updateall
@@ -38,28 +38,28 @@
 
 - name: Install sssd.conf
   template:
-  	src=sssd.conf.j2
-  	dest=/etc/sssd/sssd.conf
-  	mode=0600
+    src=sssd.conf.j2
+    dest=/etc/sssd/sssd.conf
+    mode=0600
   notify: Restart sssd
 
 - name: Stop unneeded auth services
   service:
-  	name=$item
-  	state=stopped
+    name=$item
+    state=stopped
   with_items:
   - nscd
   - nslcd
 
 - name: Disable unneeded auth services
   service:
-  	name=$item
-  	enabled=no
+    name=$item
+    enabled=no
   with_items:
   - nscd
   - nslcd
 
 - name: Enable sssd
   service:
-  	name=sssd
-  	enabled=yes
+    name=sssd
+    enabled=yes
