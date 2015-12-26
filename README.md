@@ -3,7 +3,8 @@ This is a repository of ansible playbooks for hosts on VTLUUG's network. Current
 Add files containing passwords to .gitignore before staging so they are not stored in the repo.
 
 To execute a playbook on all machines, run 
-`ansible-playbook all site.yml -i hosts.cfg -K`
+`ansible-playbook site.yml -u ssh_username`
+
 For more info, man ansible-playbook or see http://ansible.cc
 
 The following things must be done manually:
