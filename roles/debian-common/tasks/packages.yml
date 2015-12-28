@@ -1,5 +1,8 @@
+---
 - name: Install common packages
-  apt: name=$item state=latest
+  apt:
+    name={{ item }}
+    state=latest
   with_items:
   - emacs
   - elinks
@@ -25,8 +28,11 @@
   - cowsay
   tags:
   - packages
+
 - name: Install packages for development
-  apt: name=$item state=latest
+  apt:
+    name={{ item }}
+    state=latest
   with_items:
   - gcc
   - make
@@ -53,3 +59,4 @@
   - zip
   tags:
   - packages
+
