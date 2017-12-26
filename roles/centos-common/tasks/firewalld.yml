@@ -1,0 +1,16 @@
+---
+- name: Stop firewalld service
+  service:
+    name=firewalld
+    state=stopped
+  tags:
+  - services
+  - common
+
+- name: Disable firewalld service
+  service:
+    name=firewalld
+    enabled=no
+  tags:
+  - services
+  - common

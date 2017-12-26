@@ -1,66 +1,21 @@
-- hosts: debian
-  user: root
-  handlers:
-  - include: handlers/mail.yml
-  - include: handlers/ssh.yml
+---
+- hosts: fileserver
   vars:
-  - include: vars/default.yml
-  - include: vars/private.yml
+    config_zfs: "{{ CONFIG_ZFS|default('no') }}"
+    confirm_zfs: "{{ CONFIRM_ZFS|default('no') }}"
+  become: yes
   roles:
-  - common
-  - debian-common
-
-- hosts: auth
-  user: root
-  handlers:
-  - include: handlers/mail.yml
-  - include: handlers/ssh.yml
-  vars:
-  - include: default.yml
-  roles:
-  - selinux
-  - common
-  - centos-common
-  - ldap
-  
-  
-- hosts: tor-relay
-  user: root
-  handlers:
-  - include: handlers/mail.yml
-  - include: handlers/ssh.yml
-  vars:
-  - include: vars/default.yml
-  - include: vars/private.yml
-  roles:
-  - selinux
-  - common
-  - centos-common
-  - tor-relay
-
-- hosts: centos
-  user: root
-  handlers:
-  - include: handlers/mail.yml
-  - include: handlers/ssh.yml
-  vars:
-  - include: vars/default.yml
-  - include: vars/private.yml
-  roles:
-  - selinux
-  - common
-  - centos-common 
-
-- hosts: kvm
-  user: root
-  handlers:
-  - include: handlers/mail.yml
-  - include: handlers/ssh.yml
-  vars:
-  - include: vars/default.yml
-  - include: vars/private.yml
-  roles:
-  - common
-  - centos-common 
-  - kvm
-
+    - centos-common
+    - common
+    - prepare_zfs
+  # Relies on user to create 'tank' properly
+  # ASSUMES NEW INSTALLATION
+  tasks:
+    - name: Configure ZFS after pool creation
+      include_role:
+        name: configure_nfs
+      tags:
+        - configure_zfs
+      when:
+        - config_zfs == 'yes'
+        - confirm_zfs == 'yes'

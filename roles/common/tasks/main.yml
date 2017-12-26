@@ -1,1 +1,2 @@
-- include: network.yml
+---
+- include_tasks: ntp.yml

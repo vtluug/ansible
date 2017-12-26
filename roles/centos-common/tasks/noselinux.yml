@@ -1,5 +1,30 @@
+---
 - name: Disable SELinux
-  lineinfile: dest=/etc/selinux/config regexp=^SELINUX= line=SELINUX=disabled state=present
+  lineinfile:
+    dest=/etc/selinux/config
+    regexp=^SELINUX=
+    line=SELINUX=disabled
+    state=present
+  tags:
+  - common
+
 - name: Turn off SELinux
-  command: setenforce 0
-  ignore_errors: yes
+  selinux:
+    state=disabled
+  tags:
+  - common
+
+- name: Reboot and wait for host for new selinux settings
+  shell: sleep 2 && shutdown -r now "Ansible reboot - selinux"
+  async: 1
+  poll: 0
+
+######### CHANGE THIS TO IPV6 TODO
+- name: Wait for server to reboot after selinux settings
+  become: false
+  local_action: wait_for
+    host={{ ansible_default_ipv4.address }}
+    port=22
+    state=started
+    delay=60
+    timeout=120
