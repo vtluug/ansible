@@ -1,3 +1,0 @@
----
-- include_tasks: centos_zfs.yml
-  when: ansible_os_family == "RedHat"

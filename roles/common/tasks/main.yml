@@ -1,2 +1,2 @@
 ---
-- include_tasks: ntp.yml
+- import_tasks: ntp.yml
