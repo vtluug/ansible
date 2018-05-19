@@ -1,9 +1,14 @@
-This is a repository of ansible playbooks for hosts on VTLUUG's network. TODO
+This is a repository of ansible playbooks for hosts on VTLUUG's network
+
+## Prerequisites
+
+```ansible-galaxy install geerlingguy.ntp``` for ntp
+
+
 
 To execute a playbook on all machines, run 
-"ansible-playbook all main.yml -i hosts.cfg -K"
-For more info, man ansible-playbook or see http://ansible.cc
+```ansible-playbook main.yml -i hosts.cfg -K -u <user>```
 
-The following things must be done manually:
-- ZFS pool creation (zfs preparation & mount configuration are automated)
-TODO
+
+To limit execution to specific hosts, run
+```ansible-playbook main.yml -i hosts.cfg --limit=<host group> -k -u <user ```
