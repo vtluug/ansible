@@ -1,2 +1,14 @@
 ---
-- import_tasks: ntp.yml
+- name: Configure NTP
+  import_role:
+    name: geerlingguy.ntp
+  vars:
+    ntp_enabled: true
+    ntp_timezone: Etc/UTC
+    ntp_manage_config: true
+    ntp_servers:
+      - ntp-1.vt.edu iburst
+      - ntp-2.vt.edu iburst
+      - ntp-3.vt.edu iburst
+      - ntp-4.vt.edu iburst
+      - 0.debian.pool.ntp.org iburst
