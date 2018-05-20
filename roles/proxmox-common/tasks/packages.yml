@@ -4,6 +4,7 @@
     name: "{{ item }}"
     state: latest
   with_items:
+  - apt-listchanges
   - ca-certificates
   - libsasl2-2
   - libsasl2-modules
@@ -12,5 +13,6 @@
   - ntpstat
   - postfix
   - tmux
+  - unattended-upgrades
   - vim
   - zfs-zed

@@ -1,11 +1,4 @@
 ---
-#- name: Disable Subscription repo
-#  replace:
-#    dest: /etc/apt/sources.list.d/pve-enterprise.list
-#    regexp: '^(?!#)(.+?)$'
-#    replace: '#\1'
-#    backup: yes
-
 - name: Disable Subscription repo
   apt_repository:
     repo: deb https://enterprise.proxmox.com/debian/pve stretch pve-enterprise
@@ -22,7 +15,7 @@
 
 - name: Disable 'No valid subscription' warning popup on the GUI
   replace:
-    dest: /usr/share/pve-manager/js/pvemanagerlib.js
+    path: /usr/share/pve-manager/js/pvemanagerlib.js
     regexp: '^(.+?)data\.status !== \''Active\''(.+?)$'
     replace: '\1false\2'
     backup: yes

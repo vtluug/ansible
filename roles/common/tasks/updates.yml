@@ -1,0 +1,8 @@
+---
+- name: Configure unattended-upgrades mail
+  lineinfile:
+    path: /etc/apt/apt.conf.d/50unattended-upgrades
+    regexp: '^\/\/(Unattended-Upgrade::Mail "root";)$'
+    line: '\1'
+    backrefs: yes
+    backup: yes

@@ -1,7 +1,7 @@
 ---
 - name: Configure Postfix relayhost
   replace:
-    dest: /etc/postfix/main.cf
+    path: /etc/postfix/main.cf
     regexp: '^(relayhost =)$'
     replace: '\1 smtp.gmail.com'
     backup: yes

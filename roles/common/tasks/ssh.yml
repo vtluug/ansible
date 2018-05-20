@@ -1,0 +1,14 @@
+---
+- name: Remove Root SSH Configuration (if any)
+  file:
+    path: /root/.ssh
+    state: absent
+
+- name: Disable root ssh
+  lineinfile:  
+    path: /etc/ssh/sshd_config
+    regexp: '^PermitRootLogin yes$'
+    line: 'PermitRootLogin no'
+    backrefs: yes
+    backup: yes
+  notify: Restart sshd
