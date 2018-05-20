@@ -1,0 +1,15 @@
+---
+- name: Update and upgrade packages
+  apt:
+    update_cache: yes
+    upgrade: yes
+
+- name: Restart pveproxy
+  service:
+    name: pveproxy
+    state: restarted
+
+- name: Restart postfix
+  service:
+    name: postfix
+    state: restarted

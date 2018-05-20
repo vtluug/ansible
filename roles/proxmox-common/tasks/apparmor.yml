@@ -1,0 +1,6 @@
+---
+- name: Disable AppArmor
+  systemd:
+    name: apparmor
+    state: stopped
+    enabled: no
