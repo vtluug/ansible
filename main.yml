@@ -10,3 +10,78 @@
   roles:
   - debian-common
   - common
+  - freeipa-client
+
+- hosts: nfs-main
+  become: yes
+  roles:
+  - nfs-common
+  - nfs-main
+
+- hosts: nfs-backup
+  become: yes
+  roles:
+  - nfs-common
+  - nfs-backup
+
+- hosts: hpc
+  become: yes
+  roles:
+  - amdgpu-pro
+  - hpc
+
+- hosts: freeipa
+  become: yes
+  roles:
+  - freeipa
+
+- hosts: web
+  become: yes
+  roles:
+  - web
+
+- hosts: shell
+  becom: yes
+  roles:
+  - mail
+  - games
+
+- hosts: log
+  become: yes
+  roles:
+  - log
+
+- hosts: jitsi
+  become: yes
+  roles:
+  - jitsi
+
+- hosts: emby
+  become: yes
+  roles:
+  - emby
+
+- hosts: mirror
+  become: yes
+  roles:
+  - mirror
+
+- hosts: syncthing
+  become: yes
+  roles:
+  - syncthing
+
+- hosts: tahoe-lafs
+  become: yes
+  roles:
+  - tahoe-lafs
+
+- hosts: wargame
+  become: yes
+  roles:
+  - wargame
+
+- hosts: map
+  become: yes
+  roles:
+  - map
