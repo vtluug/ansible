@@ -41,7 +41,7 @@
   - web
 
 - hosts: shell
-  becom: yes
+  become: yes
   roles:
   - mail
   - games
