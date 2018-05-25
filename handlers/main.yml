@@ -1,0 +1,10 @@
+---
+- name: Update and upgrade packages
+  apt:
+    update_cache: yes
+    upgrade: yes
+
+- name: restart nfs
+  systemd:
+    name: nfs-kernel-server
+    state: restarted

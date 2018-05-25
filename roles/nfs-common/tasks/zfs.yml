@@ -1,0 +1,20 @@
+---
+- name: Install kernel headers
+  apt:
+    name: linux-kernel-headers
+    state: present
+
+- name: Enable contrib repository
+  apt_repository:
+    repo: deb http://ftp.debian.org/debian stretch main contrib non-free
+    state: present
+  notify:
+  - Update and upgrade packages
+
+- name: Install zfs packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - zfs-dkms
+    - zfsutils-linux

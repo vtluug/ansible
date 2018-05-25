@@ -3,6 +3,7 @@ This is a repository of ansible playbooks for hosts on VTLUUG's network
 ## Prerequisites
 
 ```ansible-galaxy install geerlingguy.ntp``` for ntp
+```ansible-galaxy install geerlingguy.nfs``` for nfs
 
 
 

@@ -1,12 +1,16 @@
 ---
 - hosts: proxmox
   become: yes
+  handlers:
+  - import_tasks: handlers/main.yml
   roles:
   - proxmox-common 
   - common
 
 - hosts: debian
   become: yes
+  handlers:
+  - import_tasks: handlers/main.yml
   roles:
   - debian-common
   - common
@@ -14,12 +18,16 @@
 
 - hosts: nfs-main
   become: yes
+  handlers:
+  - import_tasks: handlers/main.yml
   roles:
   - nfs-common
   - nfs-main
 
 - hosts: nfs-backup
   become: yes
+  handlers:
+  - import_tasks: handlers/main.yml
   roles:
   - nfs-common
   - nfs-backup

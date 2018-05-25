@@ -1,0 +1,11 @@
+---
+- name: Configure NFS exports for backup devices
+  import_role:
+    name: geerlingguy.nfs
+  vars:
+    nfs_exports:
+#        - /keg/nfs/temp/home    <Client hosts>
+      - /keg/nfs/temp/pve               -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # meltdown spectre phantomphreak
+      - /keg/nfs/temp/pve/images        -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # meltdown spectre phantomphreak
+      - /keg/nfs/temp/pve/isos          -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # meltdown spectre phantomphreak       
+      - /keg/nfs/temp/pve/templates     -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # meltdown spectre phantomphreak 
