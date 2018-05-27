@@ -1,5 +1,5 @@
 ---
-- name: Install common packages
+- name: Install common packages for proxmox
   apt:
     name: "{{ item }}"
     state: latest
@@ -12,7 +12,16 @@
   - nmap
   - ntpstat
   - postfix
+  - python-pip
   - tmux
   - unattended-upgrades
   - vim
   - zfs-zed
+
+- name: Install required pip packages
+  pip:
+    name: "{{ item }}"
+  with_items:
+  - proxmoxer
+  - requests
+

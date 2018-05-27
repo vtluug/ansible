@@ -1,0 +1,29 @@
+---
+- name: Deploy VMs on meltdown
+  proxmox_kvm:
+    api_user: root@pam
+    api_password: "{{ lookup('env', 'PROXMOX_PASSWORD') }}"
+    api_host: meltdown.private.vtluug.org
+    node: meltdown
+    clone: template-tiny
+    name: acidburn
+    storage: temp_images
+    timeout: 500
+  register: results
+  when: inventory_hostname == 'meltdown.private.vtluug.org'
+
+- debug: var=results
+
+- name: Pause
+  pause:
+    seconds: 10
+
+- name: Start VM
+  proxmox_kvm:
+    api_user: root@pam
+    api_password: "{{ lookup('env', 'PROXMOX_PASSWORD') }}"
+    api_host: meltdown.private.vtluug.org
+    node: meltdown
+    name: acidburn
+    state: started
+  when: inventory_hostname == 'meltdown.private.vtluug.org'

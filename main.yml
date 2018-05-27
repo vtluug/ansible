@@ -16,21 +16,12 @@
   - common
   - freeipa-client
 
-- hosts: nfs-main
+- hosts: nfs
   become: yes
   handlers:
   - import_tasks: handlers/main.yml
   roles:
-  - nfs-common
-  - nfs-main
-
-- hosts: nfs-backup
-  become: yes
-  handlers:
-  - import_tasks: handlers/main.yml
-  roles:
-  - nfs-common
-  - nfs-backup
+  - nfs
 
 - hosts: hpc
   become: yes

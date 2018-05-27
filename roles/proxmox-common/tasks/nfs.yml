@@ -1,0 +1,25 @@
+---
+- name: Add nfs mounts to proxmox
+  blockinfile:
+    path: /etc/pve/storage.cfg
+    block: |
+
+      # Newlines are weirdly formatted because ansible (& proxmox) is weird
+      nfs: {{ item.name }}
+              server {{ item.server }}
+              export {{ item.export }}
+              options {{ item.options }}
+              content {{ item.content }}
+    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.name }}" 
+    backup: yes
+  with_items:
+    - { name: dirtycow_images,    server: 10.98.0.7, export: /cistern/nfs/pve/images,     options: soft, content: images }
+    - { name: dirtycow_isos,      server: 10.98.0.7, export: /cistern/nfs/pve/isos,       options: soft, content: iso }
+    - { name: dirtycow_templates, server: 10.98.0.7, export: /cister/nfs/pve/templates,   options: soft, content: vztmpl }
+    - { name: cyberdelia_backup,  server: 10.98.0.6, export: /tank/nfs/backup,            options: soft, content: backup }
+# Until dirtycow is up {{{
+    - { name: temp_images,        server: 10.98.0.8, export: /keg/nfs/temp/pve/images,    options: soft, content: images }
+    - { name: temp_isos,          server: 10.98.0.8, export: /keg/nfs/temp/pve/isos,      options: soft, content: iso }
+    - { name: temp_templates,     server: 10.98.0.8, export: /keg/nfs/temp/pve/templates, options: soft, content: vztmpl }
+# }}}
+    - { name: keg_backup,         server: 10.98.0.8, export: /keg/nfs/backup,             options: soft, content: backup }

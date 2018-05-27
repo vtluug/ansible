@@ -1,0 +1,3 @@
+---
+- import_tasks: zfs.yml
+- import_tasks: nfs-exports.yml
