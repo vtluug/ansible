@@ -1,0 +1,7 @@
+{% for mount in mounts %}
+{{ mount.type }}: {{ mount.storage_id }}
+{% for key, value in mount.properties.items() %}
+    {{ key }} {{ value }}
+{% endfor %}
+
+{% endfor %}

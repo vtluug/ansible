@@ -26,6 +26,8 @@
 - hosts: hpc
   become: yes
   roles:
+#  - ubuntu-common
+#  - common
   - amdgpu-pro
   - hpc
 

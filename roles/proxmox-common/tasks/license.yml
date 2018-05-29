@@ -3,15 +3,13 @@
   apt_repository:
     repo: deb https://enterprise.proxmox.com/debian/pve stretch pve-enterprise
     state: absent
-  notify:
-    - Update and upgrade packages
+  notify: Update and upgrade packages
 
 - name: Enable Non-Subscription repo
   apt_repository:
     repo: deb http://download.proxmox.com/debian/pve stretch pve-no-subscription
     state: present
-  notify:
-    - Update and upgrade packages
+  notify: Update and upgrade packages
 
 - name: Disable 'No valid subscription' warning popup on the GUI
   replace:
@@ -19,5 +17,4 @@
     regexp: '^(.+?)data\.status !== \''Active\''(.+?)$'
     replace: '\1false\2'
     backup: yes
-  notify:
-    - Restart pveproxy
+  notify: Restart pveproxy

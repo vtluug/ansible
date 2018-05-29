@@ -1,0 +1,21 @@
+---
+- name: Set VM hostname
+  hostname:
+    name: "{{ vm_name }}"
+
+- name: Set VM hostname in /etc/hosts
+  replace:
+    path: /etc/hosts
+    regexp: '(.*?)template$'
+    replace: '\1{{ vm_name }}.private.vtluug.org {{ vm_name }}'
+    backup: yes
+
+- name: Set VM static IP
+  replace:
+    path: /etc/network/interfaces
+    regexp: '^(.*?)dhcp$'
+    replace: '\1static\n        address {{ vm_ip }}\n        gateway 10.98.0.1'
+    backup: yes
+
+- name: Reboot VM
+  command: /sbin/reboot

@@ -2,4 +2,9 @@
 - hosts: proxmox
   become: yes
   roles:
-  - deploy-vms
+  - role: deploy-vms
+
+- hosts: new_vms
+  become: yes
+  roles:
+  - role: setup-vms

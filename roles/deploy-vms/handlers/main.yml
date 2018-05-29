@@ -1,0 +1,13 @@
+---
+- name: Pause 10 seconds
+  pause:
+    seconds: 10
+
+- name: Start VM
+  proxmox_kvm:
+    api_user: root@pam
+    api_password: "{{ lookup('env', 'PROXMOX_PASSWORD') }}"
+    api_host: meltdown.private.vtluug.org
+    node: meltdown
+    name: "{{ vminfo.name }}"
+    state: started

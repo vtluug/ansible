@@ -8,8 +8,7 @@
   apt_repository:
     repo: deb http://ftp.debian.org/debian stretch main contrib non-free
     state: present
-  notify:
-  - Update and upgrade packages
+  notify: Update and upgrade packages
 
 - name: Install zfs packages
   apt:

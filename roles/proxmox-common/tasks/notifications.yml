@@ -17,5 +17,4 @@
       smtp_sasl_security_options = noanonymous
       inet_protocols = ipv4
     backup: yes
-  notify:
-    - Restart postfix
+  notify: Restart postfix

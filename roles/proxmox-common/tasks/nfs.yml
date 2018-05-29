@@ -1,25 +1,21 @@
 ---
 - name: Add nfs mounts to proxmox
-  blockinfile:
-    path: /etc/pve/storage.cfg
-    block: |
-
-      # Newlines are weirdly formatted because ansible (& proxmox) is weird
-      nfs: {{ item.name }}
-              server {{ item.server }}
-              export {{ item.export }}
-              options {{ item.options }}
-              content {{ item.content }}
-    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.name }}" 
-    backup: yes
-  with_items:
-    - { name: dirtycow_images,    server: 10.98.0.7, export: /cistern/nfs/pve/images,     options: soft, content: images }
-    - { name: dirtycow_isos,      server: 10.98.0.7, export: /cistern/nfs/pve/isos,       options: soft, content: iso }
-    - { name: dirtycow_templates, server: 10.98.0.7, export: /cister/nfs/pve/templates,   options: soft, content: vztmpl }
-    - { name: cyberdelia_backup,  server: 10.98.0.6, export: /tank/nfs/backup,            options: soft, content: backup }
+  template:
+    src: templates/storage.cfg.j2
+    dest: /etc/pve/storage.cfg
+    mode: 0640
+  vars:
+    mounts:
+      - { type: dir,     storage_id: local,              properties: { disable: '', path: /var/lib/vz, content: 'backup,vztmpl,iso', maxfiles: 0, shared: 0 }}
+      - { type: zfspool, storage_id: local-zfs,          properties: { disable: '', pool: rpool/data, content: 'rootdir,images', sparse: 1 }}
+      - { type: nfs,     storage_id: dirtycow_images,    properties: { server: 10.98.0.7, export: /cistern/nfs/pve/images,     options: soft, content: images }}
+      - { type: nfs,     storage_id: dirtycow_isos,      properties: { server: 10.98.0.7, export: /cistern/nfs/pve/isos,       options: soft, content: iso }}
+      - { type: nfs,     storage_id: dirtycow_templates, properties: { server: 10.98.0.7, export: /cistern/nfs/pve/templates,  options: soft, content: vztmpl }}
+      - { type: nfs,     storage_id: cyberdelia_backup,  properties: { server: 10.98.0.6, export: /tank/nfs/backup,            options: soft, content: backup }}
 # Until dirtycow is up {{{
-    - { name: temp_images,        server: 10.98.0.8, export: /keg/nfs/temp/pve/images,    options: soft, content: images }
-    - { name: temp_isos,          server: 10.98.0.8, export: /keg/nfs/temp/pve/isos,      options: soft, content: iso }
-    - { name: temp_templates,     server: 10.98.0.8, export: /keg/nfs/temp/pve/templates, options: soft, content: vztmpl }
+      - { type: nfs,     storage_id: temp_images,        properties: { server: 10.98.0.8, export: /keg/nfs/temp/pve/images,    options: soft, content: images }}
+      - { type: nfs,     storage_id: temp_isos,          properties: { server: 10.98.0.8, export: /keg/nfs/temp/pve/isos,      options: soft, content: iso }}
+      - { type: nfs,     storage_id: temp_templates,     properties: { server: 10.98.0.8, export: /keg/nfs/temp/pve/templates, options: soft, content: vztmpl }}
 # }}}
-    - { name: keg_backup,         server: 10.98.0.8, export: /keg/nfs/backup,             options: soft, content: backup }
+      - { type: nfs,     storage_id: shellshock_backup,  properties: { server: 10.98.0.8, export: /keg/nfs/backup,             options: soft, content: backup }}
+  run_once: true

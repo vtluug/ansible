@@ -1,29 +1,68 @@
 ---
-- name: Deploy VMs on meltdown
-  proxmox_kvm:
+- name: Deploy VMs
+  proxmox_kvm_vtluug:
     api_user: root@pam
     api_password: "{{ lookup('env', 'PROXMOX_PASSWORD') }}"
     api_host: meltdown.private.vtluug.org
-    node: meltdown
-    clone: template-tiny
-    name: acidburn
+    node: "{{ item.node }}"
+    target: "{{ item.target }}"
+    clone: "{{ item.clone }}"
+    name: "{{ item.name }}"
+    full: yes
     storage: temp_images
     timeout: 500
-  register: results
-  when: inventory_hostname == 'meltdown.private.vtluug.org'
+  with_items: "{{ new_vms }}"
+  register: vminfo
+  run_once: true
 
-- debug: var=results
-
-- name: Pause
+- name: Pause a bit since a bunch of VMs were just created
   pause:
     seconds: 10
+  run_once: true
 
-- name: Start VM
-  proxmox_kvm:
+
+- name: Start recently created VMs
+  proxmox_kvm_vtluug:
     api_user: root@pam
     api_password: "{{ lookup('env', 'PROXMOX_PASSWORD') }}"
     api_host: meltdown.private.vtluug.org
-    node: meltdown
-    name: acidburn
+    node: "{{ item.item.target }}"
+    name: "{{ item.item.name }}"
     state: started
-  when: inventory_hostname == 'meltdown.private.vtluug.org'
+  with_items: "{{ vminfo.results }}"
+  when: item.changed == True
+  run_once: true
+
+- name: Wait for VMs to start
+  pause:
+    seconds: 30
+  run_once: true
+
+- name: Scan for new dhcp IPs in 10.98.1.0/24
+  shell: |
+    nmap -sn 10.98.1.0/24 > /tmp/new_vms
+
+- name: Get new VM IPs
+  shell: |
+    cat /tmp/new_vms | grep -B 2 $(cat /etc/pve/nodes/{{ item.item.target }}/qemu-server/{{ item.newid }}.conf | grep -oE '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}') | grep -oE '10.98.1.[0-9]{1,3}'
+  register: ipinfo
+  with_items: "{{ vminfo.results }}"
+  when: item.changed == True
+  run_once: true
+
+#- name: debug the things
+#  debug:
+#    msg="{{ item }}"
+#  with_items: "{{ ipinfo.results }}"
+#  run_once: true
+
+- name: Add newly created VMs to group
+  add_host:
+    name: "{{ item.stdout }}"
+    groups: new_vms
+    vm_name: "{{ item.item.item.name }}"
+    vm_ip: "{{ item.item.item.ip }}"
+    vm_clone: "{{ item.item.item.clone }}"
+  with_items: "{{ ipinfo.results }}"
+  when: item.changed == True
+  run_once: true

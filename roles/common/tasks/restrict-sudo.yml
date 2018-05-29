@@ -10,7 +10,7 @@
 - name: Allow papatux to do anything
   lineinfile:
     path: /etc/sudoers
-    line: 'papatux ALL=(ALL:ALL) ALL'
+    line: 'papatux ALL=(ALL:ALL) NOPASSWD:ALL'
     backup: yes
     validate: 'visudo -cf %s'
 

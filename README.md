@@ -16,7 +16,4 @@ To limit execution to specific hosts, run
 ```ansible-galaxy install geerlingguy.nfs``` for nfs
 
 
-### Additonal Configuration
-In /usr/lib/python3.6/site-packages/ansible/modules/cloud/misc/proxmox_kvm.py:
-    - On line 1147, change the return value so the newid is also returned:
-        - ... % (name, newid, vmid) changes to ... % (name, newid, vmid), newid=newid) 
+We also use a modified version of the proxmox_kvm module because the official version is missing many features. We'll submit a PR in the future to get our changes merged.
