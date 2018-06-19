@@ -1,4 +1,5 @@
 ---
+# Distro groups
 - hosts: proxmox
   become: yes
   handlers:
@@ -16,6 +17,16 @@
   - common
   - freeipa-client
 
+- hosts: fedora
+  become: yes
+  roles:
+  - fedora-common
+  - common
+  - freeipa-client
+
+# Bare-metal
+# Proxmox is bare-metal too, but it not the standard debian install so it gets
+#   its own distro group
 - hosts: nfs
   become: yes
   handlers:
@@ -26,63 +37,62 @@
 - hosts: hpc
   become: yes
   roles:
-#  - ubuntu-common
-#  - common
   - amdgpu-pro
-  - hpc
 
+# Important VMs
 - hosts: freeipa
   become: yes
   roles:
-  - freeipa
-
-- hosts: web
-  become: yes
-  roles:
-  - web
-
-- hosts: shell
-  become: yes
-  roles:
-  - mail
-  - games
-
-- hosts: log
-  become: yes
-  roles:
-  - log
-
-- hosts: jitsi
-  become: yes
-  roles:
-  - jitsi
-
-- hosts: emby
-  become: yes
-  roles:
-  - emby
-
-- hosts: mirror
-  become: yes
-  roles:
-  - mirror
-
-- hosts: syncthing
-  become: yes
-  roles:
-  - syncthing
-
-- hosts: tahoe-lafs
-  become: yes
-  roles:
-  - tahoe-lafs
-
-- hosts: wargame
-  become: yes
-  roles:
-  - wargame
-
-- hosts: map
-  become: yes
-  roles:
-  - map
+  - freeipa-server
+#
+#- hosts: log
+#  become: yes
+#  roles:
+#  - log
+#
+#- hosts: shell
+#  become: yes
+#  roles:
+#  - mail
+#  - games
+#
+#- hosts: web
+#  become: yes
+#  roles:
+#  - web
+#
+## General VMs
+#- hosts: emby
+#  become: yes
+#  roles:
+#  - emby
+#
+#- hosts: jitsi
+#  become: yes
+#  roles:
+#  - jitsi
+#
+#- hosts: map
+#  become: yes
+#  roles:
+#  - map
+#
+#- hosts: mirror
+#  become: yes
+#  roles:
+#  - mirror
+#
+#- hosts: syncthing
+#  become: yes
+#  roles:
+#  - syncthing
+#
+#- hosts: tahoe-lafs
+#  become: yes
+#  roles:
+#  - tahoe-lafs
+#
+#- hosts: wargame
+#  become: yes
+#  roles:
+#  - wargame

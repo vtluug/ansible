@@ -1,10 +1,9 @@
 ---
-- name: Install common packages for proxmox
+- name: Install common packages (Proxmox)
   apt:
     name: "{{ item }}"
     state: latest
   with_items:
-  - apt-listchanges
   - ca-certificates
   - libsasl2-2
   - libsasl2-modules
@@ -14,7 +13,6 @@
   - postfix
   - python-pip
   - tmux
-  - unattended-upgrades
   - vim
   - zfs-zed
 

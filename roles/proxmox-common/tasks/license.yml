@@ -1,15 +1,14 @@
 ---
-- name: Disable Subscription repo
+- name: Enable non-sub repo & Disable sub repo
   apt_repository:
-    repo: deb https://enterprise.proxmox.com/debian/pve stretch pve-enterprise
-    state: absent
-  notify: Update and upgrade packages
-
-- name: Enable Non-Subscription repo
-  apt_repository:
-    repo: deb http://download.proxmox.com/debian/pve stretch pve-no-subscription
-    state: present
-  notify: Update and upgrade packages
+    repo: "{{ item.repo }}"
+    state: "{{ item.state }}"
+  with_items:
+  - { repo: 'deb http://download.proxmox.com/debian/pve stretch pve-no-subscription', state: present }
+  - { repo: 'deb https://enterprise.proxmox.com/debian/pve stretch pve-enterprise',   state: absent }
+  notify:
+    - Update packages (Debian, Ubuntu)
+    - Upgrade packages (Debian, Ubuntu)
 
 - name: Disable 'No valid subscription' warning popup on the GUI
   replace:

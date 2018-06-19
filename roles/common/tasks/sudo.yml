@@ -1,0 +1,38 @@
+---
+- name: Configure sudo (Fedora)
+  import_role:
+    name: ansible-sudoers
+  vars:
+    sudoer_rewrite_sudoers_file: yes
+    sudoer_aliases:
+      command:
+        - name: DANGEROUS
+          comment: DANGEROUS commands
+          commands:
+            - /usr/sbin/shutdown
+            - /usr/sbin/reboot
+            - /usr/sbin/halt
+            - /usr/sbin/poweroff
+    sudoer_specs:
+      - { name: papatux, comment: "Special papatux perms", users: papatux, hosts: ALL, operators: ALL, tags: NOPASSWD, commands: ALL }
+      - { name: wheel_restrictions, comment: "Special wheel restrictions", users: "%wheel", hosts: ALL, operators: ALL, tags: NOPASSWD, commands: "!DANGEROUS" }
+  when: ansible_os_family == "RedHat"
+
+- name: Configure sudo (Debain)
+  import_role:
+    name: ansible-sudoers
+  vars:
+    sudoer_rewrite_sudoers_file: yes
+    sudoer_aliases:
+      command:
+        - name: DANGEROUS
+          comment: DANGEROUS commands
+          commands:
+            - /sbin/shutdown
+            - /sbin/reboot
+            - /sbin/halt
+            - /sbin/poweroff
+    sudoer_specs:
+      - { name: papatux, comment: "Special papatux perms", users: papatux, hosts: ALL, operators: ALL, tags: NOPASSWD, commands: ALL }
+      - { name: sudo_restrictions, comment: "Special sudo restrictions", users: "%sudo", hosts: ALL, operators: ALL, tags: NOPASSWD, commands: "!DANGEROUS" }
+  when: ansible_os_family == "Debian"

@@ -1,10 +1,8 @@
 ---
-- name: Update and upgrade packages
+- name: Update packages (Debian, Ubuntu)
   apt:
     update_cache: yes
-    upgrade: yes
 
-- name: restart nfs
-  systemd:
-    name: nfs-kernel-server
-    state: restarted
+- name: Upgrade packages (Debian, Ubuntu)
+  apt:
+    upgrade: yes

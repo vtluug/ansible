@@ -3,3 +3,8 @@
   service:
     name: sshd
     state: restarted
+
+- name: restart ntp
+  service:
+    name: "{{ ntp_daemon }}"
+    state: restarted

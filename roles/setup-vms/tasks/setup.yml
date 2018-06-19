@@ -3,19 +3,42 @@
   hostname:
     name: "{{ vm_name }}"
 
-- name: Set VM hostname in /etc/hosts
+- name: Set VM hostname in /etc/hosts (Debian)
   replace:
     path: /etc/hosts
     regexp: '(.*?)template$'
     replace: '\1{{ vm_name }}.private.vtluug.org {{ vm_name }}'
     backup: yes
+  when: ansible_os_family == "Debian"
 
-- name: Set VM static IP
+- name: Set VM static IP (Debian)
   replace:
     path: /etc/network/interfaces
     regexp: '^(.*?)dhcp$'
     replace: '\1static\n        address {{ vm_ip }}\n        gateway 10.98.0.1'
     backup: yes
+  when: ansible_os_family == "Debian"
+
+- name: Install selinux-python (Fedora)
+  dnf:
+    name: libselinux-python
+    state: latest
+    disable_gpg_check: yes
+  when: ansible_os_family == "RedHat"
+
+- name: Set VM static IP (Fedora)
+  template:
+    src: templates/ifcfg-ens18.j2
+    dest: /etc/sysconfig/network-scripts/ifcfg-ens18
+    mode: 0644
+  vars:
+    ip: "{{ vm_ip }}"
+  when: ansible_os_family == "RedHat"
+
+- name: Disable selinux (Fedora)
+  selinux:
+    state: disabled
+  when: ansible_os_family == "RedHat"
 
 - name: Reboot VM
   command: /sbin/reboot

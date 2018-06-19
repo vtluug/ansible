@@ -42,6 +42,7 @@
   shell: |
     nmap -sn 10.98.1.0/24 > /tmp/new_vms
 
+# This clusterfuck looks up each MAC based on VM name, then uses the nmap scan to get IP
 - name: Get new VM IPs
   shell: |
     cat /tmp/new_vms | grep -B 2 $(cat /etc/pve/nodes/{{ item.item.target }}/qemu-server/{{ item.newid }}.conf | grep -oE '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}') | grep -oE '10.98.1.[0-9]{1,3}'
@@ -49,12 +50,6 @@
   with_items: "{{ vminfo.results }}"
   when: item.changed == True
   run_once: true
-
-#- name: debug the things
-#  debug:
-#    msg="{{ item }}"
-#  with_items: "{{ ipinfo.results }}"
-#  run_once: true
 
 - name: Add newly created VMs to group
   add_host:
