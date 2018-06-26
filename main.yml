@@ -3,26 +3,26 @@
 - hosts: proxmox
   become: yes
   handlers:
-  - import_tasks: handlers/main.yml
+    - import_tasks: handlers/main.yml
   roles:
-  - proxmox-common 
-  - common
+    - proxmox-common 
+    - common
 
-- hosts: debian
+- hosts: ubuntu
   become: yes
   handlers:
-  - import_tasks: handlers/main.yml
+    - import_tasks: handlers/main.yml
   roles:
-  - debian-common
-  - common
-  - freeipa-client
+    - ubuntu-common
+    - common
+    - freeipa-client
 
-- hosts: fedora
+- hosts: centos
   become: yes
   roles:
-  - fedora-common
-  - common
-  - freeipa-client
+    - centos-common
+    - common
+    - freeipa-client
 
 # Bare-metal
 # Proxmox is bare-metal too, but it not the standard debian install so it gets
@@ -30,69 +30,69 @@
 - hosts: nfs
   become: yes
   handlers:
-  - import_tasks: handlers/main.yml
+    - import_tasks: handlers/main.yml
   roles:
-  - nfs
+    - nfs
 
 - hosts: hpc
   become: yes
   roles:
-  - amdgpu-pro
+    - amdgpu-pro
 
 # Important VMs
 - hosts: freeipa
   become: yes
   roles:
-  - freeipa-server
+    - freeipa-server
 #
 #- hosts: log
 #  become: yes
 #  roles:
-#  - log
+#    - log
 #
 #- hosts: shell
 #  become: yes
 #  roles:
-#  - mail
-#  - games
+#    - mail
+#    - games
 #
 #- hosts: web
 #  become: yes
 #  roles:
-#  - web
+#    - web
 #
 ## General VMs
 #- hosts: emby
 #  become: yes
 #  roles:
-#  - emby
+#    - emby
 #
 #- hosts: jitsi
 #  become: yes
 #  roles:
-#  - jitsi
+#    - jitsi
 #
 #- hosts: map
 #  become: yes
 #  roles:
-#  - map
+#    - map
 #
 #- hosts: mirror
 #  become: yes
 #  roles:
-#  - mirror
+#    - mirror
 #
 #- hosts: syncthing
 #  become: yes
 #  roles:
-#  - syncthing
+#    - syncthing
 #
 #- hosts: tahoe-lafs
 #  become: yes
 #  roles:
-#  - tahoe-lafs
+#    - tahoe-lafs
 #
 #- hosts: wargame
 #  become: yes
 #  roles:
-#  - wargame
+#    - wargame

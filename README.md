@@ -17,5 +17,7 @@ To limit execution to specific hosts, run
 
 ```ansible-galaxy install git+https://github.com/paulwalko/ansible-sudoers.git``` for sudoers
 
+```ansible-galaxy install CTL-Fed-Security.freeipa-client```
+
 
 We also use a modified version of the proxmox_kvm module because the official version is missing many features. We'll submit a PR in the future to get our changes merged.

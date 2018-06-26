@@ -1,1 +1,12 @@
 ---
+- name: Enroll host in krb.vtluug.org domain
+  command: >
+    ipa-client-install
+    -U
+    --domain=krb.vtluug.org
+    --server=chimera.private.vtluug.org
+    --principal=admin
+    --password="{{ lookup('env', 'IPA_PASSWORD') }}"
+    --mkhomedir
+  args:
+    creates: /etc/ipa/default.conf

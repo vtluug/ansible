@@ -1,0 +1,17 @@
+---
+- name: Install common packages
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - curl
+    - freeipa-client
+    - git
+    - htop
+    - man
+    - nmap
+    - ntp
+    - tmux
+    - vim
+    - wget
+    - zsh

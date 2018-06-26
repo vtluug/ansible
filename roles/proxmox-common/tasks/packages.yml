@@ -4,22 +4,23 @@
     name: "{{ item }}"
     state: latest
   with_items:
-  - ca-certificates
-  - libsasl2-2
-  - libsasl2-modules
-  - git
-  - nmap
-  - ntpstat
-  - postfix
-  - python-pip
-  - tmux
-  - vim
-  - zfs-zed
+    - apt-listchanges
+    - ca-certificates
+    - libsasl2-2
+    - libsasl2-modules
+    - git
+    - nmap
+    - ntpstat
+    - postfix
+    - python-pip
+    - tmux
+    - unattended-upgrades
+    - vim
+    - zfs-zed
 
 - name: Install required pip packages
   pip:
     name: "{{ item }}"
   with_items:
-  - proxmoxer
-  - requests
-
+    - proxmoxer
+    - requests

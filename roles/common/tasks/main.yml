@@ -4,5 +4,4 @@
 
 - import_tasks: ntp.yml
 - import_tasks: ssh.yml
-- import_tasks: updates.yml
 - import_tasks: sudo.yml

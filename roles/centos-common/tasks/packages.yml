@@ -1,0 +1,11 @@
+---
+- name: Install common packages
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - freeipa-client
+    - tmux
+    - vim
+    - yum-cron
+  notify: Start and enable yum-cron

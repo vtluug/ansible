@@ -1,9 +1,0 @@
----
-- name: Install common packages
-  dnf:
-    name: "{{ item }}"
-    state: latest
-  with_items:
-  - freeipa-client
-  - tmux
-  - vim

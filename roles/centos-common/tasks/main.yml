@@ -1,3 +1,4 @@
 ---
 - import_tasks: noselinux_firewalld.yml
 - import_tasks: packages.yml
+- import_tasks: auto_upgrades.yml

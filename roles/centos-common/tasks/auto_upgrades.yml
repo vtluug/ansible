@@ -1,0 +1,12 @@
+---
+- name: Set automatic update type to security
+  lineinfile:
+    path: /etc/yum/yum-cron.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    backrefs: yes
+    backup: yes
+  with_items:
+    - { regexp: '^update_cmd = default$', line: 'update_cmd = security' }
+    - { regexp: '^apply_updates = no$', line: 'apply_updates = yes' }
+  notify: Restart yum-cron 

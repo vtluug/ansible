@@ -1,5 +1,5 @@
 ---
-- name: Configure sudo (Fedora)
+- name: Configure sudo (Centos/Fedora)
   import_role:
     name: ansible-sudoers
   vars:
@@ -18,7 +18,7 @@
       - { name: wheel_restrictions, comment: "Special wheel restrictions", users: "%wheel", hosts: ALL, operators: ALL, tags: NOPASSWD, commands: "!DANGEROUS" }
   when: ansible_os_family == "RedHat"
 
-- name: Configure sudo (Debain)
+- name: Configure sudo (Ubuntu/Debian)
   import_role:
     name: ansible-sudoers
   vars:

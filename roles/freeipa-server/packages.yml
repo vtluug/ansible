@@ -1,5 +1,0 @@
----
-- name: Install freeipa-server
-  dnf:
-    name: freeipa-server
-    state: latest

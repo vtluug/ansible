@@ -17,7 +17,7 @@
 
 - name: Pause a bit since a bunch of VMs were just created
   pause:
-    seconds: 10
+    seconds: 60
   run_once: true
 
 
@@ -33,9 +33,9 @@
   when: item.changed == True
   run_once: true
 
-- name: Wait for VMs to start
+- name: Wait for VMs to start (+ make sure networking is up)
   pause:
-    seconds: 30
+    minutes: 3
   run_once: true
 
 - name: Scan for new dhcp IPs in 10.98.1.0/24

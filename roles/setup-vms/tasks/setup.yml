@@ -3,7 +3,7 @@
   hostname:
     name: "{{ vm_name }}"
 
-- name: Set VM hostname in /etc/hosts (Debian)
+- name: Set VM hostname in /etc/hosts (Ubuntu/Debian)
   replace:
     path: /etc/hosts
     regexp: '(.*?)template$'
@@ -17,25 +17,53 @@
     regexp: '^(.*?)dhcp$'
     replace: '\1static\n        address {{ vm_ip }}\n        gateway 10.98.0.1'
     backup: yes
-  when: ansible_os_family == "Debian"
+  when: ansible_distribution == "Debian"
 
-- name: Install selinux-python (Fedora)
-  dnf:
+- name: Set VM static IP (Ubuntu)
+  template:
+    src: templates/01-netcfg.yaml
+    dest: /etc/netplan/01-netcfg.yaml
+    mode: 0644
+    backup: yes
+  vars:
+    ip: "{{ vm_ip }}"
+  when: ansible_distribution == "Ubuntu"
+
+# Not done w/ handler bc the reboot task was messing it up
+- name: Generate & apply new netplan
+  command: netplan generate && netplan apply
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install selinux-python (Centos/Fedora)
+  yum:
     name: libselinux-python
     state: latest
     disable_gpg_check: yes
   when: ansible_os_family == "RedHat"
 
-- name: Set VM static IP (Fedora)
+- name: Set VM hostname in /etc/hosts (Centos/Fedora)
+  lineinfile:
+    path: /etc/hosts
+    insertafter: EOF
+    line: "{{ item }}"
+    backrefs: yes
+    backup: yes
+  with_items:
+    - "{{ vm_ip }} {{ vm_name }}.private.vtluug.org {{ vm_name }} localhost.localdomain localhost"
+#v6   - "{{ vm_ip6 }} {{ vm_name }}.vtluug.org {{ vm_name }} localhost.localdomain localhost"
+  when: ansible_os_family == "RedHat"
+
+- name: Set VM static IP (Centos/Fedora)
   template:
-    src: templates/ifcfg-ens18.j2
-    dest: /etc/sysconfig/network-scripts/ifcfg-ens18
+    src: templates/ifcfg-eth0.j2
+    dest: /etc/sysconfig/network-scripts/ifcfg-eth0
     mode: 0644
+    backup: yes
   vars:
     ip: "{{ vm_ip }}"
   when: ansible_os_family == "RedHat"
 
-- name: Disable selinux (Fedora)
+- name: Disable selinux (Centos/Fedora)
   selinux:
     state: disabled
   when: ansible_os_family == "RedHat"
