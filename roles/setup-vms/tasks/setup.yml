@@ -46,7 +46,6 @@
     path: /etc/hosts
     insertafter: EOF
     line: "{{ item }}"
-    backrefs: yes
     backup: yes
   with_items:
     - "{{ vm_ip }} {{ vm_name }}.private.vtluug.org {{ vm_name }} localhost.localdomain localhost"

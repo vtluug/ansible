@@ -33,9 +33,9 @@
   when: item.changed == True
   run_once: true
 
-- name: Wait for VMs to start (+ make sure networking is up)
+- name: Wait for VMs to start (+ a reboot for new machine-id to take effectr; and centos can take a looong time)
   pause:
-    minutes: 3
+    minutes: 5
   run_once: true
 
 - name: Scan for new dhcp IPs in 10.98.1.0/24
