@@ -1,0 +1,30 @@
+---
+# REFERNCE:
+# cyberdelia = tank = 10.98.0.6
+# dirtycow = cistern = 10.98.0.7
+# shellshock = keg = 10.98.0.8
+- name: Create NFS mountpoints (All but Sczi's srv)
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+    state: directory
+  with_items:
+    - { path: '/nfs',              owner: 'root',     group: 'root',     mode: 0755 }
+    - { path: '/nfs/share',        owner: 'root',     group: 'root',     mode: 0777 }
+    - { path: '/nfs/files',        owner: 'www-data', group: 'www-data', mode: 0755 }
+    - { path: '/nfs/scratch',      owner: 'root',     group: 'root',     mode: 0755 }
+    - { path: '/nfs/scratch/tank', owner: 'root',     group: 'root',     mode: 0777 }
+    - { path: '/nfs/scratch/keg',  owner: 'root',     group: 'root',     mode: 0777 }
+
+- name: Create NFS mountpoints (Sczi's srv)
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+    state: directory
+  with_items:
+    - { path: '/nfs/srv', owner: 'root', group: 'root', mode: 0755 }
+  when: inventory_hostname == 'sczi.private.vtluug.org'

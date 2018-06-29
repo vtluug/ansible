@@ -33,11 +33,7 @@
     - import_tasks: handlers/main.yml
   roles:
     - nfs
-
-- hosts: hpc
-  become: yes
-  roles:
-    - amdgpu-pro
+    - common
 
 # Important VMs
 - hosts: freeipa
