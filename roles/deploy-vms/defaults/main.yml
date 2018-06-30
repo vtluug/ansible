@@ -1,14 +1,14 @@
 ---
 new_vms:
-#  - { node: meltdown, target: meltdown,      clone: ubuntu-tiny,   name: holeybeep,     ip: 10.98.0.14 }  # Jitsi
-#  - { node: meltdown, target: meltdown,      clone: ubuntu-medium, name: map,           ip: 10.98.0.20 }  # OSM + TBD
-#  - { node: meltdown, target: meltdown,      clone: ubuntu-small,  name: mirror,        ip: 10.98.0.16 }  # Mirror
-  - { node: meltdown, target: meltdown,      clone: ubuntu-medium, name: sczi,          ip: 10.98.0.11 }  # Web
-  - { node: meltdown, target: spectre,       clone: ubuntu-small,  name: acidburn,      ip: 10.98.0.12 }  # Shell
-  - { node: meltdown, target: spectre,       clone: centos-tiny,   name: chimera,       ip: 10.98.0.10 }  # FreeIPA
-#  - { node: meltdown, target: spectre,       clone: ubuntu-small,  name: wargame,       ip: 10.98.0.19 }  # Wargame
-#  - { node: meltdown, target: phantomphreak, clone: ubuntu-tiny,   name: crashoverride, ip: 10.98.0.18 }  # Tahoe-LAFS
-#  - { node: meltdown, target: phantomphreak, clone: ubuntu-tiny,   name: theplague,     ip: 10.98.0.13 }  # ELK
-#  - { node: meltdown, target: phantomphreak, clone: ubuntu-tiny,   name: wannacry,      ip: 10.98.0.15 }  # Emby
-#  - { node: meltdown, target: phantomphreak, clone: ubuntu-tiny,   name: zerocool,      ip: 10.98.0.17 }  # Syncthing
+#  - { node: 'meltdown', target: 'meltdown',      clone: 'ubuntu-tiny',   name: 'holeybeep',     ip: '10.98.0.14' }  # Jitsi
+#  - { node: 'meltdown', target: 'meltdown',      clone: 'ubuntu-medium', name: 'map',           ip: '10.98.0.20' }  # OSM + TBD
+#  - { node: 'meltdown', target: 'meltdown',      clone: 'ubuntu-small',  name: 'mirror',        ip: '10.98.0.16' }  # Mirror
+  - { node: meltdown, target: meltdown,      clone: test, name: sczi,          ip: 10.98.0.11 }  # Web
+#  - { node: 'meltdown', target: 'spectre',       clone: 'ubuntu-small',  name: 'acidburn',      ip: '10.98.0.12' }  # Shell
+#  - { node: 'meltdown', target: 'spectre',       clone: 'centos-tiny',   name: 'chimera',       ip: '10.98.0.10' }  # FreeIPA
+#  - { node: 'meltdown', target: 'spectre',       clone: 'ubuntu-small',  name: 'wargame',       ip: '10.98.0.19' }  # Wargame
+#  - { node: 'meltdown', target: 'phantomphreak', clone: 'ubuntu-tiny',   name: 'crashoverride', ip: '10.98.0.18' }  # Tahoe-LAFS
+#  - { node: 'meltdown', target: 'phantomphreak', clone: 'ubuntu-tiny',   name: 'theplague',     ip: '10.98.0.13' }  # ELK
+#  - { node: 'meltdown', target: 'phantomphreak', clone: 'ubuntu-tiny',   name: 'wannacry',      ip: '10.98.0.15' }  # Emby
+#  - { node: 'meltdown', target: 'phantomphreak', clone: 'ubuntu-tiny',   name: 'zerocool',      ip: '10.98.0.17' }  # Syncthing
 # Add user VMs here later
