@@ -34,5 +34,5 @@
             - /sbin/poweroff
     sudoer_specs:
       - { name: 'papatux', comment: 'Special papatux perms', users: 'papatux', hosts: 'ALL', operators: 'ALL', tags: 'NOPASSWD', commands: 'ALL' }
-      - { name: 'udo_restrictions', comment: 'Special sudo restrictions', users: '%sudo', hosts: 'ALL', operators: 'ALL', tags: 'NOPASSWD', commands: '!DANGEROUS' }
+      - { name: 'sudo_restrictions', comment: 'Special sudo restrictions', users: '%sudo', hosts: 'ALL', operators: 'ALL', tags: 'NOPASSWD', commands: '!DANGEROUS' }
   when: ansible_os_family == 'Debian'
