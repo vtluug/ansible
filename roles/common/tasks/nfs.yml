@@ -17,11 +17,11 @@
 # Until dirtycow is up {{{
     - { filesystem: '10.98.0.8:/keg/nfs/temp/home',  mountpoint: '/home',      type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
 # }}}
-    - { filesystem: '10.98.0.6:/tank/nfs/share',    mountpoint: '/nfs/tank/share',    type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
-    - { filesystem: '10.98.0.6:/tank/nfs/scratch',  mountpoint: '/nfs/tank/scratch',  type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
+#    - { filesystem: '10.98.0.6:/tank/nfs/share',    mountpoint: '/nfs/tank/share',    type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
+#    - { filesystem: '10.98.0.6:/tank/nfs/scratch',  mountpoint: '/nfs/tank/scratch',  type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
 #    - { filesystem: '10.98.0.7:/cistern/nfs/home',  mountpoint: '/home',              type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
-    - { filesystem: '10.98.0.7:/cistern/nfs/files', mountpoint: '/nfs/cistern/files', type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
-    - { filesystem: '10.98.0.7:/cistern/nfs/share', mountpoint: '/nfs/cistern/share', type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
+#    - { filesystem: '10.98.0.7:/cistern/nfs/files', mountpoint: '/nfs/cistern/files', type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
+#    - { filesystem: '10.98.0.7:/cistern/nfs/share', mountpoint: '/nfs/cistern/share', type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '10.98.0.8:/keg/nfs/share',     mountpoint: '/nfs/keg/share',     type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '10.98.0.8:/keg/nfs/scratch',   mountpoint: '/nfs/keg/scratch',   type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
   when:
@@ -36,9 +36,9 @@
     opts: "{{ item.options }}"
     state: mounted
   with_items:
-    - { filesystem: '10.98.0.6:/tank/nfs/share',    mountpoint: '/nfs/tank/share',    type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
-    - { filesystem: '10.98.0.6:/tank/nfs/scratch',  mountpoint: '/nfs/tank/scratch',  type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
-    - { filesystem: '10.98.0.7:/cistern/nfs/share', mountpoint: '/nfs/cistern/share', type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
+#    - { filesystem: '10.98.0.6:/tank/nfs/share',    mountpoint: '/nfs/tank/share',    type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
+#    - { filesystem: '10.98.0.6:/tank/nfs/scratch',  mountpoint: '/nfs/tank/scratch',  type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
+#    - { filesystem: '10.98.0.7:/cistern/nfs/share', mountpoint: '/nfs/cistern/share', type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '10.98.0.8:/keg/nfs/share',     mountpoint: '/nfs/keg/share',     type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '10.98.0.8:/keg/nfs/scratch',   mountpoint: '/nfs/keg/scratch',   type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
   when: "'proxmox' in group_names"
@@ -91,11 +91,11 @@
 # Until dirtycow is up {{{
     - { filesystem: '/keg/nfs/temp/home', mountpoint: '/home', type: 'none', options: 'bind', dump: '', pass: '' }
 # }}}
-    - { filesystem: '10.98.0.6:/tank/nfs/share',    mountpoint: '/nfs/tank/share',    type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
-    - { filesystem: '10.98.0.6:/tank/nfs/scratch',  mountpoint: '/nfs/tank/scratch',  type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
+#    - { filesystem: '10.98.0.6:/tank/nfs/share',    mountpoint: '/nfs/tank/share',    type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
+#    - { filesystem: '10.98.0.6:/tank/nfs/scratch',  mountpoint: '/nfs/tank/scratch',  type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
 #    - { filesystem: '10.98.0.7:/cistern/nfs/home', mountpoint: '/home',               type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
-    - { filesystem: '10.98.0.7:/cistern/nfs/files', mountpoint: '/nfs/cistern/files', type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
-    - { filesystem: '10.98.0.7:/cistern/nfs/share', mountpoint: '/nfs/cistern/share', type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
+#    - { filesystem: '10.98.0.7:/cistern/nfs/files', mountpoint: '/nfs/cistern/files', type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
+#    - { filesystem: '10.98.0.7:/cistern/nfs/share', mountpoint: '/nfs/cistern/share', type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '/keg/nfs/share',               mountpoint: '/nfs/keg/share',     type: 'none', options: 'bind', dump: '', pass: '' }
     - { filesystem: '/keg/nfs/scratch',             mountpoint: '/nfs/keg/scratch',   type: 'none', options: 'bind', dump: '', pass: '' }
   when: inventory_hostname == 'shellshock.private.vtluug.org'
