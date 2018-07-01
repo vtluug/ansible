@@ -2,7 +2,7 @@ This is a repository of ansible playbooks for hosts on VTLUUG's network
 
 
 To execute a playbook on all machines, run 
-```ansible-playbook main.yml -i hosts.cfg -K -u <user>```
+```ansible-playbook main.yml -i hosts.cfg -u <user> -k -K```
 
 
 To limit execution to specific hosts, run
