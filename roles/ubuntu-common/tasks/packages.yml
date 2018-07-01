@@ -10,6 +10,7 @@
     - git
     - htop
     - man
+    - nfs-common
     - nmap
     - tmux
     - vim

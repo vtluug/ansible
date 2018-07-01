@@ -6,6 +6,7 @@
   with_items:
     - chrony
     - freeipa-client
+    - nfs-utils
     - tmux
     - vim
     - yum-cron
