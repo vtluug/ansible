@@ -24,6 +24,6 @@ NEWUSERS=$(comm -13 <(echo "$HOMEDIRS") <(echo "$USERS"))
 GROUP='users'
 for user in $NEWUSERS; do
 	echo "Creating $user:$GROUP $HOMEPATH/$user"
-#	create $HOMEPATH/$user
-#	chown $user:$GROUP
+	mkdir $HOMEPATH/$user
+    chown $user:$GROUP
 done
