@@ -14,15 +14,15 @@
     mode: "{{ item.mode }}"
     state: directory
   with_items:
-    - { path: '/nfs',               owner: 'root',      group: 'root',  mode: '0755' }
-    - { path: '/nfs/tank',          owner: 'root',      group: 'root',  mode: '0755' }
-    - { path: '/nfs/tank/share',    owner: 'nfsnobody', group: 'users', mode: '0775' }
-    - { path: '/nfs/tank/scratch',  owner: 'root',      group: 'root',  mode: '0777' }
-    - { path: '/nfs/cistern',       owner: 'root',      group: 'root',  mode: '0755' }
-    - { path: '/nfs/cistern/share', owner: 'nfsnobody', group: 'users', mode: '0775' }
-    - { path: '/nfs/keg',           owner: 'root',      group: 'root',  mode: '0755' }
-    - { path: '/nfs/keg/share',     owner: 'nfsnobody', group: 'users', mode: '0775' }
-    - { path: '/nfs/keg/scratch',   owner: 'root',      group: 'root',  mode: '0777' }
+    - { path: '/nfs',               owner: 'root', group: 'root',  mode: '0755' }
+    - { path: '/nfs/tank',          owner: 'root', group: 'root',  mode: '0755' }
+    - { path: '/nfs/tank/share',    owner: 'root', group: 'users', mode: '0775' }
+    - { path: '/nfs/tank/scratch',  owner: 'root', group: 'root',  mode: '0777' }
+    - { path: '/nfs/cistern',       owner: 'root', group: 'root',  mode: '0755' }
+    - { path: '/nfs/cistern/share', owner: 'root', group: 'users', mode: '0775' }
+    - { path: '/nfs/keg',           owner: 'root', group: 'root',  mode: '0755' }
+    - { path: '/nfs/keg/share',     owner: 'root', group: 'users', mode: '0775' }
+    - { path: '/nfs/keg/scratch',   owner: 'root', group: 'root',  mode: '0777' }
 
 - name: Create NFS mountpoints (All hosts EXCEPT Proxmox)
   file:
