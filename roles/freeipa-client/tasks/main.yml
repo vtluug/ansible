@@ -1,3 +1,2 @@
 ---
 - import_tasks: freeipa-client.yml
-  when: "'freeipa' not in group_names"

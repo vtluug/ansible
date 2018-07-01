@@ -7,6 +7,6 @@
     --server=chimera.private.vtluug.org
     --principal=admin
     --password="{{ lookup('env', 'IPA_PASSWORD') }}"
-    --mkhomedir
   args:
     creates: /etc/ipa/default.conf
+  when: "'freeipa' not in group_names"
