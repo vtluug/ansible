@@ -1,10 +1,10 @@
 ---
 - name: Restart sshd
-  service:
-    name: sshd
+  systemd:
+    name: sshd.service
     state: restarted
 
 - name: Restart chronyd
-  service:
-    name: chronyd
+  systemd:
+    name: chronyd.service
     state: restarted

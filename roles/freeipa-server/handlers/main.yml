@@ -1,6 +1,6 @@
 ---
 - name: Start rngd
-  service:
-      name: rngd
+  syetemd:
+      name: rngd.service
       state: started
-      enabled: True
+      enabled: yes

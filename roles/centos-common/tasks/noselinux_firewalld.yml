@@ -4,7 +4,7 @@
     state: disabled
 
 - name: Disable firewalld
-  service:
-    name: firewalld
+  systemd:
+    name: firewalld.service
     state: stopped
-    enabled: False
+    enabled: no

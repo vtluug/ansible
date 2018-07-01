@@ -1,0 +1,29 @@
+#!/bin/bash
+##################################################
+# krb_mkhomedir.sh - Create homedirectories for new kerberos users
+#
+# author: pew <paul@walko.org>
+##################################################
+
+HOMEPATH='/keg/nfs/temp/home'
+#HOMEPATH='/home'
+HOST='chimera.private.vtluug.org'
+
+# Lookup current homedirs and new users
+HOMEDIRS=$(ls $HOMEPATH | sort)
+USERS=$(ldapsearch -x -h $HOST -b \
+      dc=krb,dc=vtluug,dc=org | grep -oP '(?<=uid=).*?(?=,)' | sort | uniq)
+
+# Compare old & new uers
+# -1: Suppress users with homedir but no account
+#     (shouldn't happen but it's possible)
+# -3: Suppress common users
+NEWUSERS=$(comm -13 <(echo "$HOMEDIRS") <(echo "$USERS"))
+
+# Create homedirs for new users
+GROUP='users'
+for user in $NEWUSERS; do
+	echo "Creating $user:$GROUP $HOMEPATH/$user"
+#	create $HOMEPATH/$user
+#	chown $user:$GROUP
+done

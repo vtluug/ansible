@@ -1,17 +1,17 @@
 ---
 - name: Start and enable chronyd
-  service:
-    name: chronyd
+  systemd:
+    name: chronyd.service
     state: started
-    enabled: True
+    enabled: yes
 
 - name: Start and enable yum-cron
-  service:  
-    name: yum-cron
+  systemd:
+    name: yum-cron.service
     state: started
-    enabled: True
+    enabled: yes
 
 - name: Restart yum-cron
-  service:  
-    name: yum-cron
+  systemd:
+    name: yum-cron.service
     state: restarted

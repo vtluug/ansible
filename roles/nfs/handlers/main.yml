@@ -1,5 +1,11 @@
 ---
 - name: restart nfs
   systemd:
-    name: nfs-kernel-server
+    name: nfs-kernel-server.service
     state: restarted
+
+- name: Start and enable krb_mkhomedir
+  systemd:
+    name: krb_mkhomedir.timer
+    state: started
+    enabled: yes

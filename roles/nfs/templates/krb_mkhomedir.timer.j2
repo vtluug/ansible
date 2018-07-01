@@ -1,0 +1,9 @@
+[Unit]
+Description=Run krb_mkhomedir.service every 5 minutes
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=5min
+
+[INstall]
+WantedBy=timers.target

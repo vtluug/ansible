@@ -1,10 +1,10 @@
 ---
 - name: Restart pveproxy
-  service:
-    name: pveproxy
+  systemd:
+    name: pveproxy.service
     state: restarted
 
 - name: Restart postfix
-  service:
-    name: postfix
+  systemd:
+    name: postfix.service
     state: restarted
