@@ -25,5 +25,5 @@ GROUP='users'
 for user in $NEWUSERS; do
 	echo "Creating $user:$GROUP $HOMEPATH/$user"
 	mkdir $HOMEPATH/$user
-    chown $user:$GROUP
+    chown $user:$GROUP $HOMEPATH/$user
 done
