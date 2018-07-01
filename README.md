@@ -6,12 +6,17 @@ To execute a playbook on all machines, run
 
 
 To limit execution to specific hosts, run
-```ansible-playbook main.yml -i hosts.cfg --limit=<host group> -k -u <user ```
+```ansible-playbook main.yml -i hosts.cfg --limit=<host group> -u <user -k -K```
 
+Client-side config required
+
+In your client's config (usually /etc/ansible/ansible.cfg) set the following many playbooks work with a NFS root squashed path
+
+```remote_tmp = /tmp/$USER-ansible/tmp```
 
 ## Prerequisites
 
-```ansible-galaxy install geerlingguy.ntp``` for ntp
+```ansible-galaxy install influxdata.chrony``` for chrony
 
 ```ansible-galaxy install geerlingguy.nfs``` for nfs
 

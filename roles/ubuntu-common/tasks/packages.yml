@@ -4,6 +4,7 @@
     name: "{{ item }}"
     state: latest
   with_items:
+    - chrony
     - curl
     - freeipa-client
     - git

@@ -4,7 +4,7 @@
     name: sshd
     state: restarted
 
-- name: restart ntp
+- name: Retstart chronyd
   service:
-    name: "{{ ntp_daemon }}"
+    name: chronyd
     state: restarted

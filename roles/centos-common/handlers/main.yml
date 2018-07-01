@@ -1,4 +1,10 @@
 ---
+- name: Start and enable chronyd
+  service:
+    name: chronyd
+    state: started
+    enabled: True
+
 - name: Start and enable yum-cron
   service:  
     name: yum-cron

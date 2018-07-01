@@ -4,8 +4,11 @@
     name: "{{ item }}"
     state: latest
   with_items:
+    - chrony
     - freeipa-client
     - tmux
     - vim
     - yum-cron
-  notify: Start and enable yum-cron
+  notify:
+    - Start and enable chronyd
+    - Start and enable yum-cron
