@@ -1,4 +1,5 @@
 ---
+- import_tasks: users.yml
 - import_tasks: dirs.yml
 - import_tasks: chrony.yml
 - import_tasks: nfs.yml
