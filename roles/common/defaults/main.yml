@@ -1,0 +1,7 @@
+---
+chrony_servers:
+  - 'server ntp-1.vt.edu iburst'
+  - 'server ntp-2.vt.edu iburst'
+  - 'server ntp-3.vt.edu iburst'
+  - 'server ntp-4.vt.edu iburst'
+  - 'pool 0.ubuntu.pool.ntp.org iburst'

@@ -1,0 +1,9 @@
+---
+- name: Configure Chrony
+  template:
+    src: templates/chrony.conf.j2
+    dest: /etc/chrony/chrony.conf
+    owner: root
+    group: root
+    mode: '0544'
+  notify: Restart chronyd
