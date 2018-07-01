@@ -1,6 +1,6 @@
 ---
 - name: Start rngd
-  syetemd:
+  systemd:
     name: rngd.service
     state: started
     enabled: yes
