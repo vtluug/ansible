@@ -35,7 +35,7 @@
     - { path: '/nfs/cistern/files', owner: 'www-data', group: 'www-data', mode: '755' }
   when: "'proxmox' not in group_names"
 
-- name: Create NFS mountopints (Sczi)
+- name: Create NFS mountpoints (Sczi)
   file:
     path: "{{ item.path }}"
     owner: "{{ item.owner }}"
