@@ -9,4 +9,4 @@
     --password="{{ lookup('env', 'IPA_PASSWORD') }}"
   args:
     creates: /etc/ipa/default.conf
-  when: "'freeipa' not in group_names"
+  when: inventory_hostname != 'chimera.private.vtluug.org'
