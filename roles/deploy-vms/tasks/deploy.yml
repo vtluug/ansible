@@ -8,6 +8,7 @@
     target: "{{ item.target }}"
     clone: "{{ item.clone }}"
     name: "{{ item.name }}"
+    net: "{ 'virtio': {{ item.mac }}, 'bridge': 'vmbr0' }"
     full: yes
     storage: temp-images
     timeout: 500
@@ -38,25 +39,13 @@
     minutes: 5
   run_once: true
 
-- name: Scan for new dhcp IPs in 10.98.1.0/24
-  shell: |
-    nmap -sn 10.98.1.0/24 > /tmp/new_vms
-
-# This clusterfuck looks up each MAC based on VM name, then uses the nmap scan to get IP
-- name: Get new VM IPs
-  shell: |
-    cat /tmp/new_vms | grep -B 2 $(cat /etc/pve/nodes/{{ item.item.target }}/qemu-server/{{ item.newid }}.conf | grep -oE '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}') | grep -oE '10.98.1.[0-9]{1,3}'
-  register: ipinfo
-  with_items: "{{ vminfo.results }}"
-  when: item.changed == True
-  run_once: true
-
-- name: Add newly created VMs to group
+- name: Add newly created VMs to group so we can set hostnames
   add_host:
     name: "{{ item.stdout }}"
     groups: new_vms
     vm_name: "{{ item.item.item.name }}"
     vm_ip: "{{ item.item.item.ip }}"
+    vm_ip6: "{{ item.item.item.ip6 }}"
     vm_clone: "{{ item.item.item.clone }}"
   with_items: "{{ ipinfo.results }}"
   when: item.changed == True

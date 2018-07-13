@@ -1,14 +1,14 @@
 ---
 new_vms:
-#  - { node: 'meltdown', target: 'meltdown',      clone: 'ubuntu-tiny',   name: 'holeybeep',     ip: '10.98.0.14' }  # Jitsi
-#  - { node: 'meltdown', target: 'meltdown',      clone: 'ubuntu-medium', name: 'map',           ip: '10.98.0.20' }  # OSM + TBD
-#  - { node: 'meltdown', target: 'meltdown',      clone: 'ubuntu-small',  name: 'mirror',        ip: '10.98.0.16' }  # Mirror
-  - { node: 'meltdown', target: 'meltdown',      clone: 'ubuntu-medium', name: 'sczi',         ip: '10.98.0.11' }  # Web
-  - { node: 'meltdown', target: 'spectre',       clone: 'ubuntu-small',  name: 'acidburn',      ip: '10.98.0.12' }  # Shell
-  - { node: 'meltdown', target: 'spectre',       clone: 'centos-tiny',   name: 'chimera',       ip: '10.98.0.10' }  # FreeIPA
-#  - { node: 'meltdown', target: 'spectre',       clone: 'ubuntu-small',  name: 'wargame',       ip: '10.98.0.19' }  # Wargame
-#  - { node: 'meltdown', target: 'phantomphreak', clone: 'ubuntu-tiny',   name: 'crashoverride', ip: '10.98.0.18' }  # Tahoe-LAFS
-#  - { node: 'meltdown', target: 'phantomphreak', clone: 'ubuntu-tiny',   name: 'theplague',     ip: '10.98.0.13' }  # ELK
-#  - { node: 'meltdown', target: 'phantomphreak', clone: 'ubuntu-tiny',   name: 'wannacry',      ip: '10.98.0.15' }  # Emby
-#  - { node: 'meltdown', target: 'phantomphreak', clone: 'ubuntu-tiny',   name: 'zerocool',      ip: '10.98.0.17' }  # Syncthing
+  - { node: 'meltdown', target: 'spectre',       clone: 'centos-tiny',   name: 'chimera',       mac: '00:02:0a:62:00:0a', ip: '10.98.0.10' }  # FreeIPA
+  - { node: 'meltdown', target: 'meltdown',      clone: 'ubuntu-medium', name: 'sczi',          mac: '00:02:0a:62:00:0b', ip: '10.98.0.11' }  # Web
+  - { node: 'meltdown', target: 'spectre',       clone: 'ubuntu-small',  name: 'acidburn',      mac: '00:02:0a:62:00:0c', ip: '10.98.0.12' }  # Shell
+#  - { node: 'meltdown', target: 'phantomphreak', clone: 'ubuntu-tiny',   name: 'theplague',     mac: '00:02:0a:62:00:0d', ip: '10.98.0.13' }  # ELK
+#  - { node: 'meltdown', target: 'meltdown',      clone: 'ubuntu-tiny',   name: 'holeybeep',     mac: '00:02:0a:62:00:0e', ip: '10.98.0.14' }  # Jitsi
+#  - { node: 'meltdown', target: 'phantomphreak', clone: 'ubuntu-tiny',   name: 'wannacry',      mac: '00:02:0a:62:00:0f', ip: '10.98.0.15' }  # Emby
+#  - { node: 'meltdown', target: 'meltdown',      clone: 'ubuntu-small',  name: 'mirror',        mac: '00:02:0a:62:00:10', ip: '10.98.0.16' }  # Mirror
+#  - { node: 'meltdown', target: 'phantomphreak', clone: 'ubuntu-tiny',   name: 'zerocool',      mac: '00:02:0a:62:00:11', ip: '10.98.0.17' }  # Syncthing
+#  - { node: 'meltdown', target: 'phantomphreak', clone: 'ubuntu-tiny',   name: 'crashoverride', mac: '00:02:0a:62:00:12', ip: '10.98.0.18' }  # Tahoe-LAFS
+#  - { node: 'meltdown', target: 'spectre',       clone: 'ubuntu-small',  name: 'wargame',       mac: '00:02:0a:62:00:13', ip: '10.98.0.19' }  # Wargame
+#  - { node: 'meltdown', target: 'meltdown',      clone: 'ubuntu-medium', name: 'map',           mac: '00:02:0a:62:00:14', ip: '10.98.0.20' }  # OSM + TBD
 # Add user VMs here later
