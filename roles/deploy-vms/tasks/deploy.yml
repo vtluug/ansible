@@ -2,7 +2,7 @@
 - name: Deploy VMs
   proxmox_kvm_vtluug:
     api_user: root@pam
-    api_password: "{{ lookup('env', 'PROXMOX_PASSWORD') }}"
+    api_password: "{{ proxmox_password }}"
     api_host: meltdown.private.vtluug.org
     node: "{{ item.node }}"
     target: "{{ item.target }}"
@@ -25,7 +25,7 @@
 - name: Start recently created VMs
   proxmox_kvm_vtluug:
     api_user: root@pam
-    api_password: "{{ lookup('env', 'PROXMOX_PASSWORD') }}"
+    api_password: "{{ proxmox_password }}"
     api_host: meltdown.private.vtluug.org
     node: "{{ item.item.target }}"
     name: "{{ item.item.name }}"

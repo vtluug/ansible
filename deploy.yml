@@ -2,9 +2,12 @@
 - hosts: proxmox
   become: yes
   roles:
-  - role: deploy-vms
+    - deploy-vms
+  vars_prompt:
+    - name: "proxmox_password"
+      prompt: "Proxmox root password"
 
 - hosts: new_vms
   become: yes
   roles:
-  - role: setup-vms
+    - setup-vms

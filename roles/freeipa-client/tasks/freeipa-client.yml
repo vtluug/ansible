@@ -6,7 +6,7 @@
     --domain=krb.vtluug.org
     --server=chimera.private.vtluug.org
     --principal=admin
-    --password="{{ lookup('env', 'IPA_PASSWORD') }}"
+    --password="{{ freeipa_password }}"
   args:
     creates: /etc/ipa/default.conf
   when: inventory_hostname != 'chimera.private.vtluug.org'

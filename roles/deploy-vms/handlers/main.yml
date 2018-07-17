@@ -6,7 +6,7 @@
 - name: Start VM
   proxmox_kvm:
     api_user: root@pam
-    api_password: "{{ lookup('env', 'PROXMOX_PASSWORD') }}"
+    api_password: "{{ proxmox_password }}"
     api_host: meltdown.private.vtluug.org
     node: meltdown
     name: "{{ vminfo.name }}"
