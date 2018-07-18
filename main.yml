@@ -25,10 +25,6 @@
   roles:
     - centos-common
     - common
-    - freeipa-client
-  vars_prompt:
-    - name: "freeipa_password"
-      prompt: "FreeIPA admin password"
 
 # Bare-metal
 # Proxmox is bare-metal too, but it not the standard debian install so it gets
