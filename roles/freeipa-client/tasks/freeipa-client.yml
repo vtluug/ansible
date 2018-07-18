@@ -9,4 +9,6 @@
     --password="{{ freeipa_password }}"
   args:
     creates: /etc/ipa/default.conf
-  when: inventory_hostname != 'chimera.private.vtluug.org' and "'nfs' not in group_names"
+  when:
+    - inventory_hostname != 'chimera.private.vtluug.org'
+    - "'nfs' not in group_names"
