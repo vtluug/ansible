@@ -1,7 +1,0 @@
----
-- name: Install zfs packages
-  apt:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - zfsutils-linux

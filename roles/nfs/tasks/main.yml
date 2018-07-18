@@ -1,4 +1,3 @@
 ---
-- import_tasks: zfs.yml
 - import_tasks: nfs-exports.yml
 - import_tasks: krb_mkhomedir.yml
