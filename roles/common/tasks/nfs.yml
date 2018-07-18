@@ -34,7 +34,7 @@
     path: "{{ item.mountpoint }}"
     fstype: "{{ item.type }}"
     opts: "{{ item.options }}"
-    state: mounted
+    state: present
   with_items:
 #    - { filesystem: '10.98.0.6:/tank/nfs/share',    mountpoint: '/nfs/tank/share',    type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
 #    - { filesystem: '10.98.0.6:/tank/nfs/scratch',  mountpoint: '/nfs/tank/scratch',  type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
@@ -49,7 +49,7 @@
     path: "{{ item.mountpoint }}"
     fstype: "{{ item.type }}"
     opts: "{{ item.options }}"
-    state: mounted
+    state: present
   with_items:
 # Until dirtycow is up {{{
     - { filesystem: '10.98.0.8:/keg/nfs/temp/home', mountpoint: '/home', type: 'nfs', options: 'soft,nodev', dump: '0', pass: '0' }
@@ -69,7 +69,7 @@
     path: "{{ item.mountpoint }}"
     fstype: "{{ item.type }}"
     opts: "{{ item.options }}"
-    state: mounted
+    state: present
   with_items:
     - { filesystem: '10.98.0.6:/tank/nfs/share',   mountpoint: '/nfs/tank/share',    type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '10.98.0.6:/tank/nfs/scratch', mountpoint: '/nfs/tank/scratch',  type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
@@ -86,7 +86,7 @@
     src: "{{ item.filesystem }}"
     fstype: "{{ item.type }}"
     opts: "{{ item.options }}"
-    state: mounted
+    state: present
   with_items:
 # Until dirtycow is up {{{
     - { filesystem: '/keg/nfs/temp/home', mountpoint: '/home', type: 'none', options: 'bind', dump: '0', pass: '0' }
