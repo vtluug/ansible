@@ -18,7 +18,7 @@
     - freeipa-client
   vars_prompt:
     - name: "freeipa_password"
-      prompt: "FreeIPA admin password"
+      prompt: "FreeIPA admin password (Only used for non-baremetal hosts)"
 
 - hosts: centos
   become: yes
