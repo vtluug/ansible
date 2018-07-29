@@ -4,13 +4,11 @@
 # dirtycow = cistern = 10.98.0.7
 # shellshock = keg = 10.98.0.8
 ######################################################
-# Note: mounts are organized by importance, then by IP
 - name: Configure NFS exports {{ inventory_hostname }}
   import_role:
     name: geerlingguy.nfs
   vars:
     nfs_exports:
-      - /tank/nfs/pve/backup -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # proxmox ONLY
       - /tank/nfs/share      -rw,no_subtree_check, 10.98.0.0/16  # All hosts
       - /tank/nfs/scratch    -rw,no_subtree_check,no_root_squash 10.98.0.0/16 # All hosts
   when: inventory_hostname == 'cyberdelia.private.vtluug.org'
@@ -20,12 +18,12 @@
     name: geerlingguy.nfs
   vars:
     nfs_exports:
-      - /cistern/nfs/pve/images -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # proxmox ONLY
-      - /cistern/nfs/pve/isos   -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # proxmox ONLY
-      - /cistern/nfs/home       -rw,no_subtree_check 10.98.0.0/24 # All main hosts
-      - /cistern/nfs/srv        -rw,no_subtree_check 10.98.0.11 # sczi
-      - /cistern/nfs/files      -rw,no_subtree_check 10.98.0.0/16 # All hosts
-      - /cistern/nfs/share      -rw,no_subtree_check 10.98.0.0/16 # All hosts
+      - /cistern/nfs/libvirt/images -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # libvirt ONLY
+      - /cistern/nfs/libvirt/isos   -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # libvirt ONLY
+      - /cistern/nfs/home           -rw,no_subtree_check 10.98.0.0/24 # All main hosts
+      - /cistern/nfs/srv            -rw,no_subtree_check 10.98.0.11 # sczi
+      - /cistern/nfs/files          -rw,no_subtree_check 10.98.0.0/16 # All hosts
+      - /cistern/nfs/share          -rw,no_subtree_check 10.98.0.0/16 # All hosts
   when: inventory_hostname == 'dirtycow.private.vtluug.org'
 
 
@@ -34,12 +32,11 @@
     name: geerlingguy.nfs
   vars:
     nfs_exports:
-      - /keg/nfs/pve/backup -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # proxmox ONLY
       - /keg/nfs/share      -rw,no_subtree_check 10.98.0.0/16 # All hosts
       - /keg/nfs/scratch    -rw,no_subtree_check,no_root_squash 10.98.0.0/16 # All hosts
 # Until dirtycow is up {{{
-      - /keg/nfs/temp/pve/images -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # proxmox ONLY
-      - /keg/nfs/temp/pve/isos   -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # proxmox ONLY
+      - /keg/nfs/temp/libvirt/images -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # libvirt ONLY
+      - /keg/nfs/temp/libvirt/isos   -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # libvirt ONLY
       - /keg/nfs/temp/home       -rw,no_subtree_check 10.98.0.0/24 # All main hosts
       - /keg/nfs/temp/srv        -rw,no_subtree_check 10.98.0.11 # sczi
       - /keg/nfs/temp/files      -rw,no_subtree_check 10.98.0.0/24 # All main hosts

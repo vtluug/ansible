@@ -1,52 +1,62 @@
 ---
-- name: Deploy VMs
-  proxmox_kvm_vtluug:
-    api_user: root@pam
-    api_password: "{{ proxmox_password }}"
-    api_host: meltdown.private.vtluug.org
-    node: "{{ item.node }}"
-    target: "{{ item.target }}"
-    clone: "{{ item.clone }}"
-    name: "{{ item.name }}"
-    net: "{ 'virtio': {{ item.mac }}, 'bridge': 'vmbr0' }"
-    full: yes
-    storage: temp-images
-    timeout: 500
-  with_items: "{{ new_vms }}"
-  register: vminfo
-  run_once: true
+- name: Create new VMs (meltdown)
+  shell: |
+    virt-builder
+    "{{ item.os-version }}"
+    --hostname "{{ item.hostname }}"
+    --size 10G
+    --format qcow2
+    --output '/nfs/cistern/libvirt/meltdown/"{{ item.hostname }}".qcow2'
+    --root-password password:"{{ root_password }}"
+    --firstboot-command 'useradd -m -p "{{ papatux_password }}" papatux && usermod -aG "{{ item.admins }}" papatux'
+    "{{ item.optional_args }}"
+    &&
+    virt-sysprep
+    --add '/nfs/cistern/libvirt/meltdown/"{{ item.hostname }}".qcow2'
+    --mac "{{ item.mac }}"
+    --keep-user-accounts papatux
+    &&
+    virsh setvcpus "{{ item.hostname }}" "{{ item.cpus }}" --config
+    &&
+    virsh setmaxmem "{{ item.hostname }}" "{{ item.ram }}" --config
+    &&
+    virsh setmem "{{ item.hostname }}" "{{ item.ram }}" --config
+    &&
+    virsh autostart "{{ item.hostname }}"
+    &&
+    virsh start "{{ item.hostname }}"
+  args:
+      creates: '/nfs/cistern/libvirt/meltdown/"{{ item.hostname }}".qcow2'
+  with_items: "{{ new_vms_meltdown }}"
+  when: inventory_hostname == 'meltdown.private.vtluug.org'
 
-- name: Pause a bit since a bunch of VMs were just created
-  pause:
-    seconds: 60
-  run_once: true
-
-
-- name: Start recently created VMs
-  proxmox_kvm_vtluug:
-    api_user: root@pam
-    api_password: "{{ proxmox_password }}"
-    api_host: meltdown.private.vtluug.org
-    node: "{{ item.item.target }}"
-    name: "{{ item.item.name }}"
-    state: started
-  with_items: "{{ vminfo.results }}"
-  when: item.changed == True
-  run_once: true
-
-- name: Wait for VMs to start (+ a reboot for new machine-id to take effectr; and centos can take a looong time)
-  pause:
-    minutes: 5
-  run_once: true
-
-- name: Add newly created VMs to group so we can set hostnames
-  add_host:
-    name: "{{ item.stdout }}"
-    groups: new_vms
-    vm_name: "{{ item.item.item.name }}"
-    vm_ip: "{{ item.item.item.ip }}"
-    vm_ip6: "{{ item.item.item.ip6 }}"
-    vm_clone: "{{ item.item.item.clone }}"
-  with_items: "{{ ipinfo.results }}"
-  when: item.changed == True
-  run_once: true
+- name: Create new VMs (spectre)
+  shell: |
+    virt-builder
+    "{{ item.os-version }}"
+    --hostname "{{ item.hostname }}"
+    --size 10G
+    --format qcow2
+    --output '/nfs/cistern/libvirt/spectre/"{{ item.hostname }}".qcow2'
+    --root-password password:"{{ root_password }}"
+    --firstboot-command 'useradd -m -p "{{ papatux_password }}" papatux && usermod -aG "{{ item.admins }}" papatux'
+    "{{ item.optional_args }}"
+    &&
+    virt-sysprep
+    --add '/nfs/cistern/libvirt/spectre/"{{ item.hostname }}".qcow2'
+    --mac "{{ item.mac }}"
+    --keep-user-accounts papatux
+    &&
+    virsh setvcpus "{{ item.hostname }}" "{{ item.cpus }}" --config
+    &&
+    virsh setmaxmem "{{ item.hostname }}" "{{ item.ram }}" --config
+    &&
+    virsh setmem "{{ item.hostname }}" "{{ item.ram }}" --config
+    &&
+    virsh autostart "{{ item.hostname }}"
+    &&
+    virsh start "{{ item.hostname }}"
+  args:
+      creates: '/nfs/cistern/libvirt/spectre/"{{ item.hostname }}".qcow2'
+  with_items: "{{ new_vms_spectre }}"
+  when: inventory_hostname == 'spectre.private.vtluug.org'

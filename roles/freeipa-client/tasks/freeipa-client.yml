@@ -1,8 +1,8 @@
 ---
 - name: Enroll host in krb.vtluug.org domain
-  command: >
+  shell: |
     ipa-client-install
-    -U
+    --unattended
     --domain=krb.vtluug.org
     --server=chimera.private.vtluug.org
     --principal=admin

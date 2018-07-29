@@ -1,24 +1,11 @@
 ---
 # Distro groups
-- hosts: proxmox
-  become: yes
-  handlers:
-    - import_tasks: handlers/main.yml
-  roles:
-    - proxmox-common 
-    - common
-
 - hosts: ubuntu
   become: yes
-  handlers:
-    - import_tasks: handlers/main.yml
   roles:
     - ubuntu-common
     - common
     - freeipa-client
-  vars_prompt:
-    - name: "freeipa_password"
-      prompt: "FreeIPA admin password (Only used for non-baremetal hosts)"
 
 - hosts: centos
   become: yes
@@ -27,22 +14,22 @@
     - common
 
 # Bare-metal
-# Proxmox is bare-metal too, but it not the standard debian install so it gets
-#   its own distro group
+- hosts: libvirt
+  become: yes
+  roles:
+    - libvirt
+    
 - hosts: nfs
   become: yes
-  handlers:
-    - import_tasks: handlers/main.yml
   roles:
     - nfs
-    - common
 
 # Important VMs
 - hosts: freeipa
   become: yes
   roles:
     - freeipa-server
-#
+
 #- hosts: log
 #  become: yes
 #  roles:

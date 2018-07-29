@@ -4,8 +4,6 @@
 # dirtycow = cistern = 10.98.0.7
 # shellshock = keg = 10.98.0.8
 ######################################################
-# Note: mounts are organized by importance, then by IP
-# Note2: Proxmox cluster nfs conf are in role proxmox-common/tasks/nfs.yml
 - name: Create NFS mountpoints (All hosts)
   file:
     path: "{{ item.path }}"
@@ -14,17 +12,17 @@
     mode: "{{ item.mode }}"
     state: directory
   with_items:
-    - { path: '/nfs',               owner: 'root', group: 'root',  mode: '0755' }
-    - { path: '/nfs/tank',          owner: 'root', group: 'root',  mode: '0755' }
-    - { path: '/nfs/tank/share',    owner: 'root', group: 'users', mode: '0775' }
-    - { path: '/nfs/tank/scratch',  owner: 'root', group: 'root',  mode: '0777' }
-    - { path: '/nfs/cistern',       owner: 'root', group: 'root',  mode: '0755' }
-    - { path: '/nfs/cistern/share', owner: 'root', group: 'users', mode: '0775' }
-    - { path: '/nfs/keg',           owner: 'root', group: 'root',  mode: '0755' }
-    - { path: '/nfs/keg/share',     owner: 'root', group: 'users', mode: '0775' }
-    - { path: '/nfs/keg/scratch',   owner: 'root', group: 'root',  mode: '0777' }
+    - { path: '/nfs',               owner: 'root',     group: 'root',     mode: '0755' }
+    - { path: '/nfs/tank',          owner: 'root',     group: 'root',     mode: '0755' }
+    - { path: '/nfs/tank/share',    owner: 'root',     group: 'users',    mode: '0775' }
+    - { path: '/nfs/tank/scratch',  owner: 'root',     group: 'root',     mode: '0777' }
+    - { path: '/nfs/cistern',       owner: 'root',     group: 'root',     mode: '0755' }
+    - { path: '/nfs/cistern/share', owner: 'root',     group: 'users',    mode: '0775' }
+    - { path: '/nfs/cistern/files', owner: 'www-data', group: 'www-data', mode: '0755' }
+    - { path: '/nfs/keg',           owner: 'root',     group: 'root',     mode: '0755' }
+    - { path: '/nfs/keg/share',     owner: 'root',     group: 'users',    mode: '0775' }
 
-- name: Create NFS mountpoints (All hosts EXCEPT Proxmox)
+- name: Create NFS mountpoints (Libvirt)
   file:
     path: "{{ item.path }}"
     owner: "{{ item.owner }}"
@@ -32,8 +30,12 @@
     mode: "{{ item.mode }}"
     state: directory
   with_items:
-    - { path: '/nfs/cistern/files', owner: 'www-data', group: 'www-data', mode: '755' }
-  when: "'proxmox' not in group_names"
+    - { path: '/nfs/cistern/libvirt',                 owner: 'root', group: 'root', mode: '0755' }
+    - { path: '/nfs/cistern/libvirt/images',          owner: 'root', group: 'root', mode: '0755' }
+    - { path: '/nfs/cistern/libvirt/images/meltdown', owner: 'root', group: 'root', mode: '0755' }
+    - { path: '/nfs/cistern/libvirt/images/spectre',  owner: 'root', group: 'root', mode: '0755' }
+    - { path: '/nfs/cistern/libvirt/isos',            owner: 'root', group: 'root', mode: '0755' }
+  when: "'libvirt' in group_names"
 
 - name: Create NFS mountpoints (Sczi)
   file:
@@ -43,5 +45,5 @@
     mode: "{{ item.mode }}"
     state: directory
   with_items:
-    - { path: '/nfs/cistern/srv', owner: 'root', group: 'root', mode: '755' }
+    - { path: '/nfs/cistern/srv', owner: 'root', group: 'root', mode: '0755' }
   when: inventory_hostname == 'sczi.private.vtluug.org'

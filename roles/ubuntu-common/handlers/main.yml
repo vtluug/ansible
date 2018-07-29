@@ -4,3 +4,16 @@
     name: chronyd.service
     state: started
     enabled: yes
+
+- name: Refresh sources (Debian, Ubuntu)
+  apt:
+    update_cache: yes
+
+- name: Upgrade packages (Debian, Ubuntu)
+  apt:
+    upgrade: yes
+
+- name: Restart unattended-upgrades
+  systemd:
+    name: unattended-upgrades.service
+    state: restarted

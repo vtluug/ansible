@@ -1,0 +1,6 @@
+---
+- name: Add papatux to libvirt group
+  user:
+    name: papatux
+    groups: libvirt
+    append: yes

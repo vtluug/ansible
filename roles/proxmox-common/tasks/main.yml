@@ -1,6 +1,0 @@
----
-- import_tasks: license.yml
-- import_tasks: packages.yml
-- import_tasks: apparmor.yml
-- import_tasks: nfs.yml
-- import_tasks: users.yml

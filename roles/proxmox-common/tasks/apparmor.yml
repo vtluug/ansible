@@ -1,6 +1,0 @@
----
-- name: Disable AppArmor
-  systemd:
-    name: apparmor.service
-    state: stopped
-    enabled: no

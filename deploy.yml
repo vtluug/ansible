@@ -1,13 +1,5 @@
 ---
-- hosts: proxmox
+- hosts: libvirt
   become: yes
   roles:
     - deploy-vms
-  vars_prompt:
-    - name: "proxmox_password"
-      prompt: "Proxmox root password"
-
-- hosts: new_vms
-  become: yes
-  roles:
-    - setup-vms
