@@ -1,0 +1,40 @@
+---
+- name: Configure global IPv4 addrs (Libvirt hosts, Ubuntu)
+  template:
+    src: templates/01-netcfg-bridge.yml.j2
+    dest: /etc/netplan/01-netcfg.yml
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  notify:
+    - Apply netplan config
+    - Restart networking
+  when:
+    - global_v4 is defined
+    - "'libvirt' in group_names"
+    - ansible_distribution == 'Ubuntu'
+
+- name: Configure global IPv4 addrs (Non-libvirt hosts, Ubuntu)
+  template:
+    src: templates/01-netcfg.yml.j2
+    dest: /etc/netplan/01-netcfg.yml
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  notify:
+    - Apply netplan config
+    - Restart networking (Ubuntu)
+  when:
+    - global_v4 is defined
+    - ansible_distribution == 'Ubuntu'
+
+- name: Configure global IPv4 addrs (Non-libvirt hosts, Red Hat)
+  template:
+    src: templates/ifcfg-"{{ interface }}".j2
+    dest: /etc/sysconfig/network-scripts/ifcfg-"{{ interface }}"
+    mode: 0644
+    backup: yes
+  notify:
+    - Restart networking (RedHat)

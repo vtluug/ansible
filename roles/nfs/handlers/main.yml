@@ -9,3 +9,9 @@
     name: krb_mkhomedir.timer
     state: started
     enabled: yes
+
+- name: Start and enable scratch_deletion
+  systemd:
+    name: krb_mkhomedir.timer
+    state: started
+    enabled: yes

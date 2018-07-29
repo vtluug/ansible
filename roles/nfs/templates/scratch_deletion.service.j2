@@ -1,0 +1,5 @@
+[Unit]
+Description=Delete scratch contents once a month
+
+[Service]
+ExecStart=/bin/bash rm -r /nfs/tank/scratch/*

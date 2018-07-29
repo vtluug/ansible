@@ -1,22 +1,22 @@
 ---
-- name: Configure Chrony
+- name: Configure Chrony (RedHat)
   template:
     src: templates/chrony.conf.j2
     dest: /etc/chrony.conf
     owner: root
     group: root
-    mode: '0544'
+    mode: 0644
     backup: yes
   notify: Restart chronyd
   when: ansible_os_family == 'RedHat'
 
-- name: Configure Chrony
+- name: Configure Chrony (Debian)
   template:
     src: templates/chrony.conf.j2
     dest: /etc/chrony/chrony.conf
     owner: root
     group: root
-    mode: '0544'
+    mode: 0644
     backup: yes
   notify: Restart chronyd
   when: ansible_os_family == 'Debian'

@@ -5,11 +5,11 @@
     state: started
     enabled: yes
 
-- name: Refresh sources (Debian, Ubuntu)
+- name: Refresh sources
   apt:
     update_cache: yes
 
-- name: Upgrade packages (Debian, Ubuntu)
+- name: Upgrade packages
   apt:
     upgrade: yes
 

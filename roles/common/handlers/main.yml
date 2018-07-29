@@ -8,3 +8,16 @@
   systemd:
     name: chronyd.service
     state: restarted
+
+- name: Apply netplan config
+  command: /usr/sbin/netplan apply
+
+- name: Restart networking (Ubuntu)
+  systemd:
+    name: systemd-networkd.service
+    state: restarted
+
+- name: Restart networking (RedHat)
+  systemd:
+    name: network
+    state: restarted

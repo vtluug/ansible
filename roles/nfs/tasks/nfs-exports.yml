@@ -33,7 +33,6 @@
   vars:
     nfs_exports:
       - /keg/nfs/share      -rw,no_subtree_check 10.98.0.0/16 # All hosts
-      - /keg/nfs/scratch    -rw,no_subtree_check,no_root_squash 10.98.0.0/16 # All hosts
 # Until dirtycow is up {{{
       - /keg/nfs/temp/libvirt/images -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # libvirt ONLY
       - /keg/nfs/temp/libvirt/isos   -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # libvirt ONLY

@@ -1,0 +1,8 @@
+[Unit]
+Description=Run scratch_deletion.service once a month
+
+[Timer]
+OnCalendar=*-*-01 00:00:00
+
+[Install]
+WantedBy=timers.target

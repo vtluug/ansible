@@ -1,3 +1,4 @@
 ---
 - import_tasks: nfs-exports.yml
 - import_tasks: krb_mkhomedir.yml
+- import_tasks: scratch_deletion.yml
