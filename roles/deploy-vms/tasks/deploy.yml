@@ -6,24 +6,19 @@
     --hostname "{{ item.hostname }}"
     --size 10G
     --format qcow2
-    --output '/nfs/cistern/libvirt/meltdown/"{{ item.hostname }}".qcow2'
+    --output /nfs/cistern/libvirt/meltdown/"{{ item.hostname }}".qcow2
     --root-password password:"{{ root_password }}"
     --firstboot-command 'useradd -m -p "{{ papatux_password }}" papatux && usermod -aG "{{ item.admins }}" papatux'
     "{{ item.optional_args }}"
     &&
-    virt-sysprep
-    --add '/nfs/cistern/libvirt/meltdown/"{{ item.hostname }}".qcow2'
-    --mac "{{ item.mac }}"
-    --keep-user-accounts papatux
-    &&
-    virsh setvcpus "{{ item.hostname }}" "{{ item.cpus }}" --config
-    &&
-    virsh setmaxmem "{{ item.hostname }}" "{{ item.ram }}" --config
-    &&
-    virsh setmem "{{ item.hostname }}" "{{ item.ram }}" --config
-    &&
-    virsh autostart "{{ item.hostname }}"
-    &&
+    virt-install --import
+    --name "{{ item.hostname }}"
+    --vcpus "{{ item.cpus }}"
+    --ram "{{ item.ram }}"
+    --network bridge=br0,mac="{{ item.mac }}"
+    --disk path=/nfs/cistern/libvirt/meltdown/"{{ item.hostname }}".qcow2,format=qcow2
+    --autostart
+    --graphics spice
     virsh start "{{ item.hostname }}"
   args:
       creates: '/nfs/cistern/libvirt/meltdown/"{{ item.hostname }}".qcow2'
@@ -37,24 +32,19 @@
     --hostname "{{ item.hostname }}"
     --size 10G
     --format qcow2
-    --output '/nfs/cistern/libvirt/spectre/"{{ item.hostname }}".qcow2'
+    --output /nfs/cistern/libvirt/spectre/"{{ item.hostname }}".qcow2
     --root-password password:"{{ root_password }}"
     --firstboot-command 'useradd -m -p "{{ papatux_password }}" papatux && usermod -aG "{{ item.admins }}" papatux'
     "{{ item.optional_args }}"
     &&
-    virt-sysprep
-    --add '/nfs/cistern/libvirt/spectre/"{{ item.hostname }}".qcow2'
-    --mac "{{ item.mac }}"
-    --keep-user-accounts papatux
-    &&
-    virsh setvcpus "{{ item.hostname }}" "{{ item.cpus }}" --config
-    &&
-    virsh setmaxmem "{{ item.hostname }}" "{{ item.ram }}" --config
-    &&
-    virsh setmem "{{ item.hostname }}" "{{ item.ram }}" --config
-    &&
-    virsh autostart "{{ item.hostname }}"
-    &&
+    virt-install --import
+    --name "{{ item.hostname }}"
+    --vcpus "{{ item.cpus }}"
+    --ram "{{ item.ram }}"
+    --network bridge=br0,mac="{{ item.mac }}"
+    --disk path=/nfs/cistern/libvirt/spectre/"{{ item.hostname }}".qcow2,format=qcow2
+    --autostart
+    --graphics spice
     virsh start "{{ item.hostname }}"
   args:
       creates: '/nfs/cistern/libvirt/spectre/"{{ item.hostname }}".qcow2'

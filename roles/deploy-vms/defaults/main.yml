@@ -1,17 +1,17 @@
 ---
 new_vms_meltdown:
-  - { target: 'meltdown', os-version: 'ubuntu-18.04', hostname: 'sczi',          cpus: '4', ram: '4G', mac: '00:02:0a:62:00:0b', admins: 'sudo', optional_args: '' }  # Web
-#  - { target: 'meltdown', os-version: 'ubuntu-18.04', hostname: 'theplague',     cpus: '1', ram: '1G', mac: '00:02:0a:62:00:0d', admins: 'sudo', optional_args: '' }  # ELK
-#  - { target: 'meltdown', os-version: 'ubuntu-18.04', hostname: 'holeybeep',     cpus: '1', ram: '1G', mac: '00:02:0a:62:00:0e', admins: 'sudo', optional_args: '' }  # Jitsi
-#  - { target: 'meltdown', os-version: 'ubuntu-18.04', hostname: 'mirror',        cpus: '2', ram: '2G', mac: '00:02:0a:62:00:10', admins: 'sudo', optional_args: '' }  # Mirror
-#  - { target: 'meltdown', os-version: 'ubuntu-18.04', hostname: 'crashoverride', cpus: '1', ram: '1G', mac: '00:02:0a:62:00:12', admins: 'sudo', optional_args: '' }  # Tahoe-LAFS
-#  - { target: 'meltdown', os-version: 'ubuntu-18.04', hostname: 'map',           cpus: '4', ram: '4G', mac: '00:02:0a:62:00:14', admins: 'sudo', optional_args: '' }  # OSM + TBD
+  - { target: 'meltdown', os-version: 'ubuntu-18.04', hostname: 'sczi',          cpus: '4', ram: '4096', mac: '00:02:0a:62:00:0b', admins: 'sudo', optional_args: '' }  # Web
+#  - { target: 'meltdown', os-version: 'ubuntu-18.04', hostname: 'theplague',     cpus: '1', ram: '1024', mac: '00:02:0a:62:00:0d', admins: 'sudo', optional_args: '' }  # ELK
+#  - { target: 'meltdown', os-version: 'ubuntu-18.04', hostname: 'holeybeep',     cpus: '1', ram: '1024', mac: '00:02:0a:62:00:0e', admins: 'sudo', optional_args: '' }  # Jitsi
+#  - { target: 'meltdown', os-version: 'ubuntu-18.04', hostname: 'mirror',        cpus: '2', ram: '2048', mac: '00:02:0a:62:00:10', admins: 'sudo', optional_args: '' }  # Mirror
+#  - { target: 'meltdown', os-version: 'ubuntu-18.04', hostname: 'crashoverride', cpus: '1', ram: '1024', mac: '00:02:0a:62:00:12', admins: 'sudo', optional_args: '' }  # Tahoe-LAFS
+#  - { target: 'meltdown', os-version: 'ubuntu-18.04', hostname: 'map',           cpus: '4', ram: '4096', mac: '00:02:0a:62:00:14', admins: 'sudo', optional_args: '' }  # OSM + TBD
 # Add user VMs here later
 
 new_vms_spectre:
-  - { target: 'spectre', os-version: 'centos-7.5',   hostname: 'chimera',       cpus: '1', ram: '1G', mac: '00:02:0a:62:00:0a', admins: 'wheel', optional_args: '--install libselinux-python ' }  # FreeIPA
-  - { target: 'spectre', os-version: 'ubuntu-18.04', hostname: 'acidburn',      cpus: '2', ram: '2G', mac: '00:02:0a:62:00:0c', admins: 'sudo',  optional_args: '' }  # Shell
-#  - { target: 'spectre', os-version: 'ubuntu-18.04', hostname: 'wannacry',      cpus: '1', ram: '1G', mac: '00:02:0a:62:00:0f', admins: 'sudo',  optional_args: '' }  # Emby
-#  - { target: 'spectre', os-version: 'ubuntu-18.04', hostname: 'zerocool',      cpus: '1', ram: '1G', mac: '00:02:0a:62:00:11', admins: 'sudo',  optional_args: '' }  # Syncthing
-#  - { target: 'spectre', os-version: 'ubuntu-18.04', hostname: 'wargame',       cpus: '2', ram: '2G', mac: '00:02:0a:62:00:13', admins: 'sudo',  optional_args: '' }  # Wargame
+  - { target: 'spectre', os-version: 'centos-7.5',   hostname: 'chimera',       cpus: '1', ram: '1024', mac: '00:02:0a:62:00:0a', admins: 'wheel', optional_args: '--install libselinux-python ' }  # FreeIPA
+  - { target: 'spectre', os-version: 'ubuntu-18.04', hostname: 'acidburn',      cpus: '2', ram: '2048', mac: '00:02:0a:62:00:0c', admins: 'sudo',  optional_args: '' }  # Shell
+#  - { target: 'spectre', os-version: 'ubuntu-18.04', hostname: 'wannacry',      cpus: '1', ram: '1024', mac: '00:02:0a:62:00:0f', admins: 'sudo',  optional_args: '' }  # Emby
+#  - { target: 'spectre', os-version: 'ubuntu-18.04', hostname: 'zerocool',      cpus: '1', ram: '1024', mac: '00:02:0a:62:00:11', admins: 'sudo',  optional_args: '' }  # Syncthing
+#  - { target: 'spectre', os-version: 'ubuntu-18.04', hostname: 'wargame',       cpus: '2', ram: '2048', mac: '00:02:0a:62:00:13', admins: 'sudo',  optional_args: '' }  # Wargame
 # Add user VMs here later
