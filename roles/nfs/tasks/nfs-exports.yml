@@ -33,12 +33,5 @@
   vars:
     nfs_exports:
       - /keg/nfs/share      -rw,no_subtree_check 10.98.0.0/16 # All hosts
-# Until dirtycow is up {{{
-      - /keg/nfs/temp/libvirt/images -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # libvirt ONLY
-      - /keg/nfs/temp/libvirt/isos   -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # libvirt ONLY
-      - /keg/nfs/temp/home       -rw,no_subtree_check 10.98.0.0/24 # All main hosts
-      - /keg/nfs/temp/srv        -rw,no_subtree_check 10.98.0.11 # sczi
-      - /keg/nfs/temp/files      -rw,no_subtree_check 10.98.0.0/24 # All main hosts
-# }}}
   when: inventory_hostname == 'shellshock.private.vtluug.org'
 

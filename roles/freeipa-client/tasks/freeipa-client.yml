@@ -6,7 +6,7 @@
     --domain=krb.vtluug.org
     --server=chimera.private.vtluug.org
     --principal=admin
-    --password="{{ freeipa_password }}"
+    --password="{{ ipa_admin_pass }}"
   args:
     creates: /etc/ipa/default.conf
   when:

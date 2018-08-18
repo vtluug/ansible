@@ -4,6 +4,8 @@ This is a repository of ansible playbooks for hosts on VTLUUG's network
 To execute a playbook on all machines, run 
 ```ansible-playbook main.yml -i hosts.cfg -u <user> -k -K```
 
+If you're executing the freeipa-client or deploy-vms role, also include ```--extra-vars @/path/to/vtluug/accounts/file```
+
 
 To limit execution to specific hosts, run
 ```ansible-playbook main.yml -i hosts.cfg -u <user> -k -K --limit=<host group>```

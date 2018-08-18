@@ -6,9 +6,6 @@
     - ubuntu-common
     - common
     - freeipa-client
-  vars_prompt:
-    - name: 'freeipa_password'
-      prompt: 'FReeIPA admin password (Only used for non-baremetal hosts)'
 
 - hosts: centos
   become: yes
@@ -16,9 +13,6 @@
     - centos-common
     - common
     - freeipa-client
-  vars_prompt:
-    - name: 'freeipa_password'
-      prompt: 'FReeIPA admin password (Only used for non-baremetal hosts)'
 
 # Bare-metal
 - hosts: libvirt
@@ -54,7 +48,7 @@
 #    - web
 #
 ## General VMs
-#- hosts: emby
+#- hosts: funkwhale
 #  become: yes
 #  roles:
 #    - emby

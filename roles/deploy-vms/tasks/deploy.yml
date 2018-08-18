@@ -7,8 +7,8 @@
     --size 10G
     --format qcow2
     --output /nfs/cistern/libvirt/meltdown/"{{ item.hostname }}".qcow2
-    --root-password password:"{{ root_password }}"
-    --firstboot-command 'useradd -m -p "{{ papatux_password }}" papatux && usermod -aG "{{ item.admins }}" papatux'
+    --root-password password:"{{ root_pass }}"
+    --firstboot-command 'useradd -m -p "{{ admin_pass }}" papatux && usermod -aG "{{ item.admins }}" papatux'
     "{{ item.optional_args }}"
     &&
     virt-install --import
@@ -33,8 +33,8 @@
     --size 10G
     --format qcow2
     --output /nfs/cistern/libvirt/spectre/"{{ item.hostname }}".qcow2
-    --root-password password:"{{ root_password }}"
-    --firstboot-command 'useradd -m -p "{{ papatux_password }}" papatux && usermod -aG "{{ item.admins }}" papatux'
+    --root-password password:"{{ root_pass }}"
+    --firstboot-command 'useradd -m -p "{{ admin_pass }}" papatux && usermod -aG "{{ item.admins }}" papatux'
     "{{ item.optional_args }}"
     &&
     virt-install --import

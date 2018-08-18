@@ -5,8 +5,7 @@
 # author: pew <paul@walko.org>
 ##################################################
 
-HOMEPATH='/keg/nfs/temp/home'
-#HOMEPATH='/home'
+HOMEPATH='/home'
 HOST='chimera.private.vtluug.org'
 
 # Lookup current homedirs and new users
@@ -30,4 +29,5 @@ for user in $NEWUSERS; do
     echo "Creating $user:$GROUP $HOMEPATH/$user"
     mkdir $HOMEPATH/$user
     chown $user:$GROUP $HOMEPATH/$user
+    chmod 755 $HOMEPATH/$user
 done

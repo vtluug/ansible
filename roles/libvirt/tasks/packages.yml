@@ -10,4 +10,3 @@
   notify:
     - Add papatux to libvirt group
 # TODO ensure libvirt autostarts on boot?
-
