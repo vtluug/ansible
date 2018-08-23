@@ -1,4 +1,5 @@
 ---
+# TODO change mac
 new_vms_meltdown:
   - { target: 'meltdown', os-version: 'ubuntu-18.04', hostname: 'sczi',          cpus: '4', ram: '4096', mac: '02:01:0a:62:00:0b', admins: 'sudo', optional_args: '' }  # Web
 #  - { target: 'meltdown', os-version: 'ubuntu-18.04', hostname: 'theplague',     cpus: '1', ram: '1024', mac: '02:01:0a:62:00:0d', admins: 'sudo', optional_args: '' }  # ELK
