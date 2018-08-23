@@ -9,6 +9,7 @@
     --output /nfs/cistern/libvirt/meltdown/"{{ item.hostname }}".qcow2
     --root-password password:"{{ root_pass }}"
     --firstboot-command 'useradd -m -p "{{ admin_pass }}" papatux && usermod -aG "{{ item.admins }}" papatux'
+    --edit '/etc/ssh/sshd_config:s/(Port 22)/$1\nPort 2222/'
     "{{ item.optional_args }}"
     &&
     virt-install --import
