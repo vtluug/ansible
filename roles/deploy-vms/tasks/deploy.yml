@@ -1,53 +1,55 @@
 ---
 - name: Create new VMs (meltdown)
   shell: |
-    virt-builder
-    "{{ item.os-version }}"
-    --hostname "{{ item.hostname }}"
-    --size 10G
-    --format qcow2
-    --output /nfs/cistern/libvirt/meltdown/"{{ item.hostname }}".qcow2
-    --root-password password:"{{ root_pass }}"
-    --firstboot-command 'useradd -m -p "{{ admin_pass }}" papatux && usermod -aG "{{ item.admins }}" papatux'
-    --edit '/etc/ssh/sshd_config:s/#Port 22/Port 22\nPort 2222/'
-    "{{ item.optional_args }}"
-    &&
-    virt-install --import
-    --name "{{ item.hostname }}"
-    --vcpus "{{ item.cpus }}"
-    --ram "{{ item.ram }}"
-    --network bridge=br0,mac="{{ item.mac }}"
-    --disk path=/nfs/cistern/libvirt/meltdown/"{{ item.hostname }}".qcow2,format=qcow2
-    --autostart
-    --graphics spice
-    virsh start "{{ item.hostname }}"
+    virt-builder \
+        {{ item.os }} \
+        --hostname {{ item.hostname }} \
+        --size 10G \
+        --format qcow2 \
+        --output /nfs/cistern/libvirt/images/meltdown/{{ item.hostname }}.qcow2 \
+        --root-password password:"{{ root_pass }}" \
+        --firstboot-command 'yum -y install openssl; systemctl disable firewalld; systemctl disable apparmor; sed -i "s/SELINUX=enforcing/SELINUX=disabled/" /etc/selinux/config; sed -i "s/#Port 22/Port 22\nPort 2222/" /etc/ssh/sshd_config; useradd -m -p $(openssl passwd -1 "{{ admin_pass }}") papatux && usermod -aG {{ item.admins }} papatux; reboot' \
+    && \
+    virt-install \
+        --import \
+        --name {{ item.hostname }} \
+        --vcpus {{ item.cpus }} \
+        --ram {{ item.ram }} \
+        --network bridge=br0,mac={{ item.mac }} \
+        --disk path=/nfs/cistern/libvirt/images/meltdown/{{ item.hostname }}.qcow2,format=qcow2 \
+        --os-variant rhel7 \
+        --autostart \
+        --graphics spice \
+        --noautoconsole
   args:
-      creates: '/nfs/cistern/libvirt/meltdown/"{{ item.hostname }}".qcow2'
+      creates: '/nfs/cistern/libvirt/meltdown/{{ item.hostname }}.qcow2'
   with_items: "{{ new_vms_meltdown }}"
-  when: inventory_hostname == 'meltdown.private.vtluug.org'
+  when: inventory_hostname == 'meltdown.vtluug.org'
 
 - name: Create new VMs (spectre)
   shell: |
-    virt-builder
-    "{{ item.os-version }}"
-    --hostname "{{ item.hostname }}"
-    --size 10G
-    --format qcow2
-    --output /nfs/cistern/libvirt/spectre/"{{ item.hostname }}".qcow2
-    --root-password password:"{{ root_pass }}"
-    --firstboot-command 'useradd -m -p "{{ admin_pass }}" papatux && usermod -aG "{{ item.admins }}" papatux'
-    "{{ item.optional_args }}"
-    &&
-    virt-install --import
-    --name "{{ item.hostname }}"
-    --vcpus "{{ item.cpus }}"
-    --ram "{{ item.ram }}"
-    --network bridge=br0,mac="{{ item.mac }}"
-    --disk path=/nfs/cistern/libvirt/spectre/"{{ item.hostname }}".qcow2,format=qcow2
-    --autostart
-    --graphics spice
-    virsh start "{{ item.hostname }}"
+    virt-builder \
+        {{ item.os }} \
+        --hostname {{ item.hostname }} \
+        --size 10G \
+        --format qcow2 \
+        --output /nfs/cistern/libvirt/images/spectre/{{ item.hostname }}.qcow2 \
+        --root-password password:"{{ root_pass }}" \
+        --firstboot-command 'yum -y install openssl; systemctl disable firewalld; systemctl disable apparmor; sed -i "s/SELINUX=enforcing/SELINUX=disabled/" /etc/selinux/config; sed -i "s/#Port 22/Port 22\nPort 2222/" /etc/ssh/sshd_config; useradd -m -p $(openssl passwd -1 "{{ admin_pass }}") papatux && usermod -aG {{ item.admins }} papatux; reboot' \
+    && \
+    virt-install \
+        --import \
+        --name {{ item.hostname }} \
+        --vcpus {{ item.cpus }} \
+        --ram {{ item.ram }} \
+        --network bridge=br0,mac={{ item.mac }} \
+        --disk path=/nfs/cistern/libvirt/images/spectre/{{ item.hostname }}.qcow2,format=qcow2 \
+        --os-variant rhel7 \
+        --autostart \
+        --graphics spice \
+        --noautoconsole
   args:
-      creates: '/nfs/cistern/libvirt/spectre/"{{ item.hostname }}".qcow2'
+      creates: '/nfs/cistern/libvirt/spectre/{{ item.hostname }}.qcow2'
   with_items: "{{ new_vms_spectre }}"
-  when: inventory_hostname == 'spectre.private.vtluug.org'
+  when: inventory_hostname == 'spectre.vtluug.org'
+

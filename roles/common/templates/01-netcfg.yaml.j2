@@ -5,10 +5,6 @@ network:
   renderer: networkd
   ethernets:
     {{ interface }}:
-      dhcp4: no
-  bridges:
-    br0:
-      interfaces: [{{ interface }}]
-      dhcp4: true
-      addresses: [{{ global_v4 }}/22]
+      dhcp4: yes
+#      addresses: [{{ global_v4 }}/22]
       gateway4: 128.173.88.1

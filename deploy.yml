@@ -3,8 +3,3 @@
   become: yes
   roles:
     - deploy-vms
-  vars:
-    - name: 'root_password'
-      prmopt: 'Root password (Used when creating new VMs)'
-    - name: 'papatux_password'
-      prompt: 'Papatux password (Used when creating new VMs)'

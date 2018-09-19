@@ -11,7 +11,7 @@
     nfs_exports:
       - /tank/nfs/share      -rw,no_subtree_check, 10.98.0.0/16  # All hosts
       - /tank/nfs/scratch    -rw,no_subtree_check,no_root_squash 10.98.0.0/16 # All hosts
-  when: inventory_hostname == 'cyberdelia.private.vtluug.org'
+  when: inventory_hostname == 'cyberdelia.vtluug.org'
 
 - name: Configure NFS exports {{ inventory_hostname }}
   import_role:
@@ -24,7 +24,7 @@
       - /cistern/nfs/srv            -rw,no_subtree_check 10.98.0.11 # sczi
       - /cistern/nfs/files          -rw,no_subtree_check 10.98.0.0/16 # All hosts
       - /cistern/nfs/share          -rw,no_subtree_check 10.98.0.0/16 # All hosts
-  when: inventory_hostname == 'dirtycow.private.vtluug.org'
+  when: inventory_hostname == 'dirtycow.vtluug.org'
 
 
 - name: Configure NFS exports {{ inventory_hostname }}
@@ -33,5 +33,5 @@
   vars:
     nfs_exports:
       - /keg/nfs/share      -rw,no_subtree_check 10.98.0.0/16 # All hosts
-  when: inventory_hostname == 'shellshock.private.vtluug.org'
+  when: inventory_hostname == 'shellshock.vtluug.org'
 

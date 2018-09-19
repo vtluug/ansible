@@ -18,8 +18,8 @@
     - { filesystem: '10.98.0.7:/cistern/nfs/files', mountpoint: '/nfs/cistern/files', type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '10.98.0.7:/cistern/nfs/share', mountpoint: '/nfs/cistern/share', type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '10.98.0.8:/keg/nfs/share',     mountpoint: '/nfs/keg/share',     type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
-  when:
-    - "'nfs' not in group_names"
+  when: "'nfs' not in group_names"
+  tags: needs_freeipa
 
 - name: Mount NFS (Libvirt hosts)
   mount:
@@ -29,8 +29,7 @@
     opts: "{{ item.options }}"
     state: mounted
   with_items:
-    - { filesystem: '10.98.0.7:/cistern/nfs/libvirt/images', mountpoint: '/nfs/cistern/libvirt/images', type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
-    - { filesystem: '10.98.0.7:/cistern/nfs/libvirt/isos',   mountpoint: '/nfs/cistern/libvirt/isos',   type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
+    - { filesystem: '10.98.0.7:/cistern/nfs/libvirt', mountpoint: '/nfs/cistern/libvirt', type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
   when: "'libvirt' in group_names"
 
 - name: Mount NFS  (Cyberdelia)
@@ -39,7 +38,7 @@
     path: "{{ item.mountpoint }}"
     fstype: "{{ item.type }}"
     opts: "{{ item.options }}"
-    state: mounted
+    state: present
   with_items:
     - { filesystem: '/tank/nfs/share',              mountpoint: '/nfs/tank/share',    type: 'none', options: 'bind',              dump: '0', pass: '0' }
     - { filesystem: '/tank/nfs/scratch',            mountpoint: '/nfs/tank/scratch',  type: 'none', options: 'bind',              dump: '0', pass: '0' }
@@ -47,7 +46,8 @@
     - { filesystem: '10.98.0.7:/cistern/nfs/files', mountpoint: '/nfs/cistern/files', type: 'nfs',  options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '10.98.0.7:/cistern/nfs/share', mountpoint: '/nfs/cistern/share', type: 'nfs',  options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '10.98.0.8:/keg/nfs/share',     mountpoint: '/nfs/keg/share',     type: 'nfs',  options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
-  when: inventory_hostname == 'cyberdelia.private.vtluug.org'
+  when: inventory_hostname == 'cyberdelia.vtluug.org'
+  tags: needs_freeipa
 
 - name: Mount NFS  (Dirtycow)
   mount:
@@ -55,14 +55,16 @@
     path: "{{ item.mountpoint }}"
     fstype: "{{ item.type }}"
     opts: "{{ item.options }}"
-    state: mounted
+    state: present
   with_items:
     - { filesystem: '10.98.0.6:/tank/nfs/share',   mountpoint: '/nfs/tank/share',    type: 'nfs',  options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
+    - { filesystem: '10.98.0.6:/tank/nfs/scratch', mountpoint: '/nfs/tank/scratch',  type: 'nfs',  options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '/cistern/nfs/home',           mountpoint: '/home',              type: 'none', options: 'bind',              dump: '0', pass: '0' }
     - { filesystem: '/cistern/nfs/files',          mountpoint: '/nfs/cistern/files', type: 'none', options: 'bind',              dump: '0', pass: '0' }
     - { filesystem: '/cistern/nfs/share',          mountpoint: '/nfs/cistern/share', type: 'none', options: 'bind',              dump: '0', pass: '0' }
     - { filesystem: '10.98.0.8:/keg/nfs/share',    mountpoint: '/nfs/keg/share',     type: 'nfs',  options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
-  when: inventory_hostname == 'dirtycow.private.vtluug.org'
+  when: inventory_hostname == 'dirtycow.vtluug.org'
+  tags: needs_freeipa
 
 - name: Mount NFS  (Shellshock)
   mount:
@@ -70,7 +72,7 @@
     src: "{{ item.filesystem }}"
     fstype: "{{ item.type }}"
     opts: "{{ item.options }}"
-    state: mounted
+    state: present
   with_items:
     - { filesystem: '10.98.0.6:/tank/nfs/share',    mountpoint: '/nfs/tank/share',    type: 'nfs',  options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '10.98.0.6:/tank/nfs/scratch',  mountpoint: '/nfs/tank/scratch',  type: 'nfs',  options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
@@ -78,7 +80,8 @@
     - { filesystem: '10.98.0.7:/cistern/nfs/files', mountpoint: '/nfs/cistern/files', type: 'nfs',  options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '10.98.0.7:/cistern/nfs/share', mountpoint: '/nfs/cistern/share', type: 'nfs',  options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '/keg/nfs/share',               mountpoint: '/nfs/keg/share',     type: 'none', options: 'bind',              dump: '0', pass: '0' }
-  when: inventory_hostname == 'shellshock.private.vtluug.org'
+  when: inventory_hostname == 'shellshock.vtluug.org'
+  tags: needs_freeipa
 
 - name: Mount NFS (Sczi)
   mount:
@@ -89,4 +92,6 @@
     state: mounted
   with_items:
     - { filesystem: '10.98.0.7:/cistern/nfs/srv', mountpoint: '/nfs/cistern/srv', type: 'nfs', options: 'soft,nodev,nosuid', dump: '0', pass: '0' }
-  when: inventory_hostname == 'sczi.private.vtluug.org'
+  when: inventory_hostname == 'sczi.vtluug.org'
+  tags: needs_freeipa
+

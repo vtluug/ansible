@@ -1,13 +1,15 @@
 ---
 - name: Enroll host in krb.vtluug.org domain
   shell: |
-    ipa-client-install
-    --unattended
-    --domain=krb.vtluug.org
-    --server=chimera.private.vtluug.org
-    --principal=admin
-    --password="{{ ipa_admin_pass }}"
+    ipa-client-install \
+        --unattended \
+        --domain=krb.vtluug.org \
+        --server=chimera.vtluug.org \
+        --principal=admin \
+        --password="{{ ipa_admin_pass }}"
   args:
     creates: /etc/ipa/default.conf
   when:
-    - "'nfs' not in group_names"
+    - "'baremetal' not in group_names"
+    - inventory_hostname != 'chimera.vtluug.org'
+  tags: needs_freeipa

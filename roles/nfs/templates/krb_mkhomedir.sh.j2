@@ -6,7 +6,7 @@
 ##################################################
 
 HOMEPATH='/home'
-HOST='chimera.private.vtluug.org'
+HOST='chimera.vtluug.org'
 
 # Lookup current homedirs and new users
 HOMEDIRS=$(ls $HOMEPATH | sort)
@@ -20,14 +20,13 @@ USERS=$(ldapsearch -x -h $HOST -b \
 NEWUSERS=$(comm -13 <(echo "$HOMEDIRS") <(echo "$USERS"))
 
 # Create homedirs for new users
-GROUP='users'
 for user in $NEWUSERS; do
     if [ "$user" == "admin" ]; then
         continue
     fi
 
-    echo "Creating $user:$GROUP $HOMEPATH/$user"
+    echo "Creating $user:$user $HOMEPATH/$user"
     mkdir $HOMEPATH/$user
-    chown $user:$GROUP $HOMEPATH/$user
+    chown $user:$user $HOMEPATH/$user
     chmod 755 $HOMEPATH/$user
 done

@@ -1,5 +1,5 @@
 ---
-- name: Deploy systemd timer to create new user homedirs
+- name: Deploy systemd timer to delete scratch contents
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -8,14 +8,17 @@
     mode: "{{ item.mode }}"
     backup: yes
   with_items:
-    - { src: 'templates/scratch_deletion.service.j2', dest: '/etc/systemd/system/scratch_deletion.service', mode: 0644 }
-    - { src: 'templates/scratch_deletion.timer.j2',   dest: '/etc/systemd/system/scratch_deletion.timer',   mode: 0644 }
+    - { src: 'templates/scratch_deletion.service.j2', dest: '/etc/systemd/system/scratch_deletion.service', mode: '0644' }
+    - { src: 'templates/scratch_deletion.timer.j2',   dest: '/etc/systemd/system/scratch_deletion.timer',   mode: '0644' }
   notify: Start and enable scratch_deletion
-  when: inventory_hostname == 'cyberdelia.private.vtluug.org'
+  when: inventory_hostname == 'cyberdelia.vtluug.org'
 
 - name: Add deletion warning to scratch
   file:
-    path: /nfs/tank/scratch/CONTENTS_IN_THIS_DIRECTORY_ARE_WIPED_ON_THE_FIRST_OF_EVERY_MONTH
+    path: /tank/nfs/scratch/CONTENTS_IN_THIS_DIRECTORY_ARE_WIPED_ON_THE_FIRST_OF_EVERY_MONTH
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
+    state: touch
+  when: inventory_hostname == 'cyberdelia.vtluug.org'
+  tags: needs_freeipa

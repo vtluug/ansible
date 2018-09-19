@@ -7,10 +7,8 @@
     group: root
     mode: "{{ item.mode }}"
   with_items:
-    - { src: 'templates/krb_mkhomedir.sh.j2',      dest: '/usr/local/bin/krb_mkhomedir.sh',           mode: 0755 }
-    - { src: 'templates/krb_mkhomedir.service.j2', dest: '/etc/systemd/system/krb_mkhomedir.service', mode: 0644 }
-    - { src: 'templates/krb_mkhomedir.timer.j2',   dest: '/etc/systemd/system/krb_mkhomedir.timer',   mode: 0644 }
+    - { src: 'templates/krb_mkhomedir.sh.j2',      dest: '/usr/local/bin/krb_mkhomedir.sh',           mode: '0755' }
+    - { src: 'templates/krb_mkhomedir.service.j2', dest: '/etc/systemd/system/krb_mkhomedir.service', mode: '0644' }
+    - { src: 'templates/krb_mkhomedir.timer.j2',   dest: '/etc/systemd/system/krb_mkhomedir.timer',   mode: '0644' }
   notify: Start and enable krb_mkhomedir
-# DIRTYCOW
-#  when: inventory_hostname == 'dirtycow.private.vtluug.org'
-  when: inventory_hostname == 'shellshock.private.vtluug.org'
+  when: inventory_hostname == 'dirtycow.vtluug.org'

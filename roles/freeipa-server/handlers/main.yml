@@ -1,6 +1,0 @@
----
-- name: Start rngd
-  systemd:
-    name: rngd.service
-    state: started
-    enabled: yes

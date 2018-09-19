@@ -1,26 +1,26 @@
 ---
-- name: Configure libvirt storage pools
-  virt_pool:
-    state: "{{ item.state }}"
-    name: "{{ item.name }}"
-    autostart: "{{ item.autostart }}"
-    xml: "{{ item.xml }}"
-  with_items:
-    - { state: deleted, name: default, autostart: no, xml: ''}
-    - { state: active, name: isos, autostart: yes, xml: '/nfs/cistern/libvirt/isos' }
+- name: Create isos pool
+  shell: |
+    virsh pool-define-as isos --type dir --target /nfs/cistern/libvirt/isos
+    virsh pool-autostart isos
+    virsh pool-start isos
+  args:
+    creates: /etc/libvirt/storage/isos.xml
 
 - name: Add images storage pool (meltdown)
-  virt_pool:
-    state: active
-    name: cistern-md-images
-    autostart: yes
-    xml: '/nfs/cistern/libvirt/images/meltdown'
-  when: inventory_hostname == 'meltdown.private.vtluug.org'
+  shell: |
+    virsh pool-define-as cistern-md-images --type dir --target /nfs/cistern/libvirt/meltdown
+    virsh pool-autostart cistern-md-images
+    virsh pool-start cistern-md-images
+  args:
+    creates: /etc/libvirt/storage/cistern-md-images.xml
+  when: inventory_hostname == 'meltdown.vtluug.org'
 
 - name: Add images storage pool (spectre)
-  virt_pool:
-    state: active
-    name: cistern-sp-images
-    autostart: yes
-    xml: '/nfs/cistern/libvirt/images/spectre'
-  when: inventory_hostname == 'spectre.private.vtluug.org'
+  shell: |
+    virsh pool-define-as cistern-sp-images --type dir --target /nfs/cistern/libvirt/spectre
+    virsh pool-autostart cistern-sp-images
+    virsh pool-start cistern-sp-images
+  args:
+    creates: /etc/libvirt/storage/cistern-sp-images.xml
+  when: inventory_hostname == 'spectre.vtluug.org'

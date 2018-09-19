@@ -1,12 +1,14 @@
 ---
 - name: Install libvirt packages
   apt:
-    name: "{{ item.name }}"
+    name: "{{ item }}"
   with_items:
     - qemu-kvm
+    - libguestfs-tools
     - libvirt-bin
     - python-lxml
     - python-libvirt
+    - virtinst
   notify:
     - Add papatux to libvirt group
 # TODO ensure libvirt autostarts on boot?

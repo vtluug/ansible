@@ -26,11 +26,6 @@
     - nfs
 
 # Important VMs
-- hosts: freeipa
-  become: yes
-  roles:
-    - freeipa-server
-
 #- hosts: log
 #  become: yes
 #  roles:

@@ -4,7 +4,7 @@
 # dirtycow = cistern = 10.98.0.7
 # shellshock = keg = 10.98.0.8
 ######################################################
-- name: Create NFS mountpoints (All hosts)
+- name: Create NFS mountpoints (Ubuntu)
   file:
     path: "{{ item.path }}"
     owner: "{{ item.owner }}"
@@ -12,15 +12,39 @@
     mode: "{{ item.mode }}"
     state: directory
   with_items:
-    - { path: '/nfs',               owner: 'root',     group: 'root',     mode: 0755 }
-    - { path: '/nfs/tank',          owner: 'root',     group: 'root',     mode: 0755 }
-    - { path: '/nfs/tank/share',    owner: 'root',     group: 'users',    mode: 0775 }
-    - { path: '/nfs/tank/scratch',  owner: 'root',     group: 'root',     mode: 0777 }
-    - { path: '/nfs/cistern',       owner: 'root',     group: 'root',     mode: 0755 }
-    - { path: '/nfs/cistern/share', owner: 'root',     group: 'users',    mode: 0775 }
-    - { path: '/nfs/cistern/files', owner: 'www-data', group: 'www-data', mode: 0755 }
-    - { path: '/nfs/keg',           owner: 'root',     group: 'root',     mode: 0755 }
-    - { path: '/nfs/keg/share',     owner: 'root',     group: 'users',    mode: 0775 }
+    - { path: '/nfs',               owner: 'root',   group: 'root',      mode: '0755' }
+    - { path: '/nfs/tank',          owner: 'root',   group: 'root',      mode: '0755' }
+#    - { path: '/nfs/tank/share',    owner: 'nobody', group: 'luugusers', mode: '0775' }
+#    - { path: '/nfs/tank/scratch',  owner: 'root',   group: 'root',      mode: '0777' }
+    - { path: '/nfs/cistern',       owner: 'root',   group: 'root',      mode: '0755' }
+    - { path: '/nfs/cistern/share', owner: 'nobody', group: 'luugusers', mode: '0775' }
+    - { path: '/nfs/cistern/files', owner: 'nobody', group: 'officers',  mode: 'u=rwx,g=rwx,o=rx,g+s' }
+    - { path: '/nfs/keg',           owner: 'root',   group: 'root',      mode: '0755' }
+    - { path: '/nfs/keg/share',     owner: 'nobody', group: 'luugusers', mode: '0775' }
+  when: ansible_os_family != 'RedHat'
+  tags: needs_freeipa
+
+- name: Create NFS mountpoints (Centos)
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+    state: directory
+  with_items:
+    - { path: '/nfs',               owner: 'root',      group: 'root',      mode: '0755' }
+    - { path: '/nfs/tank',          owner: 'root',      group: 'root',      mode: '0755' }
+#    - { path: '/nfs/tank/share',    owner: 'nobody',    group: 'luugusers', mode: '0775' }
+#    - { path: '/nfs/tank/scratch',  owner: 'root',      group: 'root',      mode: '0777' }
+    - { path: '/nfs/cistern',       owner: 'root',      group: 'root',      mode: '0755' }
+    - { path: '/nfs/cistern/share', owner: 'nfsnobody', group: 'luugusers', mode: '0775' }
+    - { path: '/nfs/cistern/files', owner: 'nfsnobody', group: 'officers',  mode: 'u=rwx,g=rwx,o=rx,g+s' }
+    - { path: '/nfs/keg',           owner: 'root',      group: 'root',      mode: '0755' }
+    - { path: '/nfs/keg/share',     owner: 'nfsnobody', group: 'luugusers', mode: '0775' }
+  when: ansible_os_family == 'RedHat'
+  tags: needs_freeipa
+
+
 
 - name: Create NFS mountpoints (Libvirt)
   file:
@@ -30,11 +54,11 @@
     mode: "{{ item.mode }}"
     state: directory
   with_items:
-    - { path: '/nfs/cistern/libvirt',                 owner: 'root', group: 'root', mode: 0755 }
-    - { path: '/nfs/cistern/libvirt/images',          owner: 'root', group: 'root', mode: 0755 }
-    - { path: '/nfs/cistern/libvirt/images/meltdown', owner: 'root', group: 'root', mode: 0755 }
-    - { path: '/nfs/cistern/libvirt/images/spectre',  owner: 'root', group: 'root', mode: 0755 }
-    - { path: '/nfs/cistern/libvirt/isos',            owner: 'root', group: 'root', mode: 0755 }
+    - { path: '/nfs/cistern/libvirt',                 owner: 'root', group: 'root', mode: '0755' }
+    - { path: '/nfs/cistern/libvirt/images',          owner: 'root', group: 'root', mode: '0755' }
+    - { path: '/nfs/cistern/libvirt/images/meltdown', owner: 'root', group: 'root', mode: '0755' }
+    - { path: '/nfs/cistern/libvirt/images/spectre',  owner: 'root', group: 'root', mode: '0755' }
+    - { path: '/nfs/cistern/libvirt/isos',            owner: 'root', group: 'root', mode: '0755' }
   when: "'libvirt' in group_names"
 
 - name: Create NFS mountpoints (Sczi)
@@ -45,5 +69,5 @@
     mode: "{{ item.mode }}"
     state: directory
   with_items:
-    - { path: '/nfs/cistern/srv', owner: 'root', group: 'root', mode: 0755 }
+    - { path: '/nfs/cistern/srv', owner: 'root', group: 'root', mode: '0755' }
   when: inventory_hostname == 'sczi.private.vtluug.org'
