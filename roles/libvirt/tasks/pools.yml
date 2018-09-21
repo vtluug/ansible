@@ -9,7 +9,7 @@
 
 - name: Add images storage pool (meltdown)
   shell: |
-    virsh pool-define-as cistern-md-images --type dir --target /nfs/cistern/libvirt/meltdown
+    virsh pool-define-as cistern-md-images --type dir --target /nfs/cistern/libvirt/images/meltdown
     virsh pool-autostart cistern-md-images
     virsh pool-start cistern-md-images
   args:
@@ -18,7 +18,7 @@
 
 - name: Add images storage pool (spectre)
   shell: |
-    virsh pool-define-as cistern-sp-images --type dir --target /nfs/cistern/libvirt/spectre
+    virsh pool-define-as cistern-sp-images --type dir --target /nfs/cistern/libvirt/images/spectre
     virsh pool-autostart cistern-sp-images
     virsh pool-start cistern-sp-images
   args:

@@ -1,5 +1,0 @@
----
-- name: Create www-data user (Main for modifying /files)
-  user:
-    name: www-data
-    create_home: no

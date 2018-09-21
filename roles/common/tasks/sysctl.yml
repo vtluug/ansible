@@ -1,0 +1,9 @@
+---
+- name: Set IPv6 Privacy Extensions
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+  with_items:
+    - { name: net.ipv6.conf.all.use_tempaddr, value: 2 } 
+    - { name: net.ipv6.conf.default.use_tempaddr, value: 2 } 

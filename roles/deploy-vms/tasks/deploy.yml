@@ -7,8 +7,8 @@
         --size 10G \
         --format qcow2 \
         --output /nfs/cistern/libvirt/images/meltdown/{{ item.hostname }}.qcow2 \
-        --root-password password:"{{ root_pass }}" \
-        --firstboot-command 'yum -y install openssl; systemctl disable firewalld; systemctl disable apparmor; sed -i "s/SELINUX=enforcing/SELINUX=disabled/" /etc/selinux/config; sed -i "s/#Port 22/Port 22\nPort 2222/" /etc/ssh/sshd_config; useradd -m -p $(openssl passwd -1 "{{ admin_pass }}") papatux && usermod -aG {{ item.admins }} papatux; reboot' \
+        --root-password password:'paulwalko' \
+        --run-command 'useradd -m -p ""{{ admin_pass_hash }}"" -G {{ item.admins }} papatux; systemctl disable firewalld; systemctl disable apparmor; sed -i "s/SELINUX=enforcing/SELINUX=disabled/" /etc/selinux/config; sed -i "s/#Port 22/Port 22\nPort 2222/" /etc/ssh/sshd_config; sed -i "s/ens2/ens3/" /etc/netplan/01-netcfg.yaml; reboot' \
     && \
     virt-install \
         --import \
@@ -17,14 +17,16 @@
         --ram {{ item.ram }} \
         --network bridge=br0,mac={{ item.mac }} \
         --disk path=/nfs/cistern/libvirt/images/meltdown/{{ item.hostname }}.qcow2,format=qcow2 \
-        --os-variant rhel7 \
+        --os-variant {{ item.variant }} \
         --autostart \
         --graphics spice \
         --noautoconsole
   args:
       creates: '/nfs/cistern/libvirt/meltdown/{{ item.hostname }}.qcow2'
   with_items: "{{ new_vms_meltdown }}"
-  when: inventory_hostname == 'meltdown.vtluug.org'
+  when:
+    - inventory_hostname == 'meltdown.vtluug.org'
+    - new_vms_meltdown is not none
 
 - name: Create new VMs (spectre)
   shell: |
@@ -34,8 +36,8 @@
         --size 10G \
         --format qcow2 \
         --output /nfs/cistern/libvirt/images/spectre/{{ item.hostname }}.qcow2 \
-        --root-password password:"{{ root_pass }}" \
-        --firstboot-command 'yum -y install openssl; systemctl disable firewalld; systemctl disable apparmor; sed -i "s/SELINUX=enforcing/SELINUX=disabled/" /etc/selinux/config; sed -i "s/#Port 22/Port 22\nPort 2222/" /etc/ssh/sshd_config; useradd -m -p $(openssl passwd -1 "{{ admin_pass }}") papatux && usermod -aG {{ item.admins }} papatux; reboot' \
+        --root-password password:'paulwalko' \
+        --run-command 'useradd -m -p ""{{ admin_pass_hash }}"" -G {{ item.admins }} papatux; systemctl disable firewalld; systemctl disable apparmor; sed -i "s/SELINUX=enforcing/SELINUX=disabled/" /etc/selinux/config; sed -i "s/#Port 22/Port 22\nPort 2222/" /etc/ssh/sshd_config; sed -i "s/ens2/ens3/" /etc/netplan/01-netcfg.yaml; reboot' \
     && \
     virt-install \
         --import \
@@ -44,12 +46,13 @@
         --ram {{ item.ram }} \
         --network bridge=br0,mac={{ item.mac }} \
         --disk path=/nfs/cistern/libvirt/images/spectre/{{ item.hostname }}.qcow2,format=qcow2 \
-        --os-variant rhel7 \
+        --os-variant {{ item.variant }} \
         --autostart \
         --graphics spice \
         --noautoconsole
   args:
       creates: '/nfs/cistern/libvirt/spectre/{{ item.hostname }}.qcow2'
   with_items: "{{ new_vms_spectre }}"
-  when: inventory_hostname == 'spectre.vtluug.org'
-
+  when:
+    - inventory_hostname == 'spectre.vtluug.org'
+    - new_vms_spectre is not none

@@ -21,4 +21,7 @@
     mode: '0644'
   notify:
     - Restart networking (RedHat)
-  when: ansible_distribution == 'RedHat'
+  when:
+    - global_v4 is defined
+    - ansible_distribution == 'CentOS'
+    - "'libvirt' not in group_names"
