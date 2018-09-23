@@ -1,0 +1,5 @@
+---
+- name: Append motd.sh to /etc/profile
+  blockinfile:
+    path: /etc/profile
+    block: "{{ lookup('file', 'files/motd.sh') }}"

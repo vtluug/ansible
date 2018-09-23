@@ -3,6 +3,7 @@
 - import_tasks: chrony.yml
 - import_tasks: global_v4.yml
 - import_tasks: hosts.yml
+- import_tasks: motd.yml
 - import_tasks: nfs.yml
 - import_tasks: ssh.yml
 - import_tasks: sudo.yml

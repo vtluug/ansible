@@ -1,0 +1,12 @@
+---
+- name: Remove default motd items
+  file:
+    path: /etc/update-motd.d/"{{ item }}"
+    state: absent
+  with_items:
+    - 00-header
+    - 10-help-text
+    - 50-motd-news
+    - 80-esm
+    - 80-livepatch
+    - 91-release-upgrade

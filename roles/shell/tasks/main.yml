@@ -1,0 +1,3 @@
+---
+- import_tasks: games.yml
+- import_tasks: mail.yml

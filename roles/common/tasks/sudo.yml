@@ -14,9 +14,11 @@
             - /usr/sbin/halt
             - /usr/sbin/poweroff
     sudoer_specs:
-      - { name: 'papatux',            comment: 'Special papatux perms',      users: 'papatux', hosts: 'ALL' ,operators: 'ALL', tags: 'NOPASSWD', commands: 'ALL' }
-      - { name: 'wheel_restrictions', comment: 'Special wheel restrictions', users: '%wheel',  hosts: 'ALL', operators: 'ALL', tags: 'NOPASSWD', commands: '!DANGEROUS' }
+      - { name: 'papatux',               comment: 'Special papatux perms',         users: 'papatux',    hosts: 'ALL' ,operators: 'ALL', tags: 'NOPASSWD', commands: 'ALL' }
+      - { name: 'wheel_restrictions',    comment: 'Special wheel restrictions',    users: '%wheel',     hosts: 'ALL', operators: 'ALL', tags: 'NOPASSWD', commands: '!DANGEROUS' }
+      - { name: 'officers_restrictions', comment: 'Special officers restrictions', users: '%officers',  hosts: 'ALL', operators: 'ALL', tags: 'NOPASSWD', commands: '!DANGEROUS' }
   when: ansible_os_family == 'RedHat'
+  tags: needs_freeipa
 
 - name: Configure sudo (Debian)
   import_role:
@@ -35,4 +37,6 @@
     sudoer_specs:
       - { name: 'papatux',           comment: 'Special papatux perms',     users: 'papatux', hosts: 'ALL', operators: 'ALL', tags: 'NOPASSWD', commands: 'ALL' }
       - { name: 'sudo_restrictions', comment: 'Special sudo restrictions', users: '%sudo',   hosts: 'ALL', operators: 'ALL', tags: 'NOPASSWD', commands: '!DANGEROUS' }
+      - { name: 'officers_restrictions', comment: 'Special officers restrictions', users: '%officers',  hosts: 'ALL', operators: 'ALL', tags: 'NOPASSWD', commands: '!DANGEROUS' }
   when: ansible_os_family == 'Debian'
+  tags: needs_freeipa

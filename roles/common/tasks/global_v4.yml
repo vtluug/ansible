@@ -16,8 +16,8 @@
 
 - name: Configure global IPv4 addrs (Non-libvirt hosts, Red Hat)
   template:
-    src: templates/ifcfg-"{{ interface }}".j2
-    dest: /etc/sysconfig/network-scripts/ifcfg-"{{ interface }}"
+    src: templates/ifcfg-secondary-template.j2
+    dest: /etc/sysconfig/network-scripts/ifcfg-"{{ interface }}":1
     mode: '0644'
   notify:
     - Restart networking (RedHat)

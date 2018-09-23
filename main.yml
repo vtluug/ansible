@@ -34,8 +34,7 @@
 #- hosts: shell
 #  become: yes
 #  roles:
-#    - mail
-#    - games
+#    - shell
 #
 #- hosts: web
 #  become: yes
