@@ -1,0 +1,57 @@
+---
+- name: Install Docker prerequisites
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+  notify:
+    - Refresh sources
+    - Upgrade packages
+
+- name: Add Docker GPG key
+  apt_key: url=https://download.docker.com/linux/ubuntu/gpg
+
+- name: Add Docker APT repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ansible_distribution}} stable
+
+- name: Install Docker
+  apt:
+    name: docker-ce
+    state: latest
+
+- name: Create docker systemd folder and set permissions of /nfs/cistern/docker to root:docker
+    path: "{{ item.path }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+    state: directory
+  with_items:
+    - { path: '/nfs/cistern/docker',                  owner: 'root', group: 'docker', mode: 'u=rwx,g=rwx,o=rx,g+s' }
+    - { path: '/nfs/cistern/docker/images',           owner: 'root', group: 'root',   mode: '755' }
+    - { path: '/etc/systemd/system/docker.service.d', owner: 'root', group: 'root',   mode: '755' }
+
+- name: Change default image location to /nfs/cistern/docker/images
+  template:
+    src: templates/docker-storage.conf.j2
+    dest: /etc/systemd/system/docker.service.d/docker-storage.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Docker
+
+- name: Add papatux to docker group
+  user:
+    name: papatux
+    groups: docker
+    append: yes
+
+- name: Pull github.com/vtluug/apps
+  git:
+    repo: 'https://github.com/vtluug/apps.git'
+    dest: /nfs/cistern/docker/apps
+  become_user: papatux

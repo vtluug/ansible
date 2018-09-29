@@ -44,8 +44,6 @@
   when: ansible_os_family == 'RedHat'
   tags: needs_freeipa
 
-
-
 - name: Create NFS mountpoints (Libvirt)
   file:
     path: "{{ item.path }}"
@@ -69,5 +67,9 @@
     mode: "{{ item.mode }}"
     state: directory
   with_items:
-    - { path: '/nfs/cistern/srv', owner: 'root', group: 'root', mode: '0755' }
-  when: inventory_hostname == 'sczi.private.vtluug.org'
+    - { path: '/nfs/cistern/docker',        owner: 'root',     group: 'root',  mode: '0755' }
+    - { path: '/nfs/cistern/docker/data',   owner: 'root',     group: 'root',  mode: '0755' }
+    - { path: '/nfs/cistern/srv',           owner: 'root',     group: 'root',  mode: '0755' }
+  when: inventory_hostname == 'sczi.vtluug.org'
+  tags: needs_freeipa
+  

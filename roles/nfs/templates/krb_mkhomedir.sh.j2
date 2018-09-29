@@ -21,12 +21,22 @@ NEWUSERS=$(comm -13 <(echo "$HOMEDIRS") <(echo "$USERS"))
 
 # Create homedirs for new users
 for user in $NEWUSERS; do
-    if [ "$user" == "admin" ]; then
+    if [[ "$user" == "admin" ]]; then
         continue
     fi
 
+    # Homedir creation
     echo "Creating $user:$user $HOMEPATH/$user"
     mkdir $HOMEPATH/$user
     chown $user:$user $HOMEPATH/$user
     chmod 755 $HOMEPATH/$user
+
+    # Skeleton files
+    echo "Adding skeleton files to $HOMEPATH/$user"
+    touch $HOMEPATH/$user/.nofinger
+    if [[ "$(id -un $user)" == "$(id -gn $user)" ]]; then
+        chmod 664 $HOMEPATH/$user/.nofinger
+    else
+        chmod 644 $HOMEPATH/$user/.nofinger
+    fi
 done

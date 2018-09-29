@@ -26,46 +26,21 @@
     - nfs
 
 # Important VMs
-#- hosts: log
-#  become: yes
-#  roles:
-#    - log
-#
 #- hosts: shell
 #  become: yes
 #  roles:
 #    - shell
 #
-#- hosts: web
-#  become: yes
-#  roles:
-#    - web
-#
+- hosts: web
+  become: yes
+  roles:
+    - web
+
 ## General VMs
-#- hosts: funkwhale
-#  become: yes
-#  roles:
-#    - emby
-#
-#- hosts: jitsi
-#  become: yes
-#  roles:
-#    - jitsi
-#
-#- hosts: map
-#  become: yes
-#  roles:
-#    - map
-#
 #- hosts: mirror
 #  become: yes
 #  roles:
 #    - mirror
-#
-#- hosts: syncthing
-#  become: yes
-#  roles:
-#    - syncthing
 #
 #- hosts: tahoe-lafs
 #  become: yes
