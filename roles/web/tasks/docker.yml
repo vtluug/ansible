@@ -32,7 +32,6 @@
     state: directory
   with_items:
     - { path: '/nfs/cistern/docker',                  owner: 'root', group: 'docker', mode: 'u=rwx,g=rwx,o=rx,g+s' }
-    - { path: '/nfs/cistern/docker/images',           owner: 'root', group: 'root',   mode: '755' }
     - { path: '/etc/systemd/system/docker.service.d', owner: 'root', group: 'root',   mode: '755' }
 
 - name: Change default image location to /nfs/cistern/docker/images

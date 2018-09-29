@@ -69,6 +69,7 @@
   with_items:
     - { path: '/nfs/cistern/docker',        owner: 'root',     group: 'root',  mode: '0755' }
     - { path: '/nfs/cistern/docker/data',   owner: 'root',     group: 'root',  mode: '0755' }
+    - { path: '/nfs/cistern/docker/images', owner: 'root',     group: 'root',  mode: '0755' }
     - { path: '/nfs/cistern/srv',           owner: 'root',     group: 'root',  mode: '0755' }
   when: inventory_hostname == 'sczi.vtluug.org'
   tags: needs_freeipa
