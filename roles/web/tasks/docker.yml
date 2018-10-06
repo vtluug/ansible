@@ -25,11 +25,12 @@
     state: latest
 
 - name: Create docker systemd folder and set permissions of /nfs/cistern/docker to root:docker
+  file:
     path: "{{ item.path }}"
     owner: "{{ item.owner }}"
     group: "{{ item.group }}"
     mode: "{{ item.mode }}"
-    state: directory
+    state: "{{ item.state }}"
   with_items:
     - { path: '/nfs/cistern/docker',                  owner: 'root', group: 'docker', mode: 'u=rwx,g=rwx,o=rx,g+s' }
     - { path: '/etc/systemd/system/docker.service.d', owner: 'root', group: 'root',   mode: '755' }

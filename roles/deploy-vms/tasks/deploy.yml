@@ -21,7 +21,7 @@
         --graphics spice \
         --noautoconsole
   args:
-      creates: '/nfs/cistern/libvirt/meltdown/{{ item.hostname }}.qcow2'
+      creates: '/nfs/cistern/libvirt/images/meltdown/{{ item.hostname }}.qcow2'
   with_items: "{{ new_vms_meltdown }}"
   when:
     - inventory_hostname == 'meltdown.vtluug.org'
@@ -49,7 +49,7 @@
         --graphics spice \
         --noautoconsole
   args:
-      creates: '/nfs/cistern/libvirt/spectre/{{ item.hostname }}.qcow2'
+      creates: '/nfs/cistern/libvirt/images/spectre/{{ item.hostname }}.qcow2'
   with_items: "{{ new_vms_spectre }}"
   when:
     - inventory_hostname == 'spectre.vtluug.org'
