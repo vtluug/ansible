@@ -1,22 +1,22 @@
 ---
 - name: Install common packages
   apt:
-    name: "{{ item }}"
+    pkg:
+      - chrony
+      - curl
+      - fail2ban
+      - freeipa-client
+      - git
+      - htop
+      - man
+      - nfs-common
+      - nmap
+      - tmux
+      - unattended-upgrades
+      - vim
+      - wget
+      - zsh
     state: latest
-  with_items:
-    - chrony
-    - curl
-    - freeipa-client
-    - git
-    - htop
-    - man
-    - nfs-common
-    - nmap
-    - tmux
-    - unattended-upgrades
-    - vim
-    - wget
-    - zsh
   notify:
     - Refresh sources
     - Upgrade packages

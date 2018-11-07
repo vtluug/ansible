@@ -4,15 +4,15 @@
   become: yes
   roles:
     - ubuntu-common
-    - common
     - freeipa-client
+    - common
 
 - hosts: centos
   become: yes
   roles:
     - centos-common
-    - common
     - freeipa-client
+    - common
 
 # Bare-metal
 - hosts: libvirt

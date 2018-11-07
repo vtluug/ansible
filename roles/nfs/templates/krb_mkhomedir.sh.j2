@@ -5,7 +5,7 @@
 # author: pew <paul@walko.org>
 ##################################################
 
-HOMEPATH='/home'
+HOMEPATH='/nfs/cistern/home'
 HOST='chimera.vtluug.org'
 
 # Lookup current homedirs and new users
@@ -33,10 +33,10 @@ for user in $NEWUSERS; do
 
     # Skeleton files
     echo "Adding skeleton files to $HOMEPATH/$user"
+    
+    ## .nofinger
     touch $HOMEPATH/$user/.nofinger
-    if [[ "$(id -un $user)" == "$(id -gn $user)" ]]; then
-        chmod 664 $HOMEPATH/$user/.nofinger
-    else
-        chmod 644 $HOMEPATH/$user/.nofinger
-    fi
+    chown $(id -un $user):$(ud -gn $user) $HOMEPATH/$user/.nofinger
+    chmod 644 $HOMEPATH/$user/.nofinger
+
 done

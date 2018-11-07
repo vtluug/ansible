@@ -17,6 +17,7 @@
 #    - { path: '/nfs/tank/share',    owner: 'nobody', group: 'luugusers', mode: '0775' }
 #    - { path: '/nfs/tank/scratch',  owner: 'root',   group: 'root',      mode: '0777' }
     - { path: '/nfs/cistern',       owner: 'root',   group: 'root',      mode: '0755' }
+    - { path: '/nfs/cistern/home',  owner: 'root',   group: 'root',      mode: '0755' }
     - { path: '/nfs/cistern/share', owner: 'nobody', group: 'luugusers', mode: '0775' }
     - { path: '/nfs/cistern/files', owner: 'nobody', group: 'officers',  mode: 'u=rwx,g=rwx,o=rx,g+s' }
     - { path: '/nfs/keg',           owner: 'root',   group: 'root',      mode: '0755' }
@@ -37,6 +38,7 @@
 #    - { path: '/nfs/tank/share',    owner: 'nobody',    group: 'luugusers', mode: '0775' }
 #    - { path: '/nfs/tank/scratch',  owner: 'root',      group: 'root',      mode: '0777' }
     - { path: '/nfs/cistern',       owner: 'root',      group: 'root',      mode: '0755' }
+    - { path: '/nfs/cistern/home',  owner: 'root',      group: 'root',      mode: '0755' }
     - { path: '/nfs/cistern/share', owner: 'nfsnobody', group: 'luugusers', mode: '0775' }
     - { path: '/nfs/cistern/files', owner: 'nfsnobody', group: 'officers',  mode: 'u=rwx,g=rwx,o=rx,g+s' }
     - { path: '/nfs/keg',           owner: 'root',      group: 'root',      mode: '0755' }
@@ -69,8 +71,7 @@
   with_items:
     - { path: '/nfs/cistern/docker',        owner: 'root',     group: 'root',  mode: '0755' }
     - { path: '/nfs/cistern/docker/data',   owner: 'root',     group: 'root',  mode: '0755' }
-    - { path: '/nfs/cistern/docker/images', owner: 'root',     group: 'root',  mode: '0755' }
     - { path: '/nfs/cistern/srv',           owner: 'root',     group: 'root',  mode: '0755' }
-  when: inventory_hostname == 'sczi.vtluug.org'
+  when: inventory_hostname == 'sczi2.vtluug.org'
   tags: needs_freeipa
   

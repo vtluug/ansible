@@ -1,12 +1,12 @@
 ---
-- name: Restart sshd
-  systemd:
-    name: sshd.service
-    state: restarted
-
 - name: Restart chronyd
   systemd:
     name: chronyd.service
+    state: restarted
+
+- name: Restart fail2ban
+  systemd:
+    name: fail2ban.service
     state: restarted
 
 - name: Apply netplan config
@@ -20,4 +20,9 @@
 - name: Restart networking (RedHat)
   systemd:
     name: network
+    state: restarted
+
+- name: Restart sshd
+  systemd:
+    name: sshd.service
     state: restarted

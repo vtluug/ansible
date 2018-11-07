@@ -1,0 +1,22 @@
+---
+- name: Configure Chrony (Debian)
+  template:
+    src: files/jail.local.debian
+    dest: /etc/fail2ban/jail.local
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+  notify: Restart fail2ban
+  when: ansible_os_family == 'Debian'
+
+- name: Configure fail2ban (Redhat)
+  template:
+    src: files/jail.local.redhat
+    dest: /etc/fail2ban/jail.local
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+  notify: Restart fail2ban
+  when: ansible_os_family == 'RedHat'

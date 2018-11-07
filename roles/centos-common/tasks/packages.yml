@@ -1,15 +1,22 @@
 ---
+# Only required for fail2ban
+- name: Install epel-release (before other packages)
+  yum:
+    pkg:
+      - epel-release
+    state: latest
+
 - name: Install common packages
   yum:
-    name: "{{ item }}"
+    pkg:
+      - chrony
+      - fail2ban
+      - freeipa-client
+      - nfs-utils
+      - tmux
+      - vim
+      - yum-cron
     state: latest
-  with_items:
-    - chrony
-    - freeipa-client
-    - nfs-utils
-    - tmux
-    - vim
-    - yum-cron
   notify:
     - Start and enable chronyd
     - Start and enable yum-cron

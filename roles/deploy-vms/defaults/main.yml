@@ -1,17 +1,17 @@
 ---
 new_vms_meltdown:
-  - { target: meltdown, os: ubuntu-18.04, hostname: sczi,          cpus: 4, ram: 16384, mac: "02:00:0a:62:00:0b", admins: sudo, variant: ubuntu17.10 }  # Web
-#  - { target: meltdown, os: ubuntu-18.04, hostname: theplague,     cpus: 1, ram: 1024, mac: "02:00:0a:62:00:0d", admins: sudo, variant: ubuntu17.10 }  # ELK
-#  - { target: meltdown, os: ubuntu-18.04, hostname: holeybeep,     cpus: 1, ram: 1024, mac: "02:00:0a:62:00:0e", admins: sudo, variant: ubuntu17.10 }  # Jitsi
-#  - { target: meltdown, os: ubuntu-18.04, hostname: mirror,        cpus: 2, ram: 2048, mac: "02:00:0a:62:00:10", admins: sudo, variant: ubuntu17.10 }  # Mirror
-#  - { target: meltdown, os: ubuntu-18.04, hostname: crashoverride, cpus: 1, ram: 1024, mac: "02:00:0a:62:00:12", admins: sudo, variant: ubuntu17.10 }  # Tahoe-LAFS
-#  - { target: meltdown, os: ubuntu-18.04, hostname: map,           cpus: 4, ram: 4096, mac: "02:00:0a:62:00:14", admins: sudo, variant: ubuntu17.10 }  # OSM + TBD
+  - { target: meltdown, os: ubuntu-18.04, hostname: sczi,          cpus: 4, ram: 16384, size: 50G, mac: "02:00:0a:62:00:0b", admins: sudo, variant: ubuntu17.10 }  # Web
+#  - { target: meltdown, os: ubuntu-18.04, hostname: theplague,     cpus: 1, ram: 1024,  size: 10G, mac: "02:00:0a:62:00:0d", admins: sudo, variant: ubuntu17.10 }  # ELK
+#  - { target: meltdown, os: ubuntu-18.04, hostname: holeybeep,     cpus: 1, ram: 1024,  size: 10G, mac: "02:00:0a:62:00:0e", admins: sudo, variant: ubuntu17.10 }  # Jitsi
+#  - { target: meltdown, os: ubuntu-18.04, hostname: mirror,        cpus: 2, ram: 2048,  size: 10G, mac: "02:00:0a:62:00:10", admins: sudo, variant: ubuntu17.10 }  # Mirror
+#  - { target: meltdown, os: ubuntu-18.04, hostname: crashoverride, cpus: 1, ram: 1024,  size: 10G, mac: "02:00:0a:62:00:12", admins: sudo, variant: ubuntu17.10 }  # Tahoe-LAFS
+#  - { target: meltdown, os: ubuntu-18.04, hostname: map,           cpus: 4, ram: 4096,  size: 10G, mac: "02:00:0a:62:00:14", admins: sudo, variant: ubuntu17.10 }  # OSM + TBD
 # Add user VMs here later
 
 new_vms_spectre:
-#  - { target: spectre, os: centos-7.5,   hostname: chimera,       cpus: 2, ram: 2048, mac: "02:00:0a:62:00:0a", admins: wheel, variant: centos7.0 }   # FreeIPA
-  - { target: spectre, os: ubuntu-18.04, hostname: acidburn,      cpus: 2, ram: 2048, mac: "02:00:0a:62:00:0c", admins: sudo, variant: ubuntu17.10 }  # Shell
-#  - { target: spectre, os: ubuntu-18.04, hostname: wannacry,      cpus: 1, ram: 1024, mac: "02:00:0a:62:00:0f", admins: sudo, variant: ubuntu17.10 }  # Emby
-#  - { target: spectre, os: ubuntu-18.04, hostname: zerocool,      cpus: 1, ram: 1024, mac: "02:00:0a:62:00:11", admins: sudo, variant: ubuntu17.10 }  # Syncthing
-#  - { target: spectre, os: ubuntu-18.04, hostname: wargame,       cpus: 2, ram: 2048, mac: "02:00:0a:62:00:13", admins: sudo, variant: ubuntu17.10 }  # Wargame
+  - { target: spectre, os: centos-7.5,   hostname: chimera,       cpus: 2, ram: 2048, size: 10G, mac: "02:00:0a:62:00:0a", admins: wheel, variant: centos7.0 }   # FreeIPA
+  - { target: spectre, os: ubuntu-18.04, hostname: acidburn,      cpus: 2, ram: 2048, size: 10G, mac: "02:00:0a:62:00:0c", admins: sudo, variant: ubuntu17.10 }  # Shell
+#  - { target: spectre, os: ubuntu-18.04, hostname: wannacry,      cpus: 1, ram: 1024, size: 10G, mac: "02:00:0a:62:00:0f", admins: sudo, variant: ubuntu17.10 }  # Emby
+#  - { target: spectre, os: ubuntu-18.04, hostname: zerocool,      cpus: 1, ram: 1024, size: 10G, mac: "02:00:0a:62:00:11", admins: sudo, variant: ubuntu17.10 }  # Syncthing
+#  - { target: spectre, os: ubuntu-18.04, hostname: wargame,       cpus: 2, ram: 2048, size: 10G, mac: "02:00:0a:62:00:13", admins: sudo, variant: ubuntu17.10 }  # Wargame
 # Add user VMs here later

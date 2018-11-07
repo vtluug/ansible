@@ -1,6 +1,7 @@
 ---
 - import_tasks: dirs.yml
 - import_tasks: chrony.yml
+- import_tasks: fail2ban.yml
 - import_tasks: global_v4.yml
 - import_tasks: hosts.yml
 - import_tasks: motd.yml
