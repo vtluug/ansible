@@ -26,3 +26,16 @@
   git:
     repo: 'https://github.com/vtluug/apps.git'
     dest: /nfs/cistern/docker/apps
+
+- name: Deploy systemd timer to prune old docker things
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: "{{ item.mode }}"
+    backup: yes
+  with_items:
+    - { src: 'files/docker_cleanup.service', dest: '/etc/systemd/system/docker_cleanup.service', mode: '0644' }
+    - { src: 'files/docker_cleanup.timer',   dest: '/etc/systemd/system/docker_cleanup.timer',   mode: '0644' }
+  notify: Start and enable docker_cleanup

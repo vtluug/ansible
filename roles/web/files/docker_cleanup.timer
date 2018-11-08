@@ -1,0 +1,8 @@
+[Unit]
+Description=Run docker_cleanup.service once a month
+
+[Timer]
+OnCalendar=monthly
+
+[Install]
+WantedBy=timers.target

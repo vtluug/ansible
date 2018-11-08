@@ -3,3 +3,9 @@
   systemd:
     name: docker
     state: restarted
+
+- name: Start and enable docker_cleanup
+  systemd:
+    name: docker_cleanup.timer
+    state: started
+    enabled: yes

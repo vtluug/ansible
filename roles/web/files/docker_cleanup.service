@@ -1,0 +1,5 @@
+[Unit]
+Description=Run 'docker system prune -f'
+
+[Service]
+ExecStart=/usr/bin/docker system prune -f

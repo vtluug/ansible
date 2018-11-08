@@ -40,8 +40,8 @@
     opts: "{{ item.options }}"
     state: present
   with_items:
-    - { filesystem: '/tank/nfs/share',              mountpoint: '/nfs/tank/share',    type: 'none', options: 'bind',              dump: '0', pass: '0' }
-    - { filesystem: '/tank/nfs/scratch',            mountpoint: '/nfs/tank/scratch',  type: 'none', options: 'bind',              dump: '0', pass: '0' }
+    - { filesystem: '/tank/nfs/share',              mountpoint: '/nfs/tank/share',    type: 'none', options: 'bind',                       dump: '0', pass: '0' }
+    - { filesystem: '/tank/nfs/scratch',            mountpoint: '/nfs/tank/scratch',  type: 'none', options: 'bind',                       dump: '0', pass: '0' }
     - { filesystem: '10.98.0.7:/cistern/nfs/home',  mountpoint: '/nfs/cistern/home',  type: 'nfs',  options: 'vers=4.0,soft,nodev',        dump: '0', pass: '0' }
     - { filesystem: '10.98.0.7:/cistern/nfs/files', mountpoint: '/nfs/cistern/files', type: 'nfs',  options: 'vers=4.0,soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '10.98.0.7:/cistern/nfs/share', mountpoint: '/nfs/cistern/share', type: 'nfs',  options: 'vers=4.0,soft,nodev,nosuid', dump: '0', pass: '0' }
@@ -59,17 +59,17 @@
   with_items:
     - { filesystem: '10.98.0.6:/tank/nfs/share',   mountpoint: '/nfs/tank/share',    type: 'nfs',  options: 'vers=4.0,soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '10.98.0.6:/tank/nfs/scratch', mountpoint: '/nfs/tank/scratch',  type: 'nfs',  options: 'vers=4.0,soft,nodev,nosuid', dump: '0', pass: '0' }
-    - { filesystem: '/cistern/nfs/home',           mountpoint: '/nfs/cistern/home',  type: 'none', options: 'bind',              dump: '0', pass: '0' }
-    - { filesystem: '/cistern/nfs/files',          mountpoint: '/nfs/cistern/files', type: 'none', options: 'bind',              dump: '0', pass: '0' }
-    - { filesystem: '/cistern/nfs/share',          mountpoint: '/nfs/cistern/share', type: 'none', options: 'bind',              dump: '0', pass: '0' }
+    - { filesystem: '/cistern/nfs/home',           mountpoint: '/nfs/cistern/home',  type: 'none', options: 'bind',                       dump: '0', pass: '0' }
+    - { filesystem: '/cistern/nfs/files',          mountpoint: '/nfs/cistern/files', type: 'none', options: 'bind',                       dump: '0', pass: '0' }
+    - { filesystem: '/cistern/nfs/share',          mountpoint: '/nfs/cistern/share', type: 'none', options: 'bind',                       dump: '0', pass: '0' }
     - { filesystem: '10.98.0.8:/keg/nfs/share',    mountpoint: '/nfs/keg/share',     type: 'nfs',  options: 'vers=4.0,soft,nodev,nosuid', dump: '0', pass: '0' }
   when: inventory_hostname == 'dirtycow.vtluug.org'
   tags: needs_freeipa
 
 - name: Mount NFS  (Shellshock)
   mount:
-    path: "{{ item.mountpoint }}"
     src: "{{ item.filesystem }}"
+    path: "{{ item.mountpoint }}"
     fstype: "{{ item.type }}"
     opts: "{{ item.options }}"
     state: present
@@ -79,7 +79,7 @@
     - { filesystem: '10.98.0.7:/cistern/nfs/home',  mountpoint: '/nfs/cistern/home',  type: 'nfs',  options: 'vers=4.0,soft,nodev',        dump: '0', pass: '0' }
     - { filesystem: '10.98.0.7:/cistern/nfs/files', mountpoint: '/nfs/cistern/files', type: 'nfs',  options: 'vers=4.0,soft,nodev,nosuid', dump: '0', pass: '0' }
     - { filesystem: '10.98.0.7:/cistern/nfs/share', mountpoint: '/nfs/cistern/share', type: 'nfs',  options: 'vers=4.0,soft,nodev,nosuid', dump: '0', pass: '0' }
-    - { filesystem: '/keg/nfs/share',               mountpoint: '/nfs/keg/share',     type: 'none', options: 'bind',              dump: '0', pass: '0' }
+    - { filesystem: '/keg/nfs/share',               mountpoint: '/nfs/keg/share',     type: 'none', options: 'bind',                       dump: '0', pass: '0' }
   when: inventory_hostname == 'shellshock.vtluug.org'
   tags: needs_freeipa
 
