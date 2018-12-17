@@ -27,6 +27,10 @@
     repo: 'https://github.com/vtluug/apps.git'
     dest: /nfs/cistern/docker/apps
 
+- name: Create vtluug-network for proxying things
+  docker_network:
+    name: vtluug-network
+
 - name: Deploy systemd timer to prune old docker things
   template:
     src: "{{ item.src }}"

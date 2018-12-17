@@ -21,7 +21,7 @@
   when: "'nfs' not in group_names"
   tags: needs_freeipa
 
-- name: Mount NFS (Libvirt hosts)
+- name: Mount NFS & docker-lv (Libvirt & baremetal docker hosts)
   mount:
     src: "{{ item.filesystem }}"
     path: "{{ item.mountpoint }}"
@@ -30,6 +30,7 @@
     state: mounted
   with_items:
     - { filesystem: '10.98.0.7:/cistern/nfs/libvirt', mountpoint: '/nfs/cistern/libvirt', type: 'nfs', options: 'vers=4.0,soft,nodev,nosuid', dump: '0', pass: '0' }
+    - { filesystem: '/dev/meltdown-vg/docker-lv',     mountpoint: '/var/lib/docker',      type: 'xfs', options: 'defaults,pquota',            dump: '0', pass: '0' }
   when: "'libvirt' in group_names"
 
 - name: Mount NFS  (Cyberdelia)
@@ -49,7 +50,7 @@
   when: inventory_hostname == 'cyberdelia.vtluug.org'
   tags: needs_freeipa
 
-- name: Mount NFS  (Dirtycow)
+- name: Mount NFS (Dirtycow)
   mount:
     src: "{{ item.filesystem }}"
     path: "{{ item.mountpoint }}"
@@ -66,7 +67,7 @@
   when: inventory_hostname == 'dirtycow.vtluug.org'
   tags: needs_freeipa
 
-- name: Mount NFS  (Shellshock)
+- name: Mount NFS (Shellshock)
   mount:
     src: "{{ item.filesystem }}"
     path: "{{ item.mountpoint }}"
@@ -83,7 +84,7 @@
   when: inventory_hostname == 'shellshock.vtluug.org'
   tags: needs_freeipa
 
-- name: Mount NFS (Sczi)
+- name: Mount NFS (docker)
   mount:
     src: "{{ item.filesystem }}"
     path: "{{ item.mountpoint }}"
@@ -92,6 +93,15 @@
     state: mounted
   with_items:
     - { filesystem: '10.98.0.7:/cistern/nfs/docker/data',   mountpoint: '/nfs/cistern/docker/data',   type: 'nfs', options: 'vers=4.0,soft,nodev,nosuid', dump: '0', pass: '0' }
+  when: "'docker' in group_names"
+
+- name: Mount NFS (Sczi)
+  mount:
+    src: "{{ item.filesystem }}"
+    path: "{{ item.mountpoint }}"
+    fstype: "{{ item.type }}"
+    opts: "{{ item.options }}"
+    state: mounted
+  with_items:
     - { filesystem: '10.98.0.7:/cistern/nfs/srv',           mountpoint: '/nfs/cistern/srv',           type: 'nfs', options: 'vers=4.0,soft,nodev,nosuid', dump: '0', pass: '0' }
   when: inventory_hostname == 'sczi2.vtluug.org'
-  tags: needs_freeipa

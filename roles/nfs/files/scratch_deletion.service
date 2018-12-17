@@ -2,4 +2,4 @@
 Description=Delete scratch contents once a month
 
 [Service]
-ExecStart=/bin/bash rm -r /nfs/tank/scratch/*
+ExecStart=/bin/bash rm -r /nfs/tank/scratch/* && touch /nfs/tank/scratch/FILES_IN_THIS_DIRECTORY_ARE_REMOVED_REGULARLY

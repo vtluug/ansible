@@ -19,8 +19,8 @@
     name: geerlingguy.nfs
   vars:
     nfs_exports:
-      - /cistern/nfs/docker/data    -rw,no_subtree_check,no_root_squash 10.98.0.11 # sczi
-      - /cistern/nfs/libvirt        -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.5 # libvirt ONLY
+      - /cistern/nfs/docker/data    -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 10.98.0.11 # libvirt + sczi
+      - /cistern/nfs/libvirt        -rw,no_subtree_check,no_root_squash 10.98.0.3 10.98.0.4 # libvirt
       - /cistern/nfs/home           -rw,no_subtree_check 10.98.0.0/24 # All main hosts
       - /cistern/nfs/srv            -rw,no_subtree_check 10.98.0.11 # sczi
       - /cistern/nfs/files          -rw,no_subtree_check 10.98.0.0/16 # All hosts

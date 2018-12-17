@@ -46,7 +46,7 @@
   when: ansible_os_family == 'RedHat'
   tags: needs_freeipa
 
-- name: Create NFS mountpoints (Libvirt)
+- name: Create NFS & docker mountpoints (Libvirt & docker baremetal hosts)
   file:
     path: "{{ item.path }}"
     owner: "{{ item.owner }}"
@@ -59,9 +59,10 @@
     - { path: '/nfs/cistern/libvirt/images/meltdown', owner: 'root', group: 'root', mode: '0755' }
     - { path: '/nfs/cistern/libvirt/images/spectre',  owner: 'root', group: 'root', mode: '0755' }
     - { path: '/nfs/cistern/libvirt/isos',            owner: 'root', group: 'root', mode: '0755' }
+    - { path: '/var/lib/docker',                      owner: 'root', group: 'root', mode: '0711' }
   when: "'libvirt' in group_names"
 
-- name: Create NFS mountpoints (Sczi)
+- name: Create NFS mountpoints (docker)
   file:
     path: "{{ item.path }}"
     owner: "{{ item.owner }}"
@@ -71,7 +72,15 @@
   with_items:
     - { path: '/nfs/cistern/docker',        owner: 'root',     group: 'root',  mode: '0755' }
     - { path: '/nfs/cistern/docker/data',   owner: 'root',     group: 'root',  mode: '0755' }
+  when: "'docker' in group_names"
+
+- name: Create NFS mountpoints (Sczi)
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+    state: directory
+  with_items:
     - { path: '/nfs/cistern/srv',           owner: 'root',     group: 'root',  mode: '0755' }
   when: inventory_hostname == 'sczi2.vtluug.org'
-  tags: needs_freeipa
-  

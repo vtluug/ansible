@@ -11,7 +11,8 @@ HOST='chimera.vtluug.org'
 # Lookup current homedirs and new users
 HOMEDIRS=$(ls $HOMEPATH | sort)
 USERS=$(ldapsearch -x -h $HOST -b \
-      dc=krb,dc=vtluug,dc=org | grep -oP '(?<=uid=).*?(?=,)' | sort | uniq)
+    cn=luugusers,cn=groups,cn=compat,dc=krb,dc=vtluug,dc=org | \
+    grep "^memberUid" | cut -d' ' -f2 | sort)
 
 # Compare old & new uers
 # -1: Suppress users with homedir but no account
