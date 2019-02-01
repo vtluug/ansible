@@ -5,13 +5,18 @@
       - chrony
       - curl
       - fail2ban
+      - finger
       - freeipa-client
       - git
       - htop
+      - iodine
       - man
+      - mosh
       - nfs-common
       - nmap
+      - screen
       - tmux
+      - tor
       - unattended-upgrades
       - vim
       - wget
@@ -20,7 +25,7 @@
   notify:
     - Refresh sources
     - Upgrade packages
-
+    
 - name: Configure unattended-upgrades
   template:
     src: templates/50unattended-upgrades.j2

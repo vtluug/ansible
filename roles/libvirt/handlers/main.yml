@@ -4,3 +4,9 @@
     name: papatux
     groups: libvirt
     append: yes
+
+- name: Start and enable luug_iptables_libvirt
+  systemd:
+    name: luug_iptables_libvirt.service
+    state: started
+    enabled: yes

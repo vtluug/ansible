@@ -1,0 +1,11 @@
+[Unit]
+Description=luug iptables for libvirt hosts
+After=network.target
+PartOf=networking.service
+
+[Service]
+RemainAfterExit=yes
+ExecStart=/usr/local/bin/luug_iptables_libvirt.sh
+
+[Install]
+WantedBy=default.target

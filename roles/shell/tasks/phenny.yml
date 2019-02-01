@@ -1,0 +1,6 @@
+---
+- name: Install phenny deps (Must be manually configured)
+
+- name: Install wadsworth-freenode service
+
+- name: Install wadsworth-oftc service

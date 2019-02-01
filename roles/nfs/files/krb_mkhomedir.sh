@@ -25,19 +25,24 @@ for user in $NEWUSERS; do
     if [[ "$user" == "admin" ]]; then
         continue
     fi
+    group=$(id -gn $user)
+    umask 022
 
     # Homedir creation
-    echo "Creating $user:$user $HOMEPATH/$user"
+    echo "Creating $user:$group $HOMEPATH/$user"
     mkdir $HOMEPATH/$user
-    chown $user:$user $HOMEPATH/$user
-    chmod 755 $HOMEPATH/$user
 
     # Skeleton files
     echo "Adding skeleton files to $HOMEPATH/$user"
     
     ## .nofinger
     touch $HOMEPATH/$user/.nofinger
-    chown $(id -un $user):$(ud -gn $user) $HOMEPATH/$user/.nofinger
-    chmod 644 $HOMEPATH/$user/.nofinger
+
+    ## public_html
+    mkdir $HOMEPATH/$user/public_html
+
+    # Permissions
+    echo "Setting permissions $user:$group for $HOMEPATH/$user"
+    chown $user:$group -R $HOMEPATH/$user
 
 done

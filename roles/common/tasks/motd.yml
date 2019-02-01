@@ -1,5 +1,22 @@
 ---
-- name: Append motd.sh to /etc/profile
-  blockinfile:
-    path: /etc/profile
-    block: "{{ lookup('file', 'files/motd.sh') }}"
+- name: Disable default motd (Debian)
+  command: find -L /etc/update-motd.d/ -type f -exec chmod -x {} \;
+  when: ansible_os_family == 'Debian'
+
+- name: Set motd (acidburn)
+  template:
+    src: files/acidburn-motd
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: '0644'
+  when: inventory_hostname == 'acidburn.vtluug.org'
+
+- name: Set motd (All hosts other than acidburn)
+  template:
+    src: files/motd
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: '0644'
+  when: inventory_hostname != 'acidburn.vtluug.org'

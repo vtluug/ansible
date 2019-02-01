@@ -1,0 +1,48 @@
+Welcome to acidburn.vtluug.org -- the third incarnation of our ACIDBURN shell
+server, running on Ubuntu + Linux, Codename Bionic Beaver.
+
+By using this system you agree to Virginia Tech's AUP: https://vt.edu/acceptable-use.html
+Any traffic to/from this system may be monitored thanks to the ITSO.
+
+If you plan to go 45 SECONDS FULL THROTTLE, or THERE ARE NO BARS HOLDING YOU BACK
+please make sure no-one else is currently using the system."
+fi
+
+Access to this server is available in the following ways:
+Public IPv4:            acidburn.vtluug.org 128.173.89.245 luug1.ece.vt.edu
+Public IPv6:            acidburn.vtluug.org 2607:b400:6:cc80:0:aff:fe62:c
+Private IPv4:           10.98.0.12
+Tor:                    hvfdully5yyo36we.onion
+Torv3:                  vtluugeowkdjchdi2wqo6fsqkxgvbmxksgz6kaaqshasi3hu2q7ms5id.onion
+
+Iodine (Also on wiki): sudo iodine -f iod.vtluug.org; ssh bobandrob@10.98.10.1
+
+IPv6 may have port 22 blocked from off-campus. SSH also listens on port 2222.
+Outbound email over IPv6 is also probably blocked.
+
+IPsec VPN is in development and nothing currently works. PRs welcome :)
+Join #vtluug-infra on irc.oftc.net if you want to help w/ infra things.
+
+If you find any security issues, please disclose them via email to:
+        sysadmin@vtluug.org
+        president@vtluug.org
+        officers@vtluug.org
+We do no have a VTLUUG PGP key.
+
+To change your password, run passwd
+
+To get games, set your path to PATH=$PATH:/usr/games/:/usr/share/games/
+in your .bashrc (or whatever you use as a shell).
+
+-------------------------- NOTICE -----------------------------------------
+All accounts, storage, VMs, and services have been migrated to new infra.
+
+IRC users: I attempted to start weechat in tmux/screen as you hoping you might
+have some autoconnect settings set. If you didn't, then I exited the tmux/screen
+session. I did not look any anyone's data or PMs or whatever else you might
+be hiding.
+
+Homedirs are now mounted at /nfs/cistern/home and are about 2 (maybe 3) weeks out of date
+so the old home is mounted at /nfs/tank/home if you would like to copy files over.
+
+Please report any issues to #vtluug-infra on irc.

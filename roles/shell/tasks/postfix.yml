@@ -1,0 +1,17 @@
+---
+- name: Install postfix configuration
+  template:
+    src: files/main.cf
+    dest: /etc/postfix/main.cf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Install aliases
+  template:
+    src: files/aliases
+    dest: /etc/aliases
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Generate newaliases

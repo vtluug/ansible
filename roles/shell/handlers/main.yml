@@ -1,0 +1,17 @@
+---
+- name: Refresh sources
+  apt:
+    update_cache: yes
+
+- name: Upgrade packages
+  apt:
+    upgrade: yes
+
+- name: Generate newaliases
+  command: newaliases
+
+- name: Start and enable iodined
+  systemd:
+    name: iodined.service
+    state: started
+    enabled: yes

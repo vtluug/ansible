@@ -1,0 +1,29 @@
+# /etc/aliases
+mailer-daemon: postmaster
+postmaster: root
+nobody: root
+hostmaster: root
+usenet: root
+news: root
+webmaster: root
+www: root
+ftp: root
+abuse: root
+noc: root
+security: root
+root: officers
+twitter: officers
+facebook: officers, mhazinsk
+sysadmin: echarlie, mhazinsk, pew
+president: uncurlhalo, echarlie, bgregos
+vtluug: uncurlhalo, echarlie
+officers: uncurlhalo, echarlie, president, pew, bgregos, toocrazzzzy, pconte
+mjh: mhazinsk
+jschwina: mutantmonkey
+hokieprivacy: mhazinsk, echarlie, telnoratti, uncurlhalo
+dsetareh: noteventhrice
+wsduvall: ackthet
+cockmaster: mhazinsk
+cjdns:  echarlie
+gobblerpedia: officers
+www-data: root

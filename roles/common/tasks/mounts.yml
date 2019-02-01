@@ -104,4 +104,4 @@
     state: mounted
   with_items:
     - { filesystem: '10.98.0.7:/cistern/nfs/srv',           mountpoint: '/nfs/cistern/srv',           type: 'nfs', options: 'vers=4.0,soft,nodev,nosuid', dump: '0', pass: '0' }
-  when: inventory_hostname == 'sczi2.vtluug.org'
+  when: inventory_hostname == 'sczi.vtluug.org'

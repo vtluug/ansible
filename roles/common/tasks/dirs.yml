@@ -59,7 +59,7 @@
     - { path: '/nfs/cistern/libvirt/images/meltdown', owner: 'root', group: 'root', mode: '0755' }
     - { path: '/nfs/cistern/libvirt/images/spectre',  owner: 'root', group: 'root', mode: '0755' }
     - { path: '/nfs/cistern/libvirt/isos',            owner: 'root', group: 'root', mode: '0755' }
-    - { path: '/var/lib/docker',                      owner: 'root', group: 'root', mode: '0711' }
+    - { path: '/var/lib/docker',                      owner: 'root', group: 'root', mode: '0771' }
   when: "'libvirt' in group_names"
 
 - name: Create NFS mountpoints (docker)
@@ -70,7 +70,7 @@
     mode: "{{ item.mode }}"
     state: directory
   with_items:
-    - { path: '/nfs/cistern/docker',        owner: 'root',     group: 'root',  mode: '0755' }
+    - { path: '/nfs/cistern/docker',        owner: 'root',     group: 'root',  mode: '0770' }
     - { path: '/nfs/cistern/docker/data',   owner: 'root',     group: 'root',  mode: '0755' }
   when: "'docker' in group_names"
 
@@ -83,4 +83,4 @@
     state: directory
   with_items:
     - { path: '/nfs/cistern/srv',           owner: 'root',     group: 'root',  mode: '0755' }
-  when: inventory_hostname == 'sczi2.vtluug.org'
+  when: inventory_hostname == 'sczi.vtluug.org'

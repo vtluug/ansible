@@ -1,18 +1,47 @@
 ---
-- name: Install games & mail packages for acidburn
+- name: Install certbot & universe repository (Note: Certbot setup must be done manually)
+  apt_repository:
+    repo:
+      - universe
+      - 'ppa:certbot/certbot'
+    state: latest
+  notify:
+    - Refresh sources
+
+- name: Install games & mail & irc packages
   apt:
     name: "{{ item }}"
     state: latest
   with_items:
-    - 2048
     - bastet
     - bsdgames
     - bsdgames-nonfree
+    - bsd-mailx
+    - dovecot-core
+    - dovecot-imapd
+    - irssi
     - greed
+    - mutt
     - ninvaders
     - nsnake
+    - oidentd
+    - openbsd-inetd
     - pacman4console
-    - tron
+    - postfix
+    - python3-lxml
+    - spamassassian
+    - tor
+    - weechat
   notify:
     - Refresh sources
     - Upgrade packages
+
+- name: Install 2048.sh
+  shell: curl https://raw.githubusercontent.com/mydzor/bash2048/master/bash2048.sh -o /usr/games/2048 && chmod 755 /usr/games/2048
+  args:
+    creates: /usr/games/2048
+
+- name: Install tron alias
+  shell: echo "#!/usr/bin/env bash\necho '\n\nThis script is just a helper file to call the actual game, which is a multiplayer SSH server:\n\n'\nssh sshtron.zachlatta.com" > /usr/games/tron && chmod 755 /usr/games/tron
+  args:
+    creates: /usr/games/tron

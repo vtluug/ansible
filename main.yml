@@ -25,16 +25,17 @@
   roles:
     - nfs
 
-# Important VMs
-#- hosts: shell
-#  become: yes
-#  roles:
-#    - shell
-#
-- hosts: web
+# Technically bare-matal + VMs but w/e
+- hosts: docker
   become: yes
   roles:
-    - web
+    - docker
+
+# Important VMs
+- hosts: shell
+  become: yes
+  roles:
+    - shell
 
 ## General VMs
 #- hosts: mirror

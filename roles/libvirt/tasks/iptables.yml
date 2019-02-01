@@ -1,0 +1,13 @@
+---
+- name: Install iptables rules for libvirt hosts
+  template:
+    src: files/luug_iptables_libvirt.service
+    dest: /etc/systemd/system/luug_iptables_libvirt.service
+    owner: root
+    group: root
+    mode: '0644'
+  with_items:
+    - { src: 'files/luug_iptables_libvirt.service', dest: '/etc/systemd/system/luug_iptables_libvirt.service' }
+    - { src: 'files/luug_iptables_libvirt.sh', dest: '/usr/local/bin/luug_iptables_libvirt.sh' }
+  when: "'libvirt' in group_names"
+  notify: Start and enable luug_iptables_libvirt
