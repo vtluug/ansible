@@ -1,5 +1,5 @@
 ---
-- name: Create new VMs (meltdown)
+- name: Create new service VMs (meltdown)
   shell: |
     virt-builder \
         {{ item.os }} \
@@ -27,7 +27,8 @@
     - inventory_hostname == 'meltdown.vtluug.org'
     - new_vms_meltdown is not none
 
-- name: Create new VMs (spectre)
+# New user vms should only be created in an environment where the root password can easily and quickly be changed upon creation
+- name: Create new user VMs (spectre)
   shell: |
     virt-builder \
         {{ item.os }} \
@@ -45,6 +46,7 @@
         --network bridge=br0,mac={{ item.mac }} \
         --disk path=/nfs/cistern/libvirt/images/spectre/{{ item.hostname }}.qcow2,format=qcow2 \
         --os-variant {{ item.variant }} \
+        --root-password password:pleasechangeme
         --autostart \
         --graphics spice \
         --noautoconsole
