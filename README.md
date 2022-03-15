@@ -21,3 +21,7 @@ In your client's (the host you're running ansible from) config (usually /etc/ans
 ```ansible-galaxy install geerlingguy.nfs``` for nfs
 
 ```ansible-galaxy install git+https://github.com/paulwalko/ansible-sudoers.git``` for sudoers
+
+## Manual additions
+
+2022-03-14: meltdown: `systemctl mask rpc-gssd.service`
