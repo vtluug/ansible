@@ -11,19 +11,22 @@ ftp: root
 abuse: root
 noc: root
 security: root
-root: officers
+root: officers, waves, echarlie
 twitter: officers
 facebook: officers, mhazinsk
-sysadmin: echarlie, mhazinsk, pew
-president: uncurlhalo, echarlie, bgregos
-vtluug: uncurlhalo, echarlie
-officers: uncurlhalo, echarlie, president, pew, bgregos, toocrazzzzy, pconte
+sysadmin: echarlie, pew, pconte, officers
+dmca: officers
+copyright: officers
+president: ryan21401, bgregos, pconte, rsk
+vtluug: officers
+officers: president, pew, bgregos, toocrazzzzy, pconte, waves, danyguag, catsolot, rsk
 mjh: mhazinsk
 jschwina: mutantmonkey
-hokieprivacy: mhazinsk, echarlie, telnoratti, uncurlhalo
+hokieprivacy: mhazinsk, echarlie, telnoratti, uncurlhalo, mutantmonkey, pew, rsk
 dsetareh: noteventhrice
 wsduvall: ackthet
 cockmaster: mhazinsk
 cjdns:  echarlie
-gobblerpedia: officers
+gobblerpedia: officers, echarlie
 www-data: root
+tyr: rsk
