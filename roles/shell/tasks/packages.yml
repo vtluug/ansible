@@ -1,5 +1,5 @@
 ---
-- name: Install certbot & universe repository (Note: Certbot setup must be done manually)
+- name: "Install certbot & universe repository (Note: Certbot setup must be done manually)"
   apt_repository:
     repo:
       - universe
