@@ -39,10 +39,10 @@
 #    - { path: '/nfs/tank/scratch',  owner: 'root',      group: 'root',      mode: '0777' }
     - { path: '/nfs/cistern',       owner: 'root',      group: 'root',      mode: '0755' }
     - { path: '/nfs/cistern/home',  owner: 'root',      group: 'root',      mode: '0755' }
-    - { path: '/nfs/cistern/share', owner: 'nfsnobody', group: 'luugusers', mode: '0775' }
-    - { path: '/nfs/cistern/files', owner: 'nfsnobody', group: 'officers',  mode: 'u=rwx,g=rwx,o=rx,g+s' }
+    - { path: '/nfs/cistern/share', owner: 'nobody', group: 'luugusers', mode: '0775' }
+    - { path: '/nfs/cistern/files', owner: 'nobody', group: 'officers',  mode: 'u=rwx,g=rwx,o=rx,g+s' }
     - { path: '/nfs/keg',           owner: 'root',      group: 'root',      mode: '0755' }
-    - { path: '/nfs/keg/share',     owner: 'nfsnobody', group: 'luugusers', mode: '0775' }
+    - { path: '/nfs/keg/share',     owner: 'nobody', group: 'luugusers', mode: '0775' }
   when: ansible_os_family == 'RedHat'
   tags: needs_freeipa
 
