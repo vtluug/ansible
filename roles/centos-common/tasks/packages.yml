@@ -15,8 +15,8 @@
       - nfs-utils
       - tmux
       - vim
-      - yum-cron
+      - dnf-automatic
     state: latest
   notify:
     - Start and enable chronyd
-    - Start and enable yum-cron
+    - Start and enable dnf-automatic

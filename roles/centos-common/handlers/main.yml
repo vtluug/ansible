@@ -5,13 +5,13 @@
     state: started
     enabled: yes
 
-- name: Start and enable yum-cron
+- name: Start and enable dnf-automatic
   systemd:
-    name: yum-cron.service
+    name: dnf-automatic.timer
     state: started
     enabled: yes
 
-- name: Restart yum-cron
+- name: Restart dnf-automatic
   systemd:
-    name: yum-cron.service
+    name: dnf-automatic.timer
     state: restarted
