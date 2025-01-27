@@ -5,7 +5,8 @@
   with_items:
     - qemu-kvm
     - libguestfs-tools
-    - libvirt-bin
+    - libvirt-daemon-system
+    - libvirt-clients
     - python-lxml
     - python-libvirt
     - virtinst
