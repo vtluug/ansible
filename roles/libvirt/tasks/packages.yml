@@ -7,8 +7,8 @@
     - libguestfs-tools
     - libvirt-daemon-system
     - libvirt-clients
-    - python-lxml
-    - python-libvirt
+    - python3-lxml
+    - python3-libvirt
     - virtinst
   notify:
     - Add papatux to libvirt group
