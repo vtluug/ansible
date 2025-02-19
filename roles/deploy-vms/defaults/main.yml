@@ -9,4 +9,4 @@ new_vms_meltdown:
 
 new_vms_spectre:
 # Add user VMs here later
-  - { target: spectre, os: ubuntu-18.04, hostname: scaryterry, cpus: 2, ram: 16384, size: 50G, mac: "02:00:0a:62:00:0f", admins: sudo, variant: ubuntu17.10 } # Web
+  - { target: spectre, os: ubuntu-18.04, hostname: scaryterry, cpus: 4, ram: 16384, size: 50G, mac: "02:00:0a:62:00:0f", admins: sudo, variant: ubuntu17.10 } # Web
