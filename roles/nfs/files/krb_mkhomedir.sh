@@ -43,6 +43,7 @@ for user in $NEWUSERS; do
 
     # Permissions
     echo "Setting permissions $user:$group for $HOMEPATH/$user"
+    chmod 711 $HOMEPATH/$user
     chown $user:$group -R $HOMEPATH/$user
 
 done
