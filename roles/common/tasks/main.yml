@@ -9,3 +9,4 @@
 - import_tasks: ssh.yml
 - import_tasks: sudo.yml
 - import_tasks: sysctl.yml
+- import_tasks: keys.yml

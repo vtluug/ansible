@@ -1,0 +1,6 @@
+---
+- name: Add specified authorized keys to papatux
+  ansible.posix.authorized_key:
+    user: papatux
+    state: present
+    key: "{{ lookup('file', 'papatux-keys') }}"
