@@ -10,6 +10,6 @@
   args:
     creates: /etc/ipa/default.conf
   when:
-    - "'baremetal' not in group_names"
-    - inventory_hostname not in ['chimera.vtluug.org', 'sphinx.vtluug.org']
+    - "'unenrolled' not in group_names"
+    - "'freeipa' not in group_names"
   tags: needs_freeipa
