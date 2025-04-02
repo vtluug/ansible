@@ -1,6 +1,6 @@
 ---
 new_vms_meltdown:
-#  - { target: meltdown, os: ubuntu-18.04, hostname: sczi,          cpus: 4, ram: 16384, size: 50G, mac: "02:00:0a:62:00:0b", admins: sudo, variant: ubuntu17.10 }  # Web
+  - { target: meltdown, os: ubuntu-18.04, hostname: sczi,          cpus: 16, ram: 16384, size: 50G, mac: "02:00:0a:62:00:0b", admins: sudo, variant: ubuntu17.10 }  # Web
   - { target: meltdown, os: alma-8.5,   hostname: chimera,       cpus: 2, ram: 2048, size: 10G, mac: "02:00:0a:62:00:0a", admins: wheel, variant: rhel7.5 }   # FreeIPA
   - { target: meltdown, os: alma-8.5,   hostname: sphinx,       cpus: 2, ram: 2048, size: 10G, mac: "02:00:0a:62:00:0d", admins: wheel, variant: rhel7.5 }   # FreeIPA replica, the stable osinfo-db package doesn't have any more fitting variant
   - { target: meltdown, os: ubuntu-18.04, hostname: acidburn,      cpus: 2, ram: 2048, size: 10G, mac: "02:00:0a:62:00:0c", admins: sudo, variant: ubuntu17.10 }  # Shell
