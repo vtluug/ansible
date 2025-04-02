@@ -33,7 +33,7 @@
     - { filesystem: '/dev/meltdown-vg/docker-lv',     mountpoint: '/var/lib/docker',      type: 'xfs', options: 'defaults,pquota',            dump: '0', pass: '0' }
   when: 
     - "'libvirt' in group_names"
-    - inventory_hostname not in ['gibson.vtluug.org'] # gibson doesn't have a docker-lv
+    - inventory_hostname not in ['gibson.vtluug.org', 'prospit.vtluug.org'] # gibson doesn't have a docker-lv
 
 - name: Mount NFS  (Cyberdelia)
   mount:
