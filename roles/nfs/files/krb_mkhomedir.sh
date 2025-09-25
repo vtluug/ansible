@@ -6,7 +6,7 @@
 ##################################################
 
 HOMEPATH='/nfs/cistern/home'
-HOST='chimera.vtluug.org'
+HOST='ldap://chimera.vtluug.org'
 
 # Lookup current homedirs and new users
 HOMEDIRS=$(ls $HOMEPATH | sort)
