@@ -36,6 +36,7 @@
         --size {{ item.size }} \
         --format qcow2 \
         --output /nfs/cistern/libvirt/images/spectre/{{ item.hostname }}.qcow2 \
+        --root-password password:pleasechangeme \
         --firstboot-command 'dpkg-reconfigure openssh-server; sed -i "s/#Port 22/Port 22\nPort 2222/" /etc/ssh/sshd_config; sed -i "s/ens2/ens3/" /etc/netplan/01-netcfg.yaml; yum install -y python; localectl set-locale LANG=en_US.UTF-8; apt install --assume-yes python; reboot' \
     && \
     virt-install \
@@ -46,7 +47,6 @@
         --network bridge=br0,mac={{ item.mac }} \
         --disk path=/nfs/cistern/libvirt/images/spectre/{{ item.hostname }}.qcow2,format=qcow2 \
         --os-variant {{ item.variant }} \
-        --root-password password:pleasechangeme
         --autostart \
         --graphics spice \
         --noautoconsole
